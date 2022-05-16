@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
+
 public class StarfishbookApplication {
 
-	@RequestMapping("/")
+	
+	@RequestMapping("")
 	public String greet(){
 		return "welcome";
 	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(StarfishbookApplication.class, args);
 	}
