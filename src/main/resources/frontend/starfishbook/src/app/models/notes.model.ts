@@ -1,5 +1,6 @@
 export class Notes {
-    id?: any;
-    title?: string;
-    text?: string;
+    id?: number;
+    title: string;
+    text: string;
+    color: string;
   }

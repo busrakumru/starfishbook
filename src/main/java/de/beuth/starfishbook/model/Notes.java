@@ -1,11 +1,6 @@
-package de.beuth.starfishbook.entity;
+package de.beuth.starfishbook.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "notes")
@@ -14,11 +9,14 @@ public class Notes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
+
     @Column(name = "title")
     private String title;
+
     @Column(name = "text")
     private String text;
+
     @Column(name = "color")
     private String color;
     // private boolean published;
@@ -32,6 +30,12 @@ public class Notes {
      * }
      */
     public Notes() {
+    }
+
+    public Notes(String title, String text, String color) {
+        this.title = title;
+        this.text = text;
+        this.color = color;
     }
 
     public Long getId() {

@@ -1,28 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCard()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-<ion-content [fullscreen]="true">
-
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-<div>
-  <ion-item >
-    <ion-input [(ngModel)]="notes.title"  placeholder="title" ></ion-input>
-  </ion-item>
-
-  <ion-tab-button (click)="savePost()">
-    <ion-label color="primary">save</ion-label>
-  </ion-tab-button>
+<div class="cards">
+  <ion-card *ngFor = "let note of notes">
+    <ion-card-header>
+      <div>
+        <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
+      </div>
+      <ion-card-title>Notiz Titel: {{note.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Text: {{note.text}}</p>
+      <p>Color: {{note.color}}</p>
+    </ion-card-content>
+  </ion-card>
 </div>
-
 
 </ion-content>

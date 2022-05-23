@@ -1,0 +1,70 @@
+<!--ion-header>
+  <ion-toolbar>
+    <div class="toolbar">
+      <div>
+        <ion-icon name="checkmark-outline"></ion-icon> 
+        <ion-icon name="close-outline"></ion-icon>
+      </div>
+      <div>
+        <ion-icon name="share-social-outline"></ion-icon>
+      </div>
+
+    </div>
+   
+  </ion-toolbar>
+</ion-header-->
+
+<ion-content>
+<div>
+  <div>
+    <ion-icon name="checkmark-outline"></ion-icon> 
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div>
+    <ion-icon name="share-social-outline"></ion-icon>
+  </div>
+
+</div>
+
+  <form [formGroup]="newNote" (ngSubmit)="saveNote(newNote)">
+
+    <ion-input placeholder="Titel" type="text" formControlName="title"></ion-input>
+    <ion-input placeholder="Text" type="text" formControlName="text"></ion-input>
+    <ion-input formControlName="color"></ion-input>
+
+
+
+
+    <!--input formControlName="title" type="text" />
+    <input formControlName="text" type="text" /-->
+    <!--input formControlName="color" type="text" /-->
+
+    <div style="display:flex" >
+      <ngx-colors 
+          formControlName="color"
+          ngx-colors-trigger 
+          [palette]="colorPalette" 
+          [(ngModel)]="selectedColor" 
+          [hideColorPicker]="true" 
+          [hideTextInput]="true"
+      >
+      </ngx-colors>
+      <p>{{selectedColor}}</p>
+  </div>
+
+    <button type="submit">Senden</button>
+
+
+  </form>
+
+  
+ 
+ 
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,9 +1,15 @@
 package de.beuth.starfishbook.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import de.beuth.starfishbook.entity.Notes;
+import org.springframework.stereotype.Repository;
+import de.beuth.starfishbook.model.Notes;
 
+@Repository
 public interface  NotesRepository extends JpaRepository<Notes, Long> {
+
+    /**List<Notes> findAllByTitleContaining(String title);**/
+
   
 }
 
