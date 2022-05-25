@@ -19,4 +19,8 @@
     routerLinkActive="active" routerLink="/sign-up">Sign up</a>
   <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button" class="btn btn-danger">Logout</button>
 </div>
+
+<div *ngFor="let user of users">
+  <p>{{user.email}}</p>
+</div>
 </ion-content>

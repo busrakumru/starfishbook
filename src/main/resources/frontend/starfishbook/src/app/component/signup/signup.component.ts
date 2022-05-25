@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,21 +13,28 @@ export class SignupComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    public userService: UsersService
   ) {
-    this.signupForm = this.fb.group({
+   /* this.signupForm = this.fb.group({
       email: [''],
       mobile: [''],
       password: [''],
     });
-  }
+  }*/
+
+  this.signupForm = this.fb.group({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
+}
   ngOnInit() {}
   registerUser() {
-    this.authService.signUp(this.signupForm.value).subscribe((res) => {
-      if (res.result) {
-        this.signupForm.reset();
-        this.router.navigate(['log-in']);
-      }
-    });
+    this.authService.signUp(this.signupForm.value).subscribe(
+      (response) => console.log(response),
+      error => {
+        console.error(error);
+
+      });
   }
 }
