@@ -75,4 +75,9 @@ export class NotePage implements OnInit {
         console.error(error);
       });
   }
+
+
+  abbrechen(){
+    this.modalController.dismiss();
+  }
 }

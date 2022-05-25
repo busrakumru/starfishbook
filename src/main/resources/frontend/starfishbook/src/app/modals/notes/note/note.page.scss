@@ -1,5 +1,21 @@
-/*.toolbar{
+.toolbar{
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
-}*/
+    padding: 10px;
+}
+
+.form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+ion-icon{
+    color: #092C5E;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-end;
+}
