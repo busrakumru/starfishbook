@@ -1,23 +1,37 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthInterceptor } from './shared/authconfig.interceptor';
 
+import { JwtModule } from '@auth0/angular-jwt';
+import { IonicModule } from '@ionic/angular';
+
+export function tokenGetter() {
+  return localStorage.getItem("nestjs_chat_app");
+}
 
 @NgModule({
-  declarations: [AppComponent
-    ],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule,
-    FormsModule],
-  providers: [{provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi: true},{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}],
-  bootstrap: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    IonicModule.forRoot(),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000']
+      }
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
