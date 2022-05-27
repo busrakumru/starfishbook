@@ -24,7 +24,7 @@ export class LoginComponent {
   email: this.email.value,
   password: this.password.value
 }).pipe(
-        tap(() => this.router.navigate(['../../../tabs']))
+        tap(() => this.router.navigate(['../register']))
       ).subscribe()
     }
   }

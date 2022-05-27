@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../public/services/auth-service/auth.service';
 import { TokenService } from '../public/services/token/token.service';
 
 
@@ -9,10 +10,14 @@ import { TokenService } from '../public/services/token/token.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page  implements OnInit {
-  currentUser: any;
-  constructor(private token: TokenService) { }
-  ngOnInit(): void {
-    this.currentUser = this.token.getUser();
-  }
   
+  
+  constructor(public authService: AuthService) { }
+ 
+  ngOnInit(): void {
+   
+  }
+  logout() {
+    this.authService.logout();
+  }
 }
