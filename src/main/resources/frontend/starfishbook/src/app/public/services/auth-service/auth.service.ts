@@ -7,8 +7,9 @@ import { User } from 'src/app/model/user.model';
 import { TokenService } from '../token/token.service';
 
 
+
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -26,7 +27,7 @@ export class AuthService implements OnInit {
   private baseUrl = 'http://localhost:8080/auth';
 
   login(user: User): Observable<any> {
-    return this.http.post<User[]>(`${this.baseUrl}/login`, user, httpOptions);
+    return this.http.post<User>(`${this.baseUrl}/login`, user, httpOptions);
   }
 
   register(user: User): Observable<any> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+
 import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
@@ -12,19 +13,22 @@ import { AuthService } from '../../services/auth-service/auth.service';
 export class LoginComponent {
 
   form: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   });
 
   constructor(private authService: AuthService, private router: Router) { }
 
   login() {
+
     if (this.form.valid) {
       this.authService.login({
-  email: this.email.value,
-  password: this.password.value
-}).pipe(
-        tap(() => this.router.navigate(['../register']))
+        email: this.email.value,
+        password: this.password.value
+      }).pipe(
+        tap(() =>{ 
+        console.log("User is logged in");
+        this.router.navigate(['../../../tabs/tab1'])})
       ).subscribe()
     }
   }

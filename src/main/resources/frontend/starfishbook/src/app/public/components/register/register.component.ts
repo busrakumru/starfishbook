@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { CustomValidators } from '../../_helpers/custom-validators';
 
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

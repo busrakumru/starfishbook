@@ -3,6 +3,7 @@ package de.beuth.starfishbook.controller;
 import de.beuth.starfishbook.entity.User;
 import de.beuth.starfishbook.repository.UserRepository;
 import de.beuth.starfishbook.request.AuthRequest;
+import de.beuth.starfishbook.response.JwtResponse;
 import de.beuth.starfishbook.security.JwtTokenProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,18 +44,13 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
+
   // get all notes
   @GetMapping("user")
   public List<User> getUsers() {
     return this.userRepository.findAll();
   }
-  /*public List<User> index() {
-      return userRepository.findAll();
 
-  }*/
-
-  
-   
    
     @PostMapping(value = "/register")
     public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) {
@@ -74,15 +70,16 @@ public class AuthController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getEmail(),
                         authRequest.getPassword()
                 )
         );
-
-        return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
+        final String token = jwtTokenProvider.generateToken(authentication);
+       // return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
+       return ResponseEntity.ok(new JwtResponse(token));
     }
 
 }
