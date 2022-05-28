@@ -2,7 +2,6 @@ package de.beuth.starfishbook.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity

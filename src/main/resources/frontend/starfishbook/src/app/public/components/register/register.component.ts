@@ -5,8 +5,6 @@ import { tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { CustomValidators } from '../../_helpers/custom-validators';
 
-
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -26,7 +24,6 @@ export class RegisterComponent {
 
   register() {
     if (this.form.valid) {
-     // this.userService.create({
       this.authService.register({
         email: this.email.value,
         password: this.password.value

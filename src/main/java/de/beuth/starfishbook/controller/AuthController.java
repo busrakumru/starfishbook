@@ -5,6 +5,7 @@ import de.beuth.starfishbook.repository.UserRepository;
 import de.beuth.starfishbook.request.AuthRequest;
 import de.beuth.starfishbook.response.JwtResponse;
 import de.beuth.starfishbook.security.JwtTokenProvider;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +26,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("auth/")
 public class AuthController {
-
- 
 
     @Autowired
     private UserRepository userRepository;
@@ -38,20 +36,20 @@ public class AuthController {
 
     private JwtTokenProvider jwtTokenProvider;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder,
+            AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-  // get all notes
-  @GetMapping("user")
-  public List<User> getUsers() {
-    return this.userRepository.findAll();
-  }
+    // get all users
+    @GetMapping("users")
+    public List<User> getUsers() {
+        return this.userRepository.findAll();
+    }
 
-   
     @PostMapping(value = "/register")
     public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) {
         Optional<User> userOptional = userRepository.findUserByEmail(authRequest.getEmail());
@@ -63,9 +61,7 @@ public class AuthController {
         User user = new User();
         user.setEmail(authRequest.getEmail());
         user.setPassword(passwordEncoder.encode(authRequest.getPassword()));
-
         User created = userRepository.save(user);
-
         return ResponseEntity.ok(created);
     }
 
@@ -74,12 +70,8 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getEmail(),
-                        authRequest.getPassword()
-                )
-        );
+                        authRequest.getPassword()));
         final String token = jwtTokenProvider.generateToken(authentication);
-       // return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
-       return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token));
     }
-
 }

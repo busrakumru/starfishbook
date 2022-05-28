@@ -12,7 +12,7 @@ const USER_KEY = 'auth-user';
 export class TokenService {
 
   constructor(public router: Router) { }
-  
+
   signOut(): void {
     window.sessionStorage.clear();
     this.router.navigate(['log-in']);
@@ -32,12 +32,4 @@ export class TokenService {
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
 
-  public getUser(): any {
-    const user = window.sessionStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
-  }
 }

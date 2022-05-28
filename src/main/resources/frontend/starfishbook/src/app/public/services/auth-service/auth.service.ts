@@ -6,23 +6,16 @@ import { catchError, tap } from 'rxjs/operators';
 import { User } from 'src/app/model/user.model';
 import { TokenService } from '../token/token.service';
 
-
-
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit {
-
+export class AuthService {
 
   constructor(private http: HttpClient, private tokenStorageService: TokenService) { }
-
-  ngOnInit(): void {
-
-  }
 
   private baseUrl = 'http://localhost:8080/auth';
 
@@ -43,19 +36,6 @@ export class AuthService implements OnInit {
     window.location.reload();
   }
 
- /* isLoggedIn(): any {
-    this.tokenStorageService.getToken();
-    window.location.reload();
-  }*/
-
-  get isLoggedIn():boolean {
-    let token = this.tokenStorageService.getToken();
-    window.location.reload();
-    //let authToken = localStorage.getItem('access_token');
-    return token !== null ? true : false;
-  }
-
-  // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {

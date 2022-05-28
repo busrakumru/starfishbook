@@ -1,6 +1,7 @@
 package de.beuth.starfishbook.response;
 
 public class JwtResponse {
+
 	private String token;
 
 	public JwtResponse(String accessToken) {
