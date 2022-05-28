@@ -39,6 +39,10 @@ export class NotesService {
      //return this.http.patch(`${this.baseUrl}/${id}`,note.text);
     }
 
+    patchNote(id: any, note: Notes): Observable<any>{
+      return this.http.patch<Notes[]>(`${this.baseUrl}/${id}`, note);
+    }
+
 
   /*createNote(title:string){
    return this.webReqService.post('notes',{title});

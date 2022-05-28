@@ -69,7 +69,7 @@ export class NotePage implements OnInit {
   }
 
   updateNote() {
-    this.notesService.updateNote(this.id, this.newNote.value).subscribe(
+    this.notesService.patchNote(this.id, this.newNote.value).subscribe(
       (response) => console.log(response),
       error => {
         console.error(error);
