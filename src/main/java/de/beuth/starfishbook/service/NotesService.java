@@ -1,11 +1,8 @@
 package de.beuth.starfishbook.service;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.model.NotesRequest;
 import de.beuth.starfishbook.repository.NotesRepository;
@@ -47,10 +44,6 @@ public class NotesService {
     public List<Notes> getAll() {
         return notesRepository.findAll();
     }
-
-   /**  public List<Notes> findByTitle(String title) {
-        return notesRepository.findAllByTitleContaining(title);
-    }*/
 
     public void delete(Long id) {
         Optional<Notes> post = findById(id);

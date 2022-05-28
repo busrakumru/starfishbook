@@ -10,6 +10,5 @@ public interface  NotesRepository extends JpaRepository<Notes, Long> {
 
     /**List<Notes> findAllByTitleContaining(String title);**/
 
-  
 }
 
