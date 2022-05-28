@@ -28,7 +28,7 @@ export class LoginComponent {
       }).pipe(
         tap(() =>{ 
         console.log("User is logged in");
-        this.router.navigate(['../../../tabs/tab1'])})
+        this.router.navigate(['../../tabs/tab1'])})
       ).subscribe()
     }
   }
