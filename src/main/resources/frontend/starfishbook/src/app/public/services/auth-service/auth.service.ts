@@ -3,7 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from 'src/app/model/user.model';
+import { User } from 'src/app/models/user.model';
 import { TokenService } from '../token/token.service';
 
 const httpOptions = {

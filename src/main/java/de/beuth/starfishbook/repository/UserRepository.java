@@ -1,6 +1,6 @@
 package de.beuth.starfishbook.repository;
 
-import de.beuth.starfishbook.entity.User;
+import de.beuth.starfishbook.model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
 package de.beuth.starfishbook.security;
 
-import de.beuth.starfishbook.entity.User;
+import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UserDetails;

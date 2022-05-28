@@ -15,6 +15,10 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'public',
     pathMatch: 'full'
+  },
+  {
+    path: 'note',
+    loadChildren: () => import('./modals/notes/note/note.module').then(m => m.NotePageModule)
   }
 ];
 @NgModule({

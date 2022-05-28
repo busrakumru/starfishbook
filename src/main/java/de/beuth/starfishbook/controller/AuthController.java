@@ -1,6 +1,6 @@
 package de.beuth.starfishbook.controller;
 
-import de.beuth.starfishbook.entity.User;
+import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.UserRepository;
 import de.beuth.starfishbook.request.AuthRequest;
 import de.beuth.starfishbook.response.JwtResponse;

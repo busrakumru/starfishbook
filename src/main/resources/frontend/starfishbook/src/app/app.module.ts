@@ -3,23 +3,26 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxColorsModule } from 'ngx-colors';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IonicModule } from '@ionic/angular';
 import { PublicRoutingModule } from './public/public-routing.module';
+import { IonicModule, IonicRouteStrategy  } from '@ionic/angular';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
+    BrowserModule, 
     IonicModule.forRoot(),
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    PublicRoutingModule 
-  ],
-
-  bootstrap: [AppComponent]
+    AppRoutingModule, 
+    HttpClientModule, 
+    ReactiveFormsModule, 
+    NgxColorsModule,
+    PublicRoutingModule ,
+    BrowserAnimationsModule],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],  
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

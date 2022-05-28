@@ -1,4 +1,4 @@
-package de.beuth.starfishbook.entity;
+package de.beuth.starfishbook.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
