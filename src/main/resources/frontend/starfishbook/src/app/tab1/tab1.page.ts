@@ -40,7 +40,7 @@ export class Tab1Page implements OnInit {
   })
 
 
-  createNewNote() {
+  /*createNewNote() {
     console.log(this.newNote.value);
 
     this.notesService.createNote(this.newNote.value)
@@ -50,7 +50,7 @@ export class Tab1Page implements OnInit {
           console.error(error);
 
         });
-  }
+  }*/
 
   async deleteNote(note) {
 
