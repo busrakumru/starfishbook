@@ -29,18 +29,8 @@ public class NotesController {
   @Autowired
   private NotesRepository notesRepository;
 
-  /**
-   * public NotesController(NotesRepository notesRepository){
-   * this.notesRepository = notesRepository;
-   * }
-   **/
-
   // get all notes
   @GetMapping("notes")
-  /**
-   * public List<Notes> index() {
-   * return notesRepository.findAll();
-   **/
   public List<Notes> getNotes() {
     return this.notesRepository.findAll();
 

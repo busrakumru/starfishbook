@@ -19,16 +19,7 @@ public class Notes {
 
     @Column(name = "color")
     private String color;
-    // private boolean published;
 
-    /*
-     * public Notes(Long id, String title, String color, String text) {
-     * this.id = id;
-     * this.title = title;
-     * this.color = color;
-     * this.text=text;
-     * }
-     */
     public Notes() {
     }
 

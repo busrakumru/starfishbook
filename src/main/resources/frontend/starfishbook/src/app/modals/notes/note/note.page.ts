@@ -19,8 +19,6 @@ export class NotePage implements OnInit {
     private notesService: NotesService,
     private modalController: ModalController) { }
 
-  //selectedColor:string = "#D99274";
-  //colorToAdd:string = '#EC407A';
   colorPalette: Array<any> = [
     '#D99274',
     '#FAC9C1',
@@ -33,19 +31,12 @@ export class NotePage implements OnInit {
 
   ]
   ngOnInit() { }
-  //notes: Notes[];
+ 
   newNote: FormGroup = new FormGroup({
     title: new FormControl(''),
     text: new FormControl(''),
     color: new FormControl('')
   })
-
-  /*color: FormGroup = new FormGroup({
-    selectedColor: new FormControl('')
-  })*/
-
-
-
 
   saveNote(): void {
     if (this.id) {
