@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenStorageService: TokenService) { }
 
-  private baseUrl = 'http://localhost:8080/auth';
+  private baseUrl = 'https://localhost:8443/auth';
 
   login(user: User): Observable<any> {
     return this.http.post<User>(`${this.baseUrl}/login`, user, httpOptions);
