@@ -19,7 +19,12 @@ const routes: Routes = [
   {
     path: 'note',
     loadChildren: () => import('./modals/notes/note/note.module').then(m => m.NotePageModule)
+  },
+  {
+    path: 'todo',
+    loadChildren: () => import('./modals/todo/todo.module').then( m => m.TodoPageModule)
   }
+
 ];
 @NgModule({
   imports: [

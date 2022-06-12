@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "https://localhost:8100")
 @RestController
 @RequestMapping("auth/")
 public class AuthController {

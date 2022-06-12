@@ -11,7 +11,7 @@ import { Notes } from '../models/notes.model';
 
 export class NotesService {
 
-  private baseUrl = 'http://localhost:8080/api/notes';
+  private baseUrl = 'https://localhost:8443/auth/users/notes';
 
 
   constructor( private http: HttpClient ){}
