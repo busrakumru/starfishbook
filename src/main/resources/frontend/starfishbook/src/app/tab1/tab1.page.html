@@ -17,6 +17,11 @@
   
     <ion-card-content >
       <p>{{note.text}}</p>
+    
+      <div *ngFor = "let file of files">
+        <a href="{{ file.url }}">{{ file.name }}</a>
+      </div>
+     
     </ion-card-content>
 
   </ion-card>

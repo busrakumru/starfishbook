@@ -1,10 +1,7 @@
 package de.beuth.starfishbook.controller;
 
 import java.util.List;
-
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.NotesRepository;
@@ -60,6 +56,7 @@ public class NotesController {
     notes.setTitle(noteDetail.getTitle());
     notes.setText(noteDetail.getText());
     notes.setColor(noteDetail.getColor());
+    notes.setImg(noteDetail.getImg());
 
     Notes updatedNote = this.notesRepository.save(notes);
 

@@ -18,9 +18,52 @@
 
     <ion-input placeholder="Titel" type="text" formControlName="title"></ion-input>
     <ion-input placeholder="Text" type="text" formControlName="text"></ion-input>
+
+        <div class="row">
+          <div class="col-8">
+           
+              <!--input type="file" (change)="selectFile($event)" /-->
+              <input type="file" (change)="selectImg($event)" #imageUpload accept="image/*" class="file-input"  />
+              <div class="imageUpload">
+
+                <ion-button fill="clear" (click)="imageUpload.click()">
+                  <ion-icon name="image"></ion-icon>
+                </ion-button>
+                {{imgName}}
+              </div>
+
+              <input type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
+              <div class="imageUpload">
+
+                <ion-button fill="clear" (click)="fileUpload.click()">
+                  <ion-icon name="document"></ion-icon>
+                </ion-button>
+                {{fileName}}
+              </div>
+            
+          </div>
+          <div class="col-4">
+            <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+              Upload
+            </button>
+          </div>
+        </div>
+      
+        <div class="card mt-3">
+          <ul
+            class="list-group list-group-flush"
+            *ngFor="let file of fileInfos | async"
+          >
+            <li class="list-group-item">
+              <a href="{{ file.url }}">{{ file.name }}</a>
+              <ion-icon name="trash-outline" (click)="deleteFile(file)"></ion-icon>
+            </li>
+          </ul>
+        </div>
     <ion-input formControlName="color"></ion-input>
 
     <div class="footer">
+
       <div style="display:flex">
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
           [hideColorPicker]="true" [hideTextInput]="true">
@@ -29,4 +72,5 @@
       </div>
     </div>
   </form>
+
 </ion-content>

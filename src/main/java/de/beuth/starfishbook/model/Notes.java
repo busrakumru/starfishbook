@@ -20,13 +20,17 @@ public class Notes {
     @Column(name = "color")
     private String color;
 
+    @Column(name = "img")
+    private String img;
+
     public Notes() {
     }
 
-    public Notes(String title, String text, String color) {
+    public Notes(String title, String text, String color, String img, byte[] pic) {
         this.title = title;
         this.text = text;
         this.color = color;
+        this.img = img;
     }
 
     public Long getId() {
@@ -59,5 +63,13 @@ public class Notes {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getImg(){
+        return img;
+    }
+
+    public void setImg(String img){
+        this.img = img;
     }
 }

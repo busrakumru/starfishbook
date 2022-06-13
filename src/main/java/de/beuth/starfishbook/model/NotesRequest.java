@@ -6,6 +6,7 @@ public class NotesRequest {
     private String title;
     private String text;
     private String color;
+    private String img;
     
     public Long getId() {
         return id;
@@ -38,4 +39,14 @@ public class NotesRequest {
     public void setText(String text) {
         this.text = text;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+
 }

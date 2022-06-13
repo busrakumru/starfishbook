@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { NotePage } from '../modals/notes/note/note.page';
 import { Notes } from '../models/notes.model';
+import { FileUploadService } from '../services/file-upload.service';
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -15,11 +16,13 @@ import { NotesService } from '../services/notes.service';
 export class Tab1Page  {
 
   notes: Notes[];
+  files: File[];
 
   constructor(private notesService: NotesService,
     public router: Router,
     public modalController: ModalController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private filesService: FileUploadService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +31,12 @@ export class Tab1Page  {
 
       console.log(data);
       this.notes = data;
-    })
+    });
+
+    this.filesService.getFiles().subscribe((data: File[]) => {
+      console.log(data);
+      this.files = data;
+    });
 
   }
 
