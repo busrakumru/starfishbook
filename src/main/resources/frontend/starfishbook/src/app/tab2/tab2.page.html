@@ -13,6 +13,30 @@
       <a href class="nav-link" (click)="logout()">LogOut</a>
     </li>
   </ul>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCard()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+<div class="cards">
+  <ion-card *ngFor = "let todo of todos">
+    <ion-card-header>
+      <div>
+        <ion-icon name="create-outline" (click)="update(todo.id)"></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteTodo(todo.id)" ></ion-icon>
+      </div>
+      <ion-card-title>{{todo.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content >
+      <p>{{todo.todolist}}</p>
+    </ion-card-content>
+
+  </ion-card>
+
+</div>
  
 
 </ion-content>

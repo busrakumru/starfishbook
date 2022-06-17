@@ -38,7 +38,7 @@ public class ToDosController {
           //this.todoService = todoService;
     }
  
-    @GetMapping("todos")
+    @GetMapping("todo")
     public List<ToDos> getToDos() {
         Sort sortByCreatedAtDesc = Sort.by(Sort.Direction.DESC, "createdAt");
         return todoRepository.findAll(sortByCreatedAtDesc);
@@ -46,44 +46,34 @@ public class ToDosController {
     }
 
     // Get a Single Note
-    @GetMapping("todos/{id}")
+    @GetMapping("todo/{id}")
     public ToDos getToDosById(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
-        return this.todoRepository.findById(noteId)
-                .orElseThrow(() -> new NoteNotFoundException(noteId));
+        return this.todoRepository.findTodoById(noteId);
     }
 
-    @PostMapping("todos")
+    @PostMapping("todo")
     public ToDos addToDos(@RequestBody ToDos toDos) {
         return this.todoRepository.save(toDos);
     }
 
    
-    @PutMapping("todos/{id}")
+    @PutMapping("todo/{id}")
     public ToDos updateNote(@PathVariable(value = "id") Long todoId, @RequestBody ToDos todosDetail)
             throws NoteNotFoundException {
 
-        ToDos todo = this.todoRepository.findById(todoId)
-                .orElseThrow(() -> new NoteNotFoundException(todoId));
-
-        todo.setText(todosDetail.getText());
-        todo.setFinish(todosDetail.isFinished());
+        ToDos todo = this.todoRepository.findTodoById(todoId);
         todo.setTitle(todosDetail.getTitle());
         todo.setCreatedAt(todosDetail.getCreatedAt());
- 
         ToDos updatedToDos = this.todoRepository.save(todo);
 
         return updatedToDos;
     }
 
     
-    @DeleteMapping("todos/{id}")
-    public ResponseEntity<?> deleteTodo(@PathVariable(value = "id") Long todoId) throws NoteNotFoundException {
-
-        ToDos todo = this.todoRepository.findById(todoId)
-                .orElseThrow(() -> new NoteNotFoundException(todoId));
-
+    @DeleteMapping("todo/{id}")
+    public ResponseEntity<List<ToDos>> deleteTodo(@PathVariable(value = "id") Long todoId) throws NoteNotFoundException {
+        ToDos todo = this.todoRepository.findTodoById(todoId);
         this.todoRepository.delete(todo);
-
         return ResponseEntity.ok().build();
     }
 

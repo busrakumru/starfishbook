@@ -14,28 +14,28 @@ export class TodoService {
   constructor(private http: HttpClient) { }
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.baseUrl + '/auth/users/todos/')
+    return this.http.get<Todo[]>(this.baseUrl + '/auth/users/todo')
       .pipe(
         catchError(this.handleError)
       );
   }
 
   createTodo(todoData: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.baseUrl + '/auth/users/todos/' , todoData)
+    return this.http.post<Todo>(this.baseUrl + '/auth/users/todo/' , todoData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   updateTodo(todoData: Todo): Observable<Todo> {
-    return this.http.put<Todo>(this.baseUrl  + '/auth/users/todos/'+ todoData.id, todoData)
+    return this.http.put<Todo>(this.baseUrl  + '/auth/users/todo/'+ todoData.id, todoData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteTodo(id: any): Observable<any> {
-    return this.http.delete(this.baseUrl + '/auth/users/todos/' + id)
+    return this.http.delete(this.baseUrl + '/auth/users/todo/' + id)
       .pipe(
         catchError(this.handleError)
       );

@@ -1,9 +1,9 @@
 package de.beuth.starfishbook.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -19,25 +19,22 @@ public class ToDos {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "text")
-    private String text;
-
-    @Column(name = "finished")
-    private boolean finished = false;
-
+    @OneToMany(mappedBy = "todos")
+    List<TodoList> todolist;
     
     @Column(name = "createdAt")
     private Date createdAt = new Date();
 
-     public ToDos(String text , String title, String userEmail, boolean finished) {
-        super();
+
+     public ToDos( String title, Date createdAt,  List<TodoList>  todolist) {
         this.title=title;
-        this.text = text;
-        this.finished = finished;
+        this.createdAt=createdAt;
+        this.todolist=todolist;
+    
     }
 
     public ToDos() {
-        super();
+       
     }
 
 
@@ -48,14 +45,7 @@ public class ToDos {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
+    
     public String getTitle() {
         return title;
     }
@@ -64,13 +54,6 @@ public class ToDos {
         this.title = title;
     }
  
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinish(boolean finished) {
-        this.finished = finished;
-    }
     
     public Date getCreatedAt() {
         return createdAt;
@@ -80,4 +63,11 @@ public class ToDos {
         this.createdAt = createdAt;
     }
 
+    public  List<TodoList>  getTodoList() {
+        return todolist;
+    }
+
+    public void setTodoList( List<TodoList>  todolist) {
+        this.todolist = todolist;
+    }        
 }

@@ -30,79 +30,28 @@ public class ToDosService {
         return allTodos;
     }
 
-    public  Optional<ToDos> findById(Long id){
-          return todoRepository.findById(id);
+    public  ToDos findById(Long id){
+          return this.todoRepository.findTodoById(id);
     }
 
-    public Long addTodo ( ToDosRequest request){
+    public Long addTodo ( ToDos request){
       ToDos todo = new ToDos();
-        todo.setText(request.getText());
-        todo.setFinish(request.isFinished());
         todo.setTitle(request.getTitle());
         todo.setCreatedAt(request.getCreatedAt());
-
-        return todoRepository.save(todo).getId();
+        todo.setTodoList(request.getTodoList());
+        return this.todoRepository.save(todo).getId();
     }
 
-    public void updateTodo(Long id, ToDosRequest request){
-       Optional<ToDos> todo = findById(id);
-        if (todo.isPresent()) {
-            ToDos forUpdate = todo.get();
-            forUpdate.setText(request.getText());
-            forUpdate.setFinish(request.isFinished());
+    public ToDos updateTodo(Long id, ToDos request){
+       ToDos forUpdate =  this.todoRepository.findTodoById(id);
             forUpdate.setTitle(request.getTitle());
             forUpdate.setCreatedAt(request.getCreatedAt());
-            todoRepository.save(forUpdate);
-        }
+            return this.todoRepository.save(forUpdate);
     }
 
     public void delete(Long id) {
-        Optional<ToDos> post = findById(id);
-        post.ifPresent(todoRepository::delete);
+        ToDos post = findById(id);
+        this.todoRepository.delete(post);
+       
     }
 }
-
-/*  
-    public List<ToDos> getTodosByUser(Long user_id){
-        return todoRepository.findByAuthorId(user_id);
-    }
-	public List<ToDos> getTodosByUserEmail(String email) {
-		return todoRepository.findByUserEmail(email);
-	}
-
-
-    public void update(Long id, ToDosRequest request) {
-        Optional<ToDos> todo = findById(id);
-        if (todo.isPresent()) {
-            ToDos forUpdate = todo.get();
-            forUpdate.setText(request.getText());
-            forUpdate.setFinish(request.isFinished());
-            forUpdate.setUserEmail(request.getUserEmail());
-            todoRepository.save(forUpdate);
-        }
-    }
-
-	private Optional<ToDos> findById(Long id) {
-        return todoRepository.findById(id);
-    }
-
-
-	public Long addTodo(ToDosRequest request) {
-        ToDos todo = new ToDos();
-        todo.setUserEmail(request.getUserEmail());
-        todo.setText(request.getText());
-        todo.setFinish(request.isFinished());
-        return todoRepository.save(todo).getId();
-	}
-
-    
-    public List<ToDos> getAll() {
-        return todoRepository.findAll();
-    }
-
-    public void delete(Long id) {
-        Optional<ToDos> post = findById(id);
-        post.ifPresent(todoRepository::delete);
-    }
-
-}*/
