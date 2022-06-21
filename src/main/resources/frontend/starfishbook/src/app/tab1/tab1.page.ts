@@ -13,17 +13,28 @@ import { NotesService } from '../services/notes.service';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page  {
+export class Tab1Page {
 
   notes: Notes[];
   files: File[];
+
+  /*categories: [
+    {
+
+      title: "Lebensmittel"
+    },
+    {
+      title: "Kleidung"
+    }];*/
+
+  categories: string[] = ['Alle', 'Lebensmittel', 'Kleidung', 'Kosmetik'];
 
   constructor(private notesService: NotesService,
     public router: Router,
     public modalController: ModalController,
     public alertController: AlertController,
     private filesService: FileUploadService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 

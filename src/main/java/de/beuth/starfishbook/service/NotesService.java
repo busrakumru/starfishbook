@@ -26,7 +26,6 @@ public class NotesService {
         note.setTitle(request.getTitle());
         note.setText(request.getText());
         note.setColor(request.getColor());
-        note.setImg(request.getImg());
 
 
         return notesRepository.save(note).getId();
@@ -39,7 +38,6 @@ public class NotesService {
             forUpdate.setText(request.getText());
             forUpdate.setTitle(request.getTitle());
             forUpdate.setColor(request.getColor());
-            forUpdate.setImg(request.getImg());
 
             notesRepository.save(forUpdate);
         }

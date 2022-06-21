@@ -1,15 +1,37 @@
 ion-card{
-    width: 44%;
-    height: 300px;
+    width: 175px;
+    height: 175px;
 }
 
 .cards{
     display: flex;
     flex-wrap: wrap;
-    margin-top: 20%;
+    //margin-top: 20%;
 }
 
 ion-card div{
     display: flex;
     justify-content: space-between;
+}
+
+img{
+    width: 85px;
+}
+
+ion-header{
+    display: flex;
+    margin: 10px;
+}
+
+ion-title{
+    margin-left: -34px;
+}
+
+.categories{
+    display: flex;
+    justify-content: space-evenly;
+
+    label{
+        border: 2px solid;
+    }
 }

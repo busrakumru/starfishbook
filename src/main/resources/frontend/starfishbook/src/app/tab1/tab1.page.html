@@ -1,31 +1,46 @@
+<ion-header class="ion-no-border">
+  <img src="assets/img/starfish_happy.png">
+  <ion-title>starfishbook</ion-title>
+</ion-header>
+
 <ion-content>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openCard()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-<div class="cards">
-  <ion-card *ngFor = "let note of notes" [style.background]="note.color">
-    <ion-card-header>
-      <div>
-        <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
-        <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
-      </div>
-      <ion-card-title>{{note.title}}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content >
-      <p>{{note.text}}</p>
-    
-      <div *ngFor = "let file of files">
-        <a href="{{ file.url }}">{{ file.name }}</a>
-      </div>
-     
-    </ion-card-content>
+  <div class="categories">
 
-  </ion-card>
+    <ion-item *ngFor="let c of categories">
+      <ion-label>
+        {{c}}
+      </ion-label>
+    </ion-item>
+  </div>
 
-</div>
+
+  <div class="cards">
+    <ion-card *ngFor="let note of notes" [style.background]="note.color">
+      <ion-card-header>
+        <div>
+          <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
+          <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
+        </div>
+        <ion-card-title>{{note.title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{note.text}}</p>
+
+        <div *ngFor="let file of files">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
 
 </ion-content>

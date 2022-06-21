@@ -3,5 +3,4 @@ export class Notes {
     title: string;
     text: string;
     color: string;
-    img: string;
 }

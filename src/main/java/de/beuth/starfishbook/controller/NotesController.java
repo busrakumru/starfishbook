@@ -54,9 +54,8 @@ public class NotesController {
         .orElseThrow(() -> new NoteNotFoundException(noteId));
 
     notes.setTitle(noteDetail.getTitle());
-    notes.setText(noteDetail.getText());
-    notes.setColor(noteDetail.getColor());
-    notes.setImg(noteDetail.getImg());
+    //notes.setText(noteDetail.getText());
+    //notes.setColor(noteDetail.getColor());
 
     Notes updatedNote = this.notesRepository.save(notes);
 
