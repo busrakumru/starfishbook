@@ -30,30 +30,29 @@ public class ToDosController {
 
     @Autowired
     private ToDosRepository todoRepository;
-    //private final ToDosService todoService;    
+    private final ToDosService todoService;    
 
 
     public ToDosController(ToDosRepository todoRepository,ToDosService todoService) {
         this.todoRepository = todoRepository;
-          //this.todoService = todoService;
+          this.todoService = todoService;
     }
  
     @GetMapping("todo")
     public List<ToDos> getToDos() {
-        Sort sortByCreatedAtDesc = Sort.by(Sort.Direction.DESC, "createdAt");
-        return todoRepository.findAll(sortByCreatedAtDesc);
-       // return this.todoRepository.findAll();
+         return this.todoService.getTodos();
     }
 
     // Get a Single Note
     @GetMapping("todo/{id}")
-    public ToDos getToDosById(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
-        return this.todoRepository.findTodoById(noteId);
+    public ToDos getToDosById(@PathVariable(value = "id") Long todoId) throws NoteNotFoundException {
+         return this.todoService.findTodoById(todoId);
+        
     }
 
     @PostMapping("todo")
     public ToDos addToDos(@RequestBody ToDos toDos) {
-        return this.todoRepository.save(toDos);
+        return this.todoService.addTodo(toDos);
     }
 
    
@@ -64,17 +63,25 @@ public class ToDosController {
         ToDos todo = this.todoRepository.findTodoById(todoId);
         todo.setTitle(todosDetail.getTitle());
         todo.setCreatedAt(todosDetail.getCreatedAt());
-        ToDos updatedToDos = this.todoRepository.save(todo);
+        ToDos updatedToDos = this.todoService.save(todo);
 
         return updatedToDos;
     }
 
     
+    /*@DeleteMapping("todo/{id}")
+    public void deleteTodo(@PathVariable(value = "id") Long todoId) throws NoteNotFoundException {
+       // ToDos todo = this.todoRepository.findTodoById(todoId);
+        return this.todoService.delete(todoId);
+        //return ResponseEntity.ok().build();
+    }*/
+
+    
+    
     @DeleteMapping("todo/{id}")
-    public ResponseEntity<List<ToDos>> deleteTodo(@PathVariable(value = "id") Long todoId) throws NoteNotFoundException {
-        ToDos todo = this.todoRepository.findTodoById(todoId);
-        this.todoRepository.delete(todo);
-        return ResponseEntity.ok().build();
+    public Boolean delete(@PathVariable Long id) {
+        return this.todoService.delete(id);
     }
+
 
 }

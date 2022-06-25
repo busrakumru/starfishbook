@@ -66,14 +66,14 @@ public class TodoListController {
 
     @PostMapping("todolist")
     public TodoList addTodoList(@RequestBody TodoList todosList) {
-        return this.todoListService.save(todosList);
+        return this.todoListService.addTodoList(todosList);
     }
 
     @PostMapping("todo/{todoId}/todolist")
     public TodoList createTodolistByTodosId(@PathVariable(value = "todoId") Long todoId,
             @RequestBody TodoList request) {
 
-        ToDos todos = this.todoService.findById(todoId);
+        ToDos todos = this.todoService.findTodoById(todoId);
         request.setTodos(todos);
         return this.todoListService.save(request);
     }

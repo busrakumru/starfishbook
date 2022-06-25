@@ -20,6 +20,7 @@ public class ToDos {
     private String title;
 
     @OneToMany(mappedBy = "todos")
+    //@JoinColumn(name = "todolist")
     List<TodoList> todolist;
     
     @Column(name = "createdAt")

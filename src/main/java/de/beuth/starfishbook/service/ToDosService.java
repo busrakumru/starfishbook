@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.beuth.starfishbook.model.ToDos;
+import de.beuth.starfishbook.model.TodoList;
 import de.beuth.starfishbook.repository.ToDosRepository;
 //import de.beuth.starfishbook.request.ToDosRequest;
 import de.beuth.starfishbook.request.ToDosRequest;
@@ -30,16 +31,19 @@ public class ToDosService {
         return allTodos;
     }
 
-    public  ToDos findById(Long id){
+    public  ToDos findTodoById(Long id){
           return this.todoRepository.findTodoById(id);
     }
-
-    public Long addTodo ( ToDos request){
+    
+    public ToDos addTodo ( ToDos request){  
       ToDos todo = new ToDos();
         todo.setTitle(request.getTitle());
         todo.setCreatedAt(request.getCreatedAt());
         todo.setTodoList(request.getTodoList());
-        return this.todoRepository.save(todo).getId();
+        return this.todoRepository.save(todo);
+    }
+    public ToDos save(ToDos request) {
+        return this.todoRepository.save(request);
     }
 
     public ToDos updateTodo(Long id, ToDos request){
@@ -49,9 +53,13 @@ public class ToDosService {
             return this.todoRepository.save(forUpdate);
     }
 
-    public void delete(Long id) {
-        ToDos post = findById(id);
+    /*public void delete(Long id) {
+        ToDos post = findTodoById(id);
         this.todoRepository.delete(post);
        
+    }*/
+    public Boolean delete(Long id) {
+        this.todoRepository.deleteById(id);
+        return this.todoRepository.existsById(id);
     }
 }

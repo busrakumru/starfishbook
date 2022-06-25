@@ -13,6 +13,9 @@ import { TodolistService } from 'src/app/services/todolist.service';
 })
 export class TodoPage implements OnInit {
 
+  @Input() id:any;
+  @Input() title:string;
+
   todos: Todo[] = [];
   todolist: Todolist[] = [];
 
@@ -21,6 +24,7 @@ export class TodoPage implements OnInit {
 
   editing: boolean = false;
   editingTodolist: Todolist = new Todolist();
+  editingTodo: Todo = new Todo();
 
   isLoggedIn = false;
 
@@ -30,13 +34,12 @@ export class TodoPage implements OnInit {
 
 
   ngOnInit(): void {
-        
+    console.log(this.id);
     this.getTodolist();
-    this.getTodo();
+    //this.getTodo();
     
   }
 
- 
 
   //Liste aller Todos bekommen
   getTodolist(): void {
@@ -53,25 +56,15 @@ export class TodoPage implements OnInit {
 
   
   //eine Todo für die Liste erstellen
-  createTodolist(todoForm: NgForm): void {
+  createTodolist(): void {
     this.todolistService.createTodolist(this.newTodolist)
       .subscribe(createTodolist => {
-        todoForm.reset();
+        //todoForm.reset();
         this.newTodolist = new Todolist();
         this.todolist.unshift(createTodolist);
         console.log(createTodolist);
       });
   }
-
-  updateTodolistByTodosId(todo:Todo,todoData: Todolist): void {
-      this.todolistService.updateTodolistByTodosId(todo,todoData)
-        .subscribe(updatedTodo => {
-          let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
-        Object.assign(existingTodo, updatedTodo);
-        this.clearEditing();
-          console.log(updatedTodo);
-        });
-    }
 
   //eine Todo aus der Liste löschen
   deleteTodolist(id: any): void {
@@ -112,32 +105,50 @@ export class TodoPage implements OnInit {
     this.editing = false;
   }
 
-
-
+///_----------------------------------------------------------------------------------------------------------------------
+saveTodo(): void {
+  if (this.id) {
+    this.updateTodo();
+  } else {
+    this.createTodo();
+  }
+  this.modalController.dismiss();
+}
 
     //Todos mit Titel und Todolist erstellen
-    createTodo(todoForm: NgForm): void {
+    createTodo(): void {
 
       this.todoService.createTodo(this.newTodo)
         .subscribe(createTodo => {
-          todoForm.reset();
+         // todoForm.reset();
           this.newTodo= new Todo();
           this.todos.unshift(createTodo);
           console.log(createTodo);
         });
+        
+        this.createTodolist();
+        this.newTodolist=new Todolist;
+        console.log(this.newTodolist);
+
         this.modalController.dismiss();
         //this.todolistService.createTodolistByTodosId(this.newTodo,this.newTodolist);
     }
 
-    updateTodo(todoData: Todo): void {
-      console.log(todoData);
-      this.todoService.updateTodo(todoData)
-        .subscribe(updatedTodo => {
-          let existingTodo = this.todos.find(todos => todos.id === updatedTodo.id);
-          Object.assign(existingTodo, updatedTodo);
-          this.clearEditing();
-        });
-    }
+
+    updateTodo(): void {
+      console.log(this.id);
+      console.log(this.editingTodo.title)
+      this.editing = true;
+      this.todoService.updateTodo(this.id,this.editingTodo).subscribe(updatedTodo => {
+       this.todolist.find(todolist => todolist.id === updatedTodo.id);
+    });
+  }
+  abbrechen(){
+    this.modalController.dismiss();
+  }
+
+  
 }
 
 
+ 

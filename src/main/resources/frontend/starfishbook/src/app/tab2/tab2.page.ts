@@ -2,9 +2,11 @@ import { Component, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TodoPage } from '../modals/todo/todo.page';
 import { Todo } from '../models/todo.model';
+import { Todolist } from '../models/todolist.model';
 import { AuthService } from '../public/services/auth-service/auth.service';
 import { TokenService } from '../public/services/token/token.service';
 import { TodoService } from '../services/todo.service';
+import { TodolistService } from '../services/todolist.service';
 
 @Component({
   selector: 'app-tab2',
@@ -14,18 +16,20 @@ import { TodoService } from '../services/todo.service';
 export class Tab2Page  implements OnInit {
   
 
-
+  todolists: Todolist[] = [];
   todos: Todo[] = [];
   
   isLoggedIn = false;
   editing: boolean = false;
   editingTodo: Todo = new Todo();
 
-  constructor(public authService: AuthService, private todoService: TodoService,public tokenService: TokenService,public modalController: ModalController) { }
+  constructor(public authService: AuthService, private todoService: TodoService,private todolistService: TodolistService,public tokenService: TokenService,public modalController: ModalController) { }
  
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
     this.getTodo();
+    this.getTodoList();
+
   }
 
   logout() {
@@ -37,11 +41,17 @@ export class Tab2Page  implements OnInit {
     this.todoService.getTodos()
       .subscribe(todos => this.todos = todos);
   }
-
+  getTodoList(): void {
+    this.todolistService.getTodolist()
+      .subscribe(todolist => this.todolists = todolist);
+  }
+  
+  
   async openCard() {
 
     const modal = await this.modalController.create({
       component: TodoPage,
+      
     });
     return await modal.present();
   }
@@ -64,7 +74,9 @@ export class Tab2Page  implements OnInit {
         'todolist': todo.todoList
       }
      
-    });console.log(todo.id)
+    });console.log(todo.id);
+    console.log(todo.title);
+    console.log(todo.todoList);
     return await modal.present();
   }
 }

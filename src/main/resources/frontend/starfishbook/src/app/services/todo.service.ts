@@ -1,12 +1,15 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable, throwError } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TodoService {
   
   private baseUrl = 'https://localhost:8443';
@@ -18,8 +21,10 @@ export class TodoService {
       .pipe(
         catchError(this.handleError)
       );
+
   }
 
+  
   createTodo(todoData: Todo): Observable<Todo> {
     return this.http.post<Todo>(this.baseUrl + '/auth/users/todo/' , todoData)
       .pipe(
@@ -27,8 +32,8 @@ export class TodoService {
       );
   }
 
-  updateTodo(todoData: Todo): Observable<Todo> {
-    return this.http.put<Todo>(this.baseUrl  + '/auth/users/todo/'+ todoData.id, todoData)
+  updateTodo(id: any,todoData: Todo): Observable<Todo> {
+    return this.http.put<Todo>(this.baseUrl  + '/auth/users/todo/'+ id, todoData)
       .pipe(
         catchError(this.handleError)
       );

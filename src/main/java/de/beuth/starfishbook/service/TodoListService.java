@@ -43,11 +43,19 @@ public class TodoListService {
         return this.todoListRepository.save(request);
     }
 
+    public TodoList addTodoList ( TodoList request){  
+        TodoList todo = new TodoList();
+          todo.setText(request.getText());
+          todo.setFinished(request.isFinished());
+          todo.setTodos(request.getTodos());
+          return this.todoListRepository.save(todo);
+      }
+      
     public TodoList updateTodo(Long id, TodoList request) {
         TodoList update = todoListRepository.findTodoListById(id);
         update.setText(request.getText());
         update.setFinished(request.isFinished());
-        update.setTodos(request.getTodos());
+        //update.setTodos(request.getTodos());
         return this.todoListRepository.save(update);
     }
 
