@@ -19,7 +19,15 @@ const routes: Routes = [
   {
     path: 'note',
     loadChildren: () => import('./modals/notes/note/note.module').then(m => m.NotePageModule)
+  },  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
+  },
+  {
+    path: 'mood',
+    loadChildren: () => import('./mood/mood.module').then( m => m.MoodPageModule)
   }
+
 ];
 @NgModule({
   imports: [
