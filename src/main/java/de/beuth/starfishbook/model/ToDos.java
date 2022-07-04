@@ -1,7 +1,9 @@
 package de.beuth.starfishbook.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,15 +21,19 @@ public class ToDos {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "todos")
+    /*@OneToMany(mappedBy = "todos")
     //@JoinColumn(name = "todolist")
-    List<TodoList> todolist;
+    List<TodoList> todolist;*/
+
+    @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
+    private Set<TodoList> todolist = new HashSet<>();
+
     
     @Column(name = "createdAt")
     private Date createdAt = new Date();
 
 
-     public ToDos( String title, Date createdAt,  List<TodoList>  todolist) {
+     public ToDos( String title, Date createdAt,  Set<TodoList>  todolist) {
         this.title=title;
         this.createdAt=createdAt;
         this.todolist=todolist;
@@ -64,11 +70,23 @@ public class ToDos {
         this.createdAt = createdAt;
     }
 
-    public  List<TodoList>  getTodoList() {
+    /*public  List<TodoList>  getTodoList() {
         return todolist;
     }
 
     public void setTodoList( List<TodoList>  todolist) {
         this.todolist = todolist;
-    }        
+    }      */
+    
+    public Set<TodoList> getTodoList() {
+        return todolist;
+    }
+
+    public void setTodoList(Set<TodoList> todolist) {
+        this.todolist = todolist;
+
+        for(TodoList t : todolist) {
+            t.setTodos(this);
+        }
+    }
 }

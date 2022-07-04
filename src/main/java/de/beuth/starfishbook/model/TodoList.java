@@ -2,6 +2,8 @@ package de.beuth.starfishbook.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "todoList")
 
@@ -19,9 +21,15 @@ public class TodoList {
     private boolean finished;
     
     
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "todos_id")
+    private ToDos todos;*/
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "todos_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ToDos todos;
+
 
 
     public TodoList(String text,boolean finished) {
