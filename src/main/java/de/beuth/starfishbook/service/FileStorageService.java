@@ -2,6 +2,7 @@ package de.beuth.starfishbook.service;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -20,10 +21,28 @@ public class FileStorageService {
     @Autowired
     private FileDBRepository fileDBRepository;
 
-    public FileDB store(MultipartFile file) throws IOException {
+    public List<FileDB> findByNotesId(Long notesId) {
+        return fileDBRepository.findByNotesId(notesId);
+    }
+
+    public FileDB store(MultipartFile file, Notes notes) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
         return fileDBRepository.save(FileDB);
+    }
+
+    public FileDB store2(MultipartFile file) throws IOException {
+
+        Notes notes = new Notes();
+
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
+        return fileDBRepository.save(FileDB);
+    }
+
+
+    public FileDB save(FileDB request) {
+        return this.fileDBRepository.save(request);
     }
 
     public Stream<FileDB> getAllFiles() {
@@ -49,4 +68,6 @@ public class FileStorageService {
         this.fileDBRepository.deleteById(id);
         return this.fileDBRepository.existsById(id);
     }
+
+
 }

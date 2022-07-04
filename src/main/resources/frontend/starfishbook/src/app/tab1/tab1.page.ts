@@ -48,7 +48,6 @@ export class Tab1Page {
       console.log(data);
       this.files = data;
     });
-
   }
 
   newNote: FormGroup = new FormGroup({

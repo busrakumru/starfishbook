@@ -1,5 +1,7 @@
 package de.beuth.starfishbook.message;
 
+import de.beuth.starfishbook.model.Notes;
+
 public class ResponseFile {
 
     private String id;
@@ -8,12 +10,15 @@ public class ResponseFile {
     private String type;
     private long size;
 
-    public ResponseFile(String id, String name, String url, String type, long size) {
+    private Notes notes;
+
+    public ResponseFile(String id, String name, String url, String type, long size, Notes notes) {
         this.id = id;
         this.name = name;
         this.url = url;
         this.type = type;
         this.size = size;
+        this.notes = notes;
     }
 
     public String getId() {
@@ -54,6 +59,14 @@ public class ResponseFile {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public Notes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Notes notes) {
+        this.notes = notes;
     }
 
 }

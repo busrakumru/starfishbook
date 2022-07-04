@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -52,15 +52,17 @@ export class NotePage implements OnInit {
 
   ]
   ngOnInit(): void {
-    this.fileInfos = this.uploadService.getFiles();
+    //this.fileInfos = this.uploadService.getFiles();
+    if(this.id){console.log(this.id)}
+    if(this.id){this.fileInfos = this.uploadService.getFiles();}
 
   }
 
   newNote: FormGroup = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('',),
     text: new FormControl(''),
     color: new FormControl(''),
-    img: new FormControl('')
+    files: new FormArray([])
   })
 
   saveNote(): void {
@@ -74,6 +76,7 @@ export class NotePage implements OnInit {
 
   createNewNote() {
     console.log(this.newNote.value);
+   
 
     this.notesService.createNote(this.newNote.value)
       .subscribe(

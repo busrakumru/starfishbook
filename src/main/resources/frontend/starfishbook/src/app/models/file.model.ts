@@ -3,4 +3,5 @@ export class File {
     data: any;
     name: string;
     type: string;
+    notes_id:  number;
 }

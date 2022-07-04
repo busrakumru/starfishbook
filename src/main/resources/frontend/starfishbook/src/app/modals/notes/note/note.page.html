@@ -9,15 +9,15 @@
           <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
       </div>
-      <div>
+      <!--div>
         <ion-button size="small" fill="clear">
           <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
         </ion-button>
-      </div>
+      </div-->
     </div>
 
     <ion-input placeholder="Titel" type="text" formControlName="title"></ion-input>
-    <ion-input placeholder="Text" type="text" formControlName="text"></ion-input>
+    <ion-textarea placeholder="Text" type="text" formControlName="text"></ion-textarea>
 
         <div class="row">
           <div class="col-8">
@@ -32,7 +32,7 @@
                 {{imgName}}
               </div>
 
-              <input type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
+              <input formArrayName="files" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
               <div class="imageUpload">
 
                 <ion-button fill="clear" (click)="fileUpload.click()">
@@ -52,7 +52,7 @@
         <div class="card mt-3">
           <ul
             class="list-group list-group-flush"
-            *ngFor="let file of fileInfos | async"
+            *ngFor="let f of file"
           >
             <li class="list-group-item">
               <a href="{{ file.url }}">{{ file.name }}</a>

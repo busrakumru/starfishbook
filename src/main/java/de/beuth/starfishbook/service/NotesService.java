@@ -51,4 +51,8 @@ public class NotesService {
         Optional<Notes> post = findById(id);
         post.ifPresent(notesRepository::delete);
     }
+
+    public  Notes findNotesById(Long id){
+        return this.notesRepository.findNotesById(id);
+  }
 }

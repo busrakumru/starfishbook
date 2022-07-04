@@ -12,5 +12,9 @@ import de.beuth.starfishbook.model.Notes;
 public interface  NotesRepository extends JpaRepository<Notes, Long> {
 
     /*List<Notes> findAllByTitleContaining(String title);*/
+
+    
+
+    Notes findNotesById(Long id);
 }
 
