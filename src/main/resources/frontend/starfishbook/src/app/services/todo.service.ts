@@ -5,6 +5,7 @@ import { Observable, throwError } from 'rxjs';
 
 import { catchError } from 'rxjs/operators';
 import { Todo } from '../models/todo.model';
+import { Todolist } from '../models/todolist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,7 @@ export class TodoService {
       .pipe(
         catchError(this.handleError)
       );
-
   }
-
   
   createTodo(todoData: Todo): Observable<Todo> {
     return this.http.post<Todo>(this.baseUrl + '/auth/users/todo/' , todoData)

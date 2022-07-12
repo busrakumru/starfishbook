@@ -1,6 +1,8 @@
 package de.beuth.starfishbook.controller;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.ToDos;
+import de.beuth.starfishbook.model.TodoList;
 import de.beuth.starfishbook.repository.ToDosRepository;
 import de.beuth.starfishbook.service.ToDosService;
+import de.beuth.starfishbook.service.TodoListService;
 
 
 @CrossOrigin(origins = "https://localhost:8100")
@@ -29,12 +33,9 @@ import de.beuth.starfishbook.service.ToDosService;
 public class ToDosController {
 
     @Autowired
-    private ToDosRepository todoRepository;
-    private final ToDosService todoService;    
-
-
-    public ToDosController(ToDosRepository todoRepository,ToDosService todoService) {
-        this.todoRepository = todoRepository;
+    private final ToDosService todoService; 
+  
+    public ToDosController(ToDosService todoService) {
           this.todoService = todoService;
     }
  
@@ -60,10 +61,7 @@ public class ToDosController {
     public ToDos updateNote(@PathVariable(value = "id") Long todoId, @RequestBody ToDos todosDetail)
             throws NoteNotFoundException {
 
-        ToDos todo = this.todoRepository.findTodoById(todoId);
-        todo.setTitle(todosDetail.getTitle());
-        todo.setCreatedAt(todosDetail.getCreatedAt());
-        ToDos updatedToDos = this.todoService.save(todo);
+        ToDos updatedToDos = this.todoService.updateTodo(todoId,todosDetail);
 
         return updatedToDos;
     }

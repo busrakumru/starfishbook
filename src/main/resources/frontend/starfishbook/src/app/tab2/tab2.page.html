@@ -23,7 +23,7 @@
     <ion-card-header>
       <div>
         <ion-icon name="create-outline" (click)="update(todo)"></ion-icon>
-        <ion-icon name="trash-outline" (click)="deleteTodo(todo.id)" ></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteTodo(todo)" ></ion-icon>
       </div>
       <ion-card-title>{{todo.title}}</ion-card-title>
     </ion-card-header>
@@ -31,13 +31,12 @@
     <ion-card-content >
       <p>{{todo.todolist}}</p>
 
-      <div *ngFor="let todolist of todolists">
+      <!--div *ngFor="let todolist of todolists">
         <p>{{todolist.text}}</p>
-      </div>
+      </div-->
     </ion-card-content>
 
   </ion-card>
 
 </div>
 </ion-content>
-<app-

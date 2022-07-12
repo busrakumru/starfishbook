@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AlertController, ModalController } from '@ionic/angular';
 import { TodoPage } from '../modals/todo/todo.page';
 import { Todo } from '../models/todo.model';
 import { Todolist } from '../models/todolist.model';
@@ -16,19 +17,23 @@ import { TodolistService } from '../services/todolist.service';
 export class Tab2Page  implements OnInit {
   
 
-  todolists: Todolist[] = [];
+  //todolists: Todolist[] = [];
   todos: Todo[] = [];
   
-  isLoggedIn = false;
-  editing: boolean = false;
-  editingTodo: Todo = new Todo();
+  newTodo: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    todolist: new FormArray([])
 
-  constructor(public authService: AuthService, private todoService: TodoService,private todolistService: TodolistService,public tokenService: TokenService,public modalController: ModalController) { }
+  })
+
+  isLoggedIn = false;
+
+  constructor(public authService: AuthService,  public alertController: AlertController,private todoService: TodoService,private todolistService: TodolistService,public tokenService: TokenService,public modalController: ModalController) { }
  
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
     this.getTodo();
-    this.getTodoList();
+    //this.getTodoList();
 
   }
 
@@ -39,12 +44,16 @@ export class Tab2Page  implements OnInit {
 
   getTodo(): void {
     this.todoService.getTodos()
-      .subscribe(todos => this.todos = todos);
+      .subscribe((data: Todo[]) => 
+      {this.todos = data
+      
+      });
   }
-  getTodoList(): void {
+  
+  /*getTodoList(): void {
     this.todolistService.getTodolist()
       .subscribe(todolist => this.todolists = todolist);
-  }
+  }*/
   
   
   async openCard() {
@@ -57,11 +66,42 @@ export class Tab2Page  implements OnInit {
   }
 
    //eine Todo aus der Liste löschen
-  deleteTodo(id: any): void {
-    this.todoService.deleteTodo(id)
+  async deleteTodo(todo) {
+
+
+    const alert = await this.alertController.create({
+
+      header: 'Achtung!',
+      message: 'Möchtest du deine Todo  wirklich <strong>löschen</strong>?',
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: () => {
+            console.log('Abgebrochen');
+          }
+        }, {
+          text: 'Löschen',
+          id: 'confirm-button',
+          handler: () => {
+            this.todoService.deleteTodo(todo.id)
+              .subscribe(() => {
+                this.todos = this.todos.filter(todos => todos.id != todo.id);
+              });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  
+    /*this.todoService.deleteTodo(id)
       .subscribe(() => {
         this.todos = this.todos.filter(todos => todos.id != id);
-      });
+      });*/
   }
 
   async update(todo) {
@@ -71,12 +111,12 @@ export class Tab2Page  implements OnInit {
       componentProps: {
         'id': todo.id,
         'title': todo.title,
-        'todolist': todo.todoList
+        'todolist': todo.todolist
       }
      
     });console.log(todo.id);
     console.log(todo.title);
-    console.log(todo.todoList);
+    console.log(todo.todolist);
     return await modal.present();
   }
 }

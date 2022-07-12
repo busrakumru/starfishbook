@@ -25,7 +25,7 @@ public class TodoList {
     @JoinColumn(name = "todos_id")
     private ToDos todos;*/
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todos_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ToDos todos;
