@@ -2,8 +2,8 @@
 
   <div>
     <div class="register">
-      <a [routerLink]="['../register']">Go to Register</a>
-      <p>Hint: If you are here for the first time you first need to register a user</p>
+      <a [routerLink]="['../register']">Registrieren</a>
+      <p>Du hast noch kein Konto? Dann registriere dich in nur ein Paar Schritten!</p>
     </div>
 
     <div>
@@ -14,16 +14,16 @@
 
             <mat-form-field>
               <input type="email" matInput placeholder="Email" formControlName="email">
-              <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="email.touched && email.hasError('email')">Email must be valid</mat-error>
+              <mat-error *ngIf="email.touched && email.hasError('required')">Email ist erforderlich</mat-error>
+              <mat-error *ngIf="email.touched && email.hasError('email')">Email muss gültig sein</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input type="password" matInput placeholder="Password" formControlName="password">
-              <mat-error *ngIf="password.touched && password.hasError('required')">Password is required</mat-error>
+              <mat-error *ngIf="password.touched && password.hasError('required')">Passwort ist erforderlich</mat-error>
             </mat-form-field>
 
-            <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
+            <mat-hint *ngIf="!form.valid"><small>Bitte fülle alle Felder aus</small></mat-hint>
 
             <div class="button">
               <button mat-button type="submit" [disabled]="!form.valid">Login</button>

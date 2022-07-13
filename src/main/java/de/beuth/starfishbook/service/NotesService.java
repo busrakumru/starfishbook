@@ -27,7 +27,6 @@ public class NotesService {
         note.setText(request.getText());
         note.setColor(request.getColor());
 
-
         return notesRepository.save(note).getId();
     }
 
@@ -55,4 +54,6 @@ public class NotesService {
     public  Notes findNotesById(Long id){
         return this.notesRepository.findNotesById(id);
   }
+
+  
 }

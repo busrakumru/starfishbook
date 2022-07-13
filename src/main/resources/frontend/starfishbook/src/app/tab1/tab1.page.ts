@@ -18,15 +18,6 @@ export class Tab1Page {
   notes: Notes[];
   files: File[];
 
-  /*categories: [
-    {
-
-      title: "Lebensmittel"
-    },
-    {
-      title: "Kleidung"
-    }];*/
-
   categories: string[] = ['Alle', 'Lebensmittel', 'Kleidung', 'Kosmetik'];
 
   constructor(private notesService: NotesService,
@@ -44,10 +35,10 @@ export class Tab1Page {
       this.notes = data;
     });
 
-    this.filesService.getFiles().subscribe((data: File[]) => {
+    /*this.filesService.getFiles().subscribe((data: File[]) => {
       console.log(data);
       this.files = data;
-    });
+    });*/
   }
 
   newNote: FormGroup = new FormGroup({

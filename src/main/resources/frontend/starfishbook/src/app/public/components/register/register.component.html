@@ -2,38 +2,37 @@
 
   <div>
     <div class="login">
-      <a [routerLink]="['../login']">Go to Login</a>
+      <a [routerLink]="['../login']">Gehe zur Login</a>
     </div>
 
     <div>
 
       <mat-card>
-        <mat-card-title>Register</mat-card-title>
+        <mat-card-title>Registrierung</mat-card-title>
 
         <mat-card-content>
           <form [formGroup]="form" (ngSubmit)="register()">
 
             <mat-form-field>
               <input type="email" matInput placeholder="Email" formControlName="email">
-              <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="email.touched && email.hasError('email')">Email must be valid</mat-error>
+              <mat-error *ngIf="email.touched && email.hasError('required')">Email ist erforderlich</mat-error>
+              <mat-error *ngIf="email.touched && email.hasError('email')">Email muss gültig sein</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input type="password" matInput placeholder="Password" formControlName="password">
-              <mat-error *ngIf="password.touched && password.hasError('required')">Password is required</mat-error>
+              <mat-error *ngIf="password.touched && password.hasError('required')">Passwort ist erforderlich</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input type="password" matInput placeholder="Password Confirmation" formControlName="passwordConfirm">
             </mat-form-field>
 
-            <mat-hint *ngIf="!form.valid"><small>Please fill out all needed information</small></mat-hint>
-            <mat-error *ngIf="passwordConfirm.touched && form.hasError('passwordsNotMatching')"><small>Passwords are not
-                matching</small></mat-error>
+            <mat-hint *ngIf="!form.valid"><small>Bitte fülle alle Felder aus</small></mat-hint>
+            <mat-error *ngIf="passwordConfirm.touched && form.hasError('passwordsNotMatching')"><small>Die Passwörter stimmen nicht überein!</small></mat-error>
 
             <div class="button">
-              <button mat-button type="submit" [disabled]="!form.valid">Register</button>
+              <button mat-button type="submit" [disabled]="!form.valid">Registrieren</button>
             </div>
 
           </form>

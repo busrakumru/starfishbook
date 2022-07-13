@@ -1,6 +1,5 @@
 package de.beuth.starfishbook.controller;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -39,34 +38,25 @@ import de.beuth.starfishbook.service.NotesService;
 @RequestMapping("auth/users/")
 public class FileController {
 
-    private NotesRepository notesRepository;
     private FileDBRepository filesRepository;
+    private NotesRepository notesRepository;
 
   @Autowired
-  public FileController(NotesRepository notesRepository, FileDBRepository filesRepository) {
-    this.notesRepository = notesRepository;
+  public FileController(FileDBRepository filesRepository, NotesRepository notesRepository) {
     this.filesRepository = filesRepository;
+    this.notesRepository = notesRepository;
   }
 
     @Autowired
     private FileStorageService storageService;
-
-    @Autowired
-    private NotesService notesService;
-
 
     @GetMapping("notes/{notesId}/files")
     public ResponseEntity<List<FileDB>> getFilesByNotesId(@PathVariable(value = "notesId") Long notesId) {
         List<FileDB> files = storageService.findByNotesId(notesId);
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
-
-    
-
-    
-
   
-    @PostMapping("notes/{notesId}/files")
+    /*@PostMapping("notes/{notesId}/files")
     public ResponseEntity<ResponseMessage> createFileByNotesId(@PathVariable(value = "notesId") Long notesId,
             @RequestParam("file") MultipartFile file) {
         String message = "";
@@ -82,14 +72,14 @@ public class FileController {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
-    }
+    }*/
 
     @PostMapping("files")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         try {
             
-            storageService.store2(file);
+            storageService.store(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
@@ -112,8 +102,22 @@ public class FileController {
             .buildAndExpand(savedfile.getId()).toUri();
 
         return ResponseEntity.created(location).body(savedfile);
-    }*/
+    }
+    @PostMapping("files")
+    public ResponseEntity<FileDB> create(@RequestBody @Valid FileDB files) {
+        Optional<Notes> optionalNotes = notesRepository.findById(files.getNotes().getId());
+        if (!optionalNotes.isPresent()) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
 
+        files.setNotes(optionalNotes.get());
+
+        FileDB savedFiles = filesRepository.save(files);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+            .buildAndExpand(savedFiles.getId()).toUri();
+
+        return ResponseEntity.created(location).body(savedFiles);
+    }*/
     /*
      * public FileDB createFileByNotesId(@PathVariable(value = "notesId") Long
      * notesId, @RequestBody FileDB request, @RequestParam("file") MultipartFile
@@ -131,25 +135,6 @@ public class FileController {
     public ResponseEntity<Page<FileDB>> getAll(Pageable pageable) {
         return ResponseEntity.ok(filesRepository.findAll(pageable));
     }
-
-    /*@GetMapping("files")
-    public ResponseEntity<List<ResponseFile>> getListFiles(Pageable pageable) {
-        List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("auth/users/files/")
-                    .path(dbFile.getId())
-                    .toUriString();
-            return new ResponseFile(
-                    dbFile.getId(),
-                    dbFile.getName(),
-                    fileDownloadUri,
-                    dbFile.getType(),
-                    dbFile.getData().length,
-                    dbFile.getNotes());
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(filesRepository.findAll(files));
-    }*/
 
 
     /*@GetMapping("files")

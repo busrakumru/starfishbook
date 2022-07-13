@@ -25,20 +25,26 @@ public class FileStorageService {
         return fileDBRepository.findByNotesId(notesId);
     }
 
-    public FileDB store(MultipartFile file, Notes notes) throws IOException {
+    /*public FileDB store(MultipartFile file, Notes notes) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
         return fileDBRepository.save(FileDB);
+    }*/
+
+    public FileDB store(MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
+        return fileDBRepository.save(FileDB);
     }
 
-    public FileDB store2(MultipartFile file) throws IOException {
+    /*public FileDB store2(MultipartFile file) throws IOException {
 
         Notes notes = new Notes();
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
         return fileDBRepository.save(FileDB);
-    }
+    }*/
 
 
     public FileDB save(FileDB request) {

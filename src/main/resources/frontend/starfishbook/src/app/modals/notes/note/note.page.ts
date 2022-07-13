@@ -53,17 +53,36 @@ export class NotePage implements OnInit {
   ]
   ngOnInit(): void {
     //this.fileInfos = this.uploadService.getFiles();
-    if(this.id){console.log(this.id)}
-    if(this.id){this.fileInfos = this.uploadService.getFiles();}
+    if (this.id) { console.log(this.id) }
+    if (this.id) { this.fileInfos = this.uploadService.getFiles(); }
 
   }
+
+  /*newFile: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    size: new FormControl('')
+  })*/
 
   newNote: FormGroup = new FormGroup({
     title: new FormControl('',),
     text: new FormControl(''),
     color: new FormControl(''),
-    files: new FormArray([])
+    files: new FormArray([
+      new FormGroup({
+        name: new FormControl('')})])
+  
+    //files: new FormArray([this.newFile])
   })
+
+  
+
+  /*add() {
+    (this.newNote.controls['files'] as FormArray).push(this.newFile)
+  }*/
+
+  get files() {
+    return this.newNote.get('files') as FormArray;
+  }
 
   saveNote(): void {
     if (this.id) {
@@ -76,7 +95,7 @@ export class NotePage implements OnInit {
 
   createNewNote() {
     console.log(this.newNote.value);
-   
+
 
     this.notesService.createNote(this.newNote.value)
       .subscribe(
@@ -160,9 +179,9 @@ export class NotePage implements OnInit {
         });
   }
 
- /* refresh(): void {
-    window.location.reload();
-  }*/
+  /* refresh(): void {
+     window.location.reload();
+   }*/
 
   async openCard() {
 
@@ -176,6 +195,7 @@ export class NotePage implements OnInit {
     });
     return await modal.present();
   }
+
 
 
 

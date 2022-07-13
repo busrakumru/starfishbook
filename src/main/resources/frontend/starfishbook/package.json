@@ -24,6 +24,8 @@
     "@angular/router": "~13.2.2",
     "@auth0/angular-jwt": "^5.0.2",
     "@ionic/angular": "^6.1.10",
+    "@syncfusion/ej2-data": "^20.2.38",
+    "angular-switchable-grid": "^2.0.0",
     "ngx-color": "^7.3.3",
     "ngx-colors": "^3.1.2",
     "ngx-custom-validators": "^11.0.1",
