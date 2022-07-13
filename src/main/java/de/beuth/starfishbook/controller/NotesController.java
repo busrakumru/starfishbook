@@ -21,9 +21,9 @@ import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.NotesRepository;
 
-@CrossOrigin(origins = "http://localhost:8100")
+@CrossOrigin(origins = "https://localhost:8100")
 @RestController
-@RequestMapping("api/")
+@RequestMapping("/auth/users/")
 public class NotesController {
 
   @Autowired

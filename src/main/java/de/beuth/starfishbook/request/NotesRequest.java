@@ -1,4 +1,4 @@
-package de.beuth.starfishbook.model;
+package de.beuth.starfishbook.request;
 
 public class NotesRequest {
 

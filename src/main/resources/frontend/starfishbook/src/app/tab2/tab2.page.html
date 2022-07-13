@@ -1,18 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-       Login geschafft
-    </ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true"  class="ion-no-border">
+  <img src="assets/img/starfish_happy.png">
+  <ion-title>To-Dos</ion-title>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <virtual-scroll-element class="ion-content-scroll-host">
+    <!-- Your virtual scroll content -->
+  </virtual-scroll-element>
 
-  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+  <!--ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
     <li class="nav-item">
       <a href class="nav-link" (click)="logout()">LogOut</a>
     </li>
-  </ul>
- 
+  </ul-->
 
+  <ion-fab vertical="top" horizontal="center" slot="fixed" class="open">
+    <ion-fab-button  (click)="openCard()"  color="primary-contrast">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-label>Was steht heute an?</ion-label>
+  </ion-fab>
+
+<div class="cards">
+  <ion-card *ngFor = "let todo of todos">
+    <ion-card-header>
+      <div>
+        <ion-icon name="create-outline" (click)="update(todo)"></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteTodo(todo)" ></ion-icon>
+      </div>
+      <ion-card-title>{{todo.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content >
+      <p>{{todo.todolist}}</p>
+
+      <!--div *ngFor="let todolist of todolists">
+        <p>{{todolist.text}}</p>
+      </div-->
+    </ion-card-content>
+
+  </ion-card>
+
+</div>
 </ion-content>
