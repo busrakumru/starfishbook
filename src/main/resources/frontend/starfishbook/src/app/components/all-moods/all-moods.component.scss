@@ -1,5 +1,7 @@
 img {
   max-width: 70px;
+ // margin:5px;
+  max-height: 90px;
 }
 
 ion-label {
@@ -13,6 +15,12 @@ ion-label {
 }
 
 div {
-  padding-top: 20px;
+  padding-top: 10px;
+  display:flex;
+  margin-left:3%;
+  margin-right:20px;
 }
 
+.no-scroll{
+  overflow: hidden;
+}

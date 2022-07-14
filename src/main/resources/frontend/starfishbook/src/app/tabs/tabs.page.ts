@@ -10,7 +10,6 @@ import { AllMoodsComponent } from '../components/all-moods/all-moods.component';
 })
 export class TabsPage {
   
-  roleMsg = "";
   constructor(public popoverController: PopoverController) {}
   
   async presentPopover(e: Event) {
@@ -22,7 +21,6 @@ export class TabsPage {
 
     await popover.present();
   
-    const { role } = await popover.onDidDismiss();
-    this.roleMsg = `Popover dismissed with role: ${role}`;
   }
 }
+

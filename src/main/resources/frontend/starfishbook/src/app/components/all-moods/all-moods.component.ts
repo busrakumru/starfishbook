@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { MoodPage } from 'src/app/modals/mood/mood.page';
 
 @Component({
   selector: 'app-all-moods',
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllMoodsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public modalController: ModalController,private popoverController: PopoverController) { }
 
   ngOnInit() {}
 
+   
+  async openmodal() {
+    this.popoverController.dismiss();
+    const modal = await this.modalController.create({
+      component: MoodPage,
+      
+    });
+    return await modal.present();
+  }
+  
 }

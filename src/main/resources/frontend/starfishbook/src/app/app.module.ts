@@ -9,7 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicRoutingModule } from './public/public-routing.module';
 import { IonicModule, IonicRouteStrategy  } from '@ionic/angular';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,6 +26,11 @@ import { RouteReuseStrategy } from '@angular/router';
     NgxColorsModule,
     PublicRoutingModule ,
     FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
     BrowserAnimationsModule],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],  
   bootstrap: [AppComponent],

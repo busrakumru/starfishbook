@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController, PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-mood',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoodPage implements OnInit {
 
-  constructor() { }
+  constructor( private modalController: ModalController, private route: Router) { }
 
   ngOnInit() {
   }
 
+  abbrechen(){
+    this.modalController.dismiss();
+  }
+
+  speichern(){
+    this.modalController.dismiss();
+    this.route.navigate(['/tabs/tab4'], { queryParams: {  } });
+  }
 }

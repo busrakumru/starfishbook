@@ -1,0 +1,71 @@
+.col {
+    display: grid;
+    grid-template-columns: repeat(2, 140px);
+    grid-template-rows: 100px;
+    grid-gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-img {
+    position: relative;
+    top: 10%;
+    left: 35%;
+    max-width: 120px;
+}
+
+ion-header {
+    border: 0px !important;
+
+    ion-label {
+        position: relative;
+        font-size: 18px;
+        left: 100px;
+        color: #092c5e;
+    }
+}
+
+section {
+
+    position: relative;
+    top: 20px;
+   
+
+    ion-label {
+        position: relative;
+        left: 60px;
+        font-size: 15px;  
+        color: #FFFFFF;
+    }
+    mat-form-field {
+        color: #FFFFFF;
+        width: 70%;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        font-size: 12px;
+    }
+}
+
+ion-footer{
+    background: #092c5e;
+}
+
+ion-content{
+    --background: #092c5e;
+    position: relative;
+    top: 20px;
+}
+
+
+::ng-deep .mat-input-element {
+    color: white;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline  {
+    color: white!important;
+}
+
+
+
+
+

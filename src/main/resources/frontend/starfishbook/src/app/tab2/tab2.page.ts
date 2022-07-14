@@ -28,7 +28,7 @@ export class Tab2Page  implements OnInit {
 
   isLoggedIn = false;
 
-  constructor(public authService: AuthService,  public alertController: AlertController,private todoService: TodoService,private todolistService: TodolistService,public tokenService: TokenService,public modalController: ModalController) { }
+  constructor(public authService: AuthService,  public alertController: AlertController,private todoService: TodoService,public tokenService: TokenService,public modalController: ModalController) { }
  
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
