@@ -1,31 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-button size="small" fill="clear" (click)="saveTodo(newTodo)">
+      <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+    </ion-button>
+    <ion-button size="small" fill="clear" (click)="abbrechen()">
+      <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
 
   <div class="form">
 
 
 
-    <div class="todo-create">
+    <div>
       <form #todoForm="ngForm">
 
-        <div class="toolbar">
-          <div>
-            <ion-button size="small" fill="clear" (click)="saveTodo(newTodo)">
-              <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
-            </ion-button>
-            <ion-button size="small" fill="clear" (click)="abbrechen()">
-              <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-            </ion-button>
-          </div>
-        </div>
-        <div *ngFor="let todo of todos">
+
+        <!--div *ngFor="let todo of todos">
           <span class="todo-text">
             {{todo.title}}
           </span>
 
-        </div>
-        
+        </div-->
 
-<!--form [formGroup]="newTodo" >
+
+        <!--form [formGroup]="newTodo" >
 
 
         <ion-input placeholder="Titel" class="form-control"  formControlName="title" [(ngModel)]="newTodo.title" id="title" type="text"
@@ -55,43 +59,66 @@
 
 
 
-        
-        <ion-input placeholder="Titel" class="form-control" [(ngModel)]="newTodo.title" id="title" type="text"
-          required name="title" #title="ngModel">
-        </ion-input>
-
-        <ion-input placeholder="Titel ändern" [(ngModel)]="editingTodo.title" type="text" required name="editingtitle"
-          #editingtitle="ngModel"></ion-input>
-
-   
-          <ion-input type="text" id="text" class="form-control" placeholder="todo" required name="text"
-          [(ngModel)]="newTodolist.text" #text="ngModel"></ion-input>
 
 
-          
 
-    
+
+        <section>
+
+          <div class="ion-padding-top">
+
+            <div class="ion-padding-top">
+              <mat-form-field [hideRequiredMarker]="true" >
+                <input matInput placeholder="Titel" [(ngModel)]="newTodo.title" id="title"
+                  type="text" required name="title" #title="ngModel">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field [hideRequiredMarker]="true" >
+                <input matInput placeholder="Titel ändern" [(ngModel)]="editingTodo.title" type="text" required
+                  name="editingtitle" #editingtitle="ngModel">
+              </mat-form-field>
+            </div>
+
+            <div class="todos">
+              <mat-form-field  class="todo_input" [hideRequiredMarker]="true" >
+
+                <input matInput placeholder="Todos erstellen" type="text" id="text" class="form-control" required
+                  name="text" [(ngModel)]="newTodolist.text" #text="ngModel">
+
+              </mat-form-field>
+
+              <ion-button size="small" (click)="createTodolist()">
+                Todo speichern
+              </ion-button>
+            </div>
+          </div>
+
+        </section>
+
+
       </form>
 
-      <div>
-        <button (click)="createTodolist()">Speichern Todo in die Liste</button>
-      </div>
 
     </div>
 
 
 
-    <div class="todo-list">
+    <div>
+
       <div *ngFor="let todo of todolist" [class.finished]="todo.finised === true">
 
-        <div class="todo-row" *ngIf="!editing || editingTodolist.id != todo.id">
+        <div *ngIf="!editing || editingTodolist.id != todo.id" class="todo-list">
           <a class="todo-completed">
             <ion-checkbox [(ngModel)]="todo.finished" (click)="toggleCompleted(todo)"
               class="material-icons toggle-completed-checkbox"></ion-checkbox>
           </a>
+
           <span class="todo-text">
             {{todo.text}}
           </span>
+
           <span class="todo-actions">
             <a (click)="editTodolist(todo)">
               <i class="material-icons edit" color="secondary">edit</i>
@@ -100,11 +127,21 @@
               <i class="material-icons delete" color="secondary">clear</i>
             </a>
           </span>
+
         </div>
+
+
 
         <div class="todo-edit" *ngIf="editing && editingTodolist.id === todo.id">
 
-          <input class="form-control" type="text" [(ngModel)]="editingTodolist.text" required>
+          <!--input class="form-control" type="text" [(ngModel)]="editingTodolist.text" required-->
+
+
+          <div>
+            <mat-form-field style=" width: 120%;" >
+              <input  matInput type="text" [(ngModel)]="editingTodolist.text" required>
+            </mat-form-field>
+          </div>
 
           <span class="edit-actions">
             <a (click)="updateTodolist(editingTodolist)">
@@ -117,11 +154,15 @@
         </div>
 
       </div>
+
+
+      <!--div class="no-todos" *ngIf="todolist && todolist.length == 0">
+      <p>No
+         Todos Found!</p>
+    </div-->
     </div>
 
-    <div class="no-todos" *ngIf="todolist && todolist.length == 0">
-      <p>No Todos Found!</p>
-    </div>
+
   </div>
 
 
