@@ -1,37 +1,42 @@
-<ion-card>
-  <ion-card-header>
+<div *ngFor="let mood of moods">
 
+  <ion-text class="date">{{mood.createdAt | date: 'EEEE dd.MM.yyyy' : 'de-DE'}}</ion-text>
+  <ion-card>
 
-  </ion-card-header>
-  
-  <ion-card-content>
-<ion-grid>
-    <ion-row>
-      <ion-col class="ion-no-padding" size="3">
+    <ion-card-header>
+      <div>
+        <ion-icon name="trash-outline" (click)="deleteMood(mood)"></ion-icon>
+      </div>
 
-        <ion-img src="../../../assets/img/logo.png"></ion-img>
+    </ion-card-header>
 
-      </ion-col>
-      
-      <ion-col  class="ion-no-padding colum" size="9">
-        <ion-card-title>GLÜCKLICH</ion-card-title>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-no-padding" size="3">
+            <ion-img src="{{mood.img}}"></ion-img>
+          </ion-col>
 
-        <div class="content1">
-          <ion-card-subtitle> Beschreib dein Tag mit einem Wort?
-          </ion-card-subtitle><br>
-          <ion-text  class="ion-text-wrap">bsp.
-          </ion-text>
-        </div>
+          <ion-col class="ion-no-padding colum" size="9">
+            <ion-card-title [ngStyle]="{color : mood.color}">{{mood.name}}</ion-card-title>
 
-        <div class="content2">
-          <ion-card-subtitle>Was hast du alles gemacht?
-          </ion-card-subtitle><br>
-          <ion-text>bsp.
-          </ion-text>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  </ion-card-content>
+            <div class="content1">
+              <ion-card-subtitle> Beschreib dein Tag mit einem Wort?
+              </ion-card-subtitle><br>
+              <ion-text class="ion-text-wrap">{{mood.day}}
+              </ion-text>
+            </div>
 
-</ion-card>
+            <div class="content2">
+              <ion-card-subtitle>Was hast du alles gemacht?
+              </ion-card-subtitle><br>
+              <ion-text class="ion-text-wrap">{{mood.daily}}
+              </ion-text>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+  </ion-card>
+</div>

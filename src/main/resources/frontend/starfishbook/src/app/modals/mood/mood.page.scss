@@ -17,11 +17,12 @@ ion-img {
 ion-header {
     border: 0px !important;
 
-    ion-label {
+    .label_text {
         position: relative;
         font-size: 18px;
         left: 100px;
         color: #092c5e;
+        
     }
 }
 
@@ -65,7 +66,7 @@ ion-content{
     color: white!important;
 }
 
-
-
-
+::ng-deep .mat-form-field.mat-focused  .mat-input-element{
+    caret-color: white;
+}
 

@@ -1,11 +1,8 @@
 <ion-content class="no-scroll">
   <ion-label>Wie fühlst du dich?</ion-label>
-  
-  <div >
-  <img src="../../assets/img/logo.png" (click)="openmodal()">
-  <img src="../../assets/img/good.png" (click)="openmodal()">
-  <img src="../../assets/img/bad.png" (click)="openmodal()">
-  <img src="../../assets/img/sad.png" (click)="openmodal()">
+<div class="imgposition">
+    <div *ngFor = "let img of moodService.moodImage">
+        <img src="{{img.img}}" (click)="openmodal(img)"/>
+   </div>
 </div>
-
 </ion-content>
