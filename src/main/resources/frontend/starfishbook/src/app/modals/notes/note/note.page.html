@@ -16,55 +16,23 @@
       </div-->
     </div>
 
-    <ion-input placeholder="Titel" type="text" formControlName="title"></ion-input>
-    <ion-textarea placeholder="Text" type="text" formControlName="text"></ion-textarea>
-
-    <div class="row">
-      <div class="col-8">
-        <ng-container formArrayName="files">
-          <div *ngFor="let file of files.controls;index as i">
-            <div [formGroupName]="i">
-
-
-              <!--input type="text" placeholder="hallo" formControlName="name"-->
-
-              <!--input type="file" (change)="selectFile($event)" /-->
-              <input onchange="console.log(event.target.files)" formControlName="name" type="file"
-                (change)="selectImg($event)" #imageUpload accept="image/*" class="file-input" />
-              <div class="imageUpload">
-
-                <ion-button fill="clear" (click)="imageUpload.click()">
-                  <ion-icon name="image"></ion-icon>
-                </ion-button>
-                {{imgName}}
-              </div>
-
-              <input formControlName="name" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
-              <div class="imageUpload">
-      
-                <ion-button fill="clear" (click)="fileUpload.click()">
-                  <ion-icon name="document"></ion-icon>
-                </ion-button>
-                {{fileName}}
-              </div>
-
-            </div>
-          </div>
-        </ng-container>
+    <input placeholder="Titel" type="text" formControlName="title" class="title"/>
+    <textarea placeholder="Text" type="text" formControlName="text" class="text"></textarea>
+        
 
 
      
 
 
-      </div>
+ 
       <!--div class="col-4">
         <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
           Upload
         </button>
       </div-->
-    </div>
+    
 
-    <div class="card mt-3">
+    <div>
       <ul class="list-group list-group-flush" *ngFor="let f of file">
         <li class="list-group-item">
           <a href="{{ file.url }}">{{ file.name }}</a>
@@ -72,15 +40,50 @@
         </li>
       </ul>
     </div>
+
+    <p>{{imgName}}</p>
+    <p>{{fileName}}</p>
+
+
+    
     <ion-input formControlName="color"></ion-input>
 
     <div class="footer">
 
-      <div style="display:flex">
+      <ng-container formArrayName="files">
+        <div *ngFor="let file of files.controls;index as i">
+          <div [formGroupName]="i">
+
+
+            <!--input type="text" placeholder="hallo" formControlName="name"-->
+
+            <!--input type="file" (change)="selectFile($event)" /-->
+            <input onchange="console.log(event.target.files)" formControlName="name" type="file"
+              (change)="selectImg($event)" #imageUpload accept="image/*" class="file-input" />
+            <div class="imageUpload">
+
+              <ion-button fill="clear" (click)="imageUpload.click()">
+                <ion-icon name="image"></ion-icon>
+              </ion-button>
+            </div>
+
+            <input formControlName="name" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
+            <div class="imageUpload">
+    
+              <ion-button fill="clear" (click)="fileUpload.click()">
+                <ion-icon name="document"></ion-icon>
+              </ion-button>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
+      <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
           [hideColorPicker]="true" [hideTextInput]="true">
         </ngx-colors>
-        <p>{{selectedColor}}</p>
+        <!--p>{{selectedColor}}</p-->
       </div>
     </div>
   </form>

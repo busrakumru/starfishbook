@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicRoutingModule } from './public/public-routing.module';
 import { IonicModule, IonicRouteStrategy  } from '@ionic/angular';
 import { RouteReuseStrategy } from '@angular/router';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { RouteReuseStrategy } from '@angular/router';
     ReactiveFormsModule, 
     NgxColorsModule,
     PublicRoutingModule ,
-    BrowserAnimationsModule],
+    BrowserAnimationsModule,
+    MatSlideToggleModule,
+    ],
     providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],  
   bootstrap: [AppComponent],
 })

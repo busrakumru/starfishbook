@@ -15,11 +15,26 @@ import { NotesService } from '../services/notes.service';
 
 export class Tab1Page {
 
+  searchTerm: string;
   notes: Notes[];
   files: File[];
 
+  list= false;
+
   categories: string[] = ['Alle', 'Lebensmittel', 'Kleidung', 'Kosmetik'];
 
+  colorPalette: Array<any> = [
+    '#D99274',
+    '#FAC9C1',
+    '#E9D8B8',
+    '#DACEE7',
+    '#C0C49C',
+    '#98C3B0',
+    '#FEC888',
+    '#C6BBBA',
+  ]
+
+  displayMode: number;
   constructor(private notesService: NotesService,
     public router: Router,
     public modalController: ModalController,
@@ -115,4 +130,18 @@ export class Tab1Page {
     });
     return await modal.present();
   }
+
+  changeView(){
+  this.list= !this.list;
+}
+
+passValue(c){
+  this.searchTerm = c;
+  console.log(c);
+}
+
+clearSearch(){
+  this.searchTerm = '';
+}
+
 }

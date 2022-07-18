@@ -1,7 +1,7 @@
-ion-card{
+/*ion-card{
     width: 175px;
     height: 175px;
-}
+}*/
 
 .cards{
     display: flex;
@@ -21,6 +21,7 @@ img{
 ion-header{
     display: flex;
     margin: 10px;
+    //width: 95%;
 }
 
 ion-title{
@@ -34,4 +35,151 @@ ion-title{
     label{
         border: 2px solid;
     }
+}
+
+ion-button{
+    margin-right: 20px;
+}
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    //background-color: antiquewhite;
+
+   ion-card{
+    width: 45%;
+    height: 200px;
+
+   }
+  
+}
+
+.list{
+
+    ion-card{
+
+        height: 150px;
+
+    }
+
+}
+
+
+.toggle{
+    display: flex;
+    padding-right: 5%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.container{
+
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 5%;
+
+    .searchbox{
+
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 53px;
+        transition: 0.4s linear;
+        overflow: hidden;
+
+        .searchbox__input {
+
+            display: block;
+            appearance: none;
+            width: 100%;
+
+            border: none;
+            outline: none;
+            border-radius: 50px;
+
+            background-color: var(--ion-color-secondary);
+
+            padding: 15px;
+            color: var(--ion-color-secondary);
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.4s linear;
+
+            &::placeholder{
+                color: var(--ion-color-secondary);
+            }
+        }
+
+        ion-icon{
+
+            position: absolute;
+            right: calc(53 / 2);
+            top: 50%;
+            transform: translate(50%, -50%);
+
+            width: 27px;
+            height: 40px;
+
+            pointer-events: none;
+
+            color: #fff;
+            transition: 0.4s linear;
+
+
+
+        }
+
+        &:focus-within {
+            max-width: 300px;
+
+            .searchbox__input{
+
+                background-color: #fff;
+                padding-left: 50px;
+                box-shadow: inset 0px 0px 10px rgba($color: #000000, $alpha: 0.1);
+            }
+
+            ion-icon{
+                color: var(--ion-color-primary);
+            }
+        }
+    }
+}
+
+.searchColorsContainer{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .c{
+        margin: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+
+        
+       
+    }
+
+    .clear{
+
+    //border: 1px solid;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: var(--ion-color-secondary);
+
+
+    }
+
+    .clear_searchbar{
+
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        color: var(--ion-color-secondary);            }
 }
