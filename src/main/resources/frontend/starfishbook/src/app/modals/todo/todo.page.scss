@@ -21,6 +21,7 @@ ion-icon {
     justify-content: flex-end;
 }
 section{
+
 mat-form-field {
     width: 80%;
     transform: translate(10%, 0);
@@ -28,7 +29,7 @@ mat-form-field {
 }
 }
 
-.todos {
+/*.todos {
     display: grid;
     grid-template-columns: repeat(2, 50% 50%);
     justify-items: center;
@@ -37,7 +38,7 @@ mat-form-field {
         height: 60%;
     }
 }
-
+*/
 .todo-list{
     display: flex;
     align-items: center;
@@ -69,6 +70,12 @@ ion-checkbox {
     top: 2px;
 }
 
+.save{
+    float: right;
+    clear: left;
+    margin-right: 45px;
+    margin-top: 20px;
+}
 .todo-text {
     width: 73%;
     padding-left: 5px;

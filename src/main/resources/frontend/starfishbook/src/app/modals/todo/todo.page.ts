@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Todo } from 'src/app/models/todo.model';
 import { Todolist } from 'src/app/models/todolist.model';
+import { ReloadService } from 'src/app/services/reload.service';
 import { TodoService } from 'src/app/services/todo.service';
 import { TodolistService } from 'src/app/services/todolist.service';
 
@@ -96,16 +97,9 @@ todolist: Todolist[];
     abbrechen(){
       this.modalController.dismiss();
     }
-  */
-
-  
-    @Input() id:any;
-    @Input() title:string;
-  
-    todos: Todo[] = [];
-    newTodo: Todo = new Todo();
-  
-   /* newTodolist: FormGroup = new FormGroup({
+    
+    
+    newTodolist: FormGroup = new FormGroup({
       text: new FormControl(''),
       finished: new FormControl(false)
     });
@@ -122,7 +116,15 @@ todolist: Todolist[];
       onAddSpecialRequest () {
         (this.newTodo.controls['todolists'] as FormArray).push(this.newTodolist);
       
-      }*/
+      }
+  */
+
+  
+    @Input() id:any;
+    @Input() title:string;
+  
+    todos: Todo[] = [];
+    newTodo: Todo = new Todo();
 
     todolist: Todolist[] = [];
     newTodolist: Todolist = new Todolist();
@@ -134,7 +136,7 @@ todolist: Todolist[];
     isLoggedIn = false;
   
     constructor(
-      public modalController: ModalController,private todolistService: TodolistService,private todoService: TodoService
+      public reloadService: ReloadService,public modalController: ModalController,private todolistService: TodolistService,private todoService: TodoService
     ) { }
   
   
@@ -217,7 +219,6 @@ todolist: Todolist[];
     } else {
       this.createTodo();
     }
-   // this.modalController.dismiss();
   }
   
       //Todos mit Titel und Todolist erstellen
@@ -231,9 +232,10 @@ todolist: Todolist[];
             console.log(this.todos);
             
           });     
+          this.modalController.dismiss();
+          this.reloadService.reload();
       }
-  
-  
+
       updateTodo(): void {
         console.log(this.id);
         console.log(this.editingTodo.title)
@@ -241,6 +243,8 @@ todolist: Todolist[];
         this.todoService.updateTodo(this.id,this.editingTodo).subscribe(updatedTodo => {
          this.todolist.find(todolist => todolist.id === updatedTodo.id);
       });
+      this.modalController.dismiss();
+      this.reloadService.reload();
     }
   
     abbrechen(){

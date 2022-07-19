@@ -68,35 +68,35 @@
           <div class="ion-padding-top">
 
             <div class="ion-padding-top">
-              <mat-form-field [hideRequiredMarker]="true" >
-                <input matInput placeholder="Titel" [(ngModel)]="newTodo.title" id="title"
-                  type="text" required name="title" #title="ngModel">
+              <mat-form-field [hideRequiredMarker]="true">
+                <input matInput placeholder="{{editingTodo.title}}" [(ngModel)]="newTodo.title" id="title" type="text" required
+                  name="title" #title="ngModel">
               </mat-form-field>
             </div>
 
             <div>
-              <mat-form-field [hideRequiredMarker]="true" >
+              <mat-form-field [hideRequiredMarker]="true">
                 <input matInput placeholder="Titel ändern" [(ngModel)]="editingTodo.title" type="text" required
                   name="editingtitle" #editingtitle="ngModel">
               </mat-form-field>
             </div>
 
-            <div class="todos">
-              <mat-form-field  class="todo_input" [hideRequiredMarker]="true" >
+            <div >
+              <mat-form-field  [hideRequiredMarker]="true">
 
                 <input matInput placeholder="Todos erstellen" type="text" id="text" class="form-control" required
                   name="text" [(ngModel)]="newTodolist.text" #text="ngModel">
 
               </mat-form-field>
 
-              <ion-button size="small" (click)="createTodolist()">
-                Todo speichern
-              </ion-button>
             </div>
           </div>
 
         </section>
 
+        <ion-button class="save" size="small" (click)="createTodolist()">
+          Todo speichern
+        </ion-button>
 
       </form>
 
@@ -138,8 +138,8 @@
 
 
           <div>
-            <mat-form-field style=" width: 120%;" >
-              <input  matInput type="text" [(ngModel)]="editingTodolist.text" required>
+            <mat-form-field style=" width: 120%;">
+              <input matInput type="text" [(ngModel)]="editingTodolist.text" required>
             </mat-form-field>
           </div>
 
