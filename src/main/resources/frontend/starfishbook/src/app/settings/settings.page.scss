@@ -1,0 +1,56 @@
+ion-content {
+  bottom: 1px;
+}
+
+.label {
+  color: #cedbed;
+}
+
+ion-header {
+
+  display: flex;
+  background-color: white;
+  align-items: center;
+  height: 16%;
+  background-color: #092c5e;
+
+  ion-title {
+    --color: #cedbed;
+    font-size: 20px;
+    margin-left: -15px;
+  }
+}
+
+ .back {
+  --color: #cedbed;
+  max-width: 19%;
+  margin: 0px 30px 0px 20px;
+}
+
+ion-item,
+ion-list {
+  --background: #092c5e;
+}
+
+.icon {
+  color: white;
+  padding: 25px;
+}
+
+.language {
+  position: absolute;
+  right: 45px;
+}
+
+ion-toggle {
+  height: 25px;
+  width: 50px;
+  position: relative;
+  right: 20px;
+
+  --background-checked: rgba(235, 142, 113, 0.7);
+  --handle-background-checked: var(--ion-color-primary);
+  --handle-background: #bbbbbb;
+  --handle-width: 25px;
+  --handle-height: 25px;
+}
