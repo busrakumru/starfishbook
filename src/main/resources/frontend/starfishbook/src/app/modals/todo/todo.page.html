@@ -67,17 +67,17 @@
 
           <div class="ion-padding-top">
 
-            <div class="ion-padding-top">
+            <div class="ion-padding-top" *ngIf="!show">
               <mat-form-field [hideRequiredMarker]="true">
-                <input matInput placeholder="{{editingTodo.title}}" [(ngModel)]="newTodo.title" id="title" type="text" required
-                  name="title" #title="ngModel">
+                <input matInput  [placeholder]="placeholderTitel" [(ngModel)]="newTodo.title" id="title" type="text" required
+                  name="title" #title="ngModel" >
               </mat-form-field>
             </div>
 
-            <div>
+            <div *ngIf="show">
               <mat-form-field [hideRequiredMarker]="true">
-                <input matInput placeholder="Titel ändern" [(ngModel)]="editingTodo.title" type="text" required
-                  name="editingtitle" #editingtitle="ngModel">
+                <input matInput [placeholder]="placeholderTitel" [(ngModel)]="editingTodo.title" type="text" required
+                  name="editingtitle" #editingtitle="ngModel"  >
               </mat-form-field>
             </div>
 

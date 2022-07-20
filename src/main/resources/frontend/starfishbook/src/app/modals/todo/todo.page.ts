@@ -14,91 +14,17 @@ import { TodolistService } from 'src/app/services/todolist.service';
 })
 export class TodoPage implements OnInit {
 
-/*
-  @Input() id:any;
-
-  constructor(
-    private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
-  ) { }
-
- // todos: Todo[] = [];
-todolist: Todolist[];
-
-
-  newTodolist: FormGroup = new FormGroup({
-    text: new FormControl(''),
-    finished: new FormControl(false)
-  });
-
-  newTodo: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    todolists: new FormArray([this.newTodolist])
-
-  });
-
-  get todolists(){
-    return this.newTodo.get('todolists') as FormArray  }
-
-    onAddSpecialRequest () {
-      (this.newTodo.controls['todolists'] as FormArray).push(this.newTodolist);
-    
-    }
-    
-  ngOnInit(): void {
-  }
-
-  saveTodo(): void {
-    if (this.id) {
-      this.updateTodo();
-    } else {
-      this.createTodo();
-    }
-   // this.modalController.dismiss();
-  }
+  /*
+    @Input() id:any;
   
-      //Todos mit Titel und Todolist erstellen
-      createTodo(): void {
+    constructor(
+      private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
+    ) { }
   
-        this.todoService.createTodo(this.newTodo.value)
-          .subscribe(response => {
-
-            console.log(response);
-           // console.log(this.todos);
-          });
-          //this.modalController.dismiss();
-        
-      }
+   // todos: Todo[] = [];
+  todolist: Todolist[];
   
-      toggleCompleted(todoData: Todolist): void {
-        todoData.finished = !todoData.finished;
-        this.todolistService.updateTodolist(todoData)
-          .subscribe(updatedTodo => {
-            let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
-            Object.assign(existingTodo, updatedTodo);
-          });
-      }
   
-      
-      createTodolist(): void {
-        this.todolistService.createTodolist(this.newTodolist.value)
-          .subscribe(createTodolist => {
-          
-            console.log(createTodolist);
-          });
-      }
-  
-      updateTodo(): void {
-  
-        this.todoService.updateTodo(this.id,this.newTodo.value).subscribe(updatedTodo => {
-         this.todolist.find(todolist => this.newTodo.value.id === updatedTodo.id);
-      });
-    }
-  
-    abbrechen(){
-      this.modalController.dismiss();
-    }
-    
-    
     newTodolist: FormGroup = new FormGroup({
       text: new FormControl(''),
       finished: new FormControl(false)
@@ -117,101 +43,180 @@ todolist: Todolist[];
         (this.newTodo.controls['todolists'] as FormArray).push(this.newTodolist);
       
       }
-  */
-
-  
-    @Input() id:any;
-    @Input() title:string;
-  
-    todos: Todo[] = [];
-    newTodo: Todo = new Todo();
-
-    todolist: Todolist[] = [];
-    newTodolist: Todolist = new Todolist();
-  
-    editing: boolean = false;
-    editingTodolist: Todolist = new Todolist();
-    editingTodo: Todo = new Todo();
-  
-    isLoggedIn = false;
-  
-    constructor(
-      public reloadService: ReloadService,public modalController: ModalController,private todolistService: TodolistService,private todoService: TodoService
-    ) { }
-  
-  
-    ngOnInit(): void {
-      //console.log(this.id);
-      this.getTodolist();
-      //this.getTodo();
       
+    ngOnInit(): void {
     }
   
-  
-    //Liste aller Todos bekommen
-    getTodolist(): void {
-      this.todolistService.getTodolist()
-        .subscribe(todolist => this.todolist = todolist);
+    saveTodo(): void {
+      if (this.id) {
+        this.updateTodo();
+      } else {
+        this.createTodo();
+      }
+     // this.modalController.dismiss();
     }
-  
     
-    //Liste aller Todos bekommen
-    getTodo(): void {
-      this.todoService.getTodos()
-        .subscribe(todos => this.todos = todos);
-    }
+        //Todos mit Titel und Todolist erstellen
+        createTodo(): void {
+    
+          this.todoService.createTodo(this.newTodo.value)
+            .subscribe(response => {
   
-     //eine Todo für die Liste erstellen
-     createTodolist(): void {
-      this.todolistService.createTodolist(this.newTodolist)
-        .subscribe(createTodolist => {
-
-            this.newTodolist = new Todolist();
-            this.todolist.unshift(createTodolist);
-          console.log(this.todolist);
-        }); 
+              console.log(response);
+             // console.log(this.todos);
+            });
+            //this.modalController.dismiss();
+          
+        }
+    
+        toggleCompleted(todoData: Todolist): void {
+          todoData.finished = !todoData.finished;
+          this.todolistService.updateTodolist(todoData)
+            .subscribe(updatedTodo => {
+              let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
+              Object.assign(existingTodo, updatedTodo);
+            });
+        }
+    
         
-    }
-  
-    //eine Todo aus der Liste löschen
-    deleteTodolist(id: any): void {
-      this.todolistService.deleteTodolist(id)
-        .subscribe(() => {
-          this.todolist = this.todolist.filter(todolist => todolist.id != id);
+        createTodolist(): void {
+          this.todolistService.createTodolist(this.newTodolist.value)
+            .subscribe(createTodolist => {
+            
+              console.log(createTodolist);
+            });
+        }
+    
+        updateTodo(): void {
+    
+          this.todoService.updateTodo(this.id,this.newTodo.value).subscribe(updatedTodo => {
+           this.todolist.find(todolist => this.newTodo.value.id === updatedTodo.id);
         });
+      }
+    
+      abbrechen(){
+        this.modalController.dismiss();
+      }
+      
+      
+      newTodolist: FormGroup = new FormGroup({
+        text: new FormControl(''),
+        finished: new FormControl(false)
+      });
+    
+      newTodo: FormGroup = new FormGroup({
+        title: new FormControl(''),
+        todolists: new FormArray([this.newTodolist])
+    
+      });
+    
+      get todolists(){
+        return this.newTodo.get('todolists') as FormArray  }
+    
+        onAddSpecialRequest () {
+          (this.newTodo.controls['todolists'] as FormArray).push(this.newTodolist);
+        
+        }
+    */
+
+  @Input() id: any;
+  @Input() title: string;
+
+  placeholderTitel = "Titel";
+  show: boolean;
+
+  todos: Todo[] = [];
+  newTodo: Todo = new Todo();
+
+  todolist: Todolist[] = [];
+  newTodolist: Todolist = new Todolist();
+
+  editing: boolean = false;
+  editingTodolist: Todolist = new Todolist();
+  editingTodo: Todo = new Todo();
+
+  isLoggedIn = false;
+
+  constructor(
+    public reloadService: ReloadService, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
+  ) { }
+
+
+  ngOnInit(): void {
+    this.getTodolist();
+
+    if (this.id) {
+      this.placeholderTitel = this.title;
+      this.show = !this.show;
     }
-  
-    //eine Todo aus der Liste aktualisieren
-    updateTodolist(todoData: Todolist): void {
-      console.log(todoData);
-      this.todolistService.updateTodolist(todoData)
-        .subscribe(updatedTodo => {
-          let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
-          Object.assign(existingTodo, updatedTodo);
-          this.clearEditing();
-        });
-    }
-  
-    //Todo aus der Liste abchecken
-    toggleCompleted(todoData: Todolist): void {
-      todoData.finished = !todoData.finished;
-      this.todolistService.updateTodolist(todoData)
-        .subscribe(updatedTodo => {
-          let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
-          Object.assign(existingTodo, updatedTodo);
-        });
-    }
-  
-    editTodolist(todoData: Todolist): void {
-      this.editing = true;
-      Object.assign(this.editingTodolist, todoData);
-    }
-  
-    clearEditing(): void {
-      this.editingTodolist = new Todolist();
-      this.editing = false;
-    }
-  
+    
+  }
+
+
+  //Liste aller Todos bekommen
+  getTodolist(): void {
+    this.todolistService.getTodolist()
+      .subscribe(todolist => this.todolist = todolist);
+  }
+
+  //Liste aller Todos bekommen
+  getTodo(): void {
+    this.todoService.getTodos()
+      .subscribe(todos => this.todos = todos);
+  }
+
+  //eine Todo für die Liste erstellen
+  createTodolist(): void {
+    this.todolistService.createTodolist(this.newTodolist)
+      .subscribe(createTodolist => {
+
+        this.newTodolist = new Todolist();
+        this.todolist.unshift(createTodolist);
+        console.log(this.todolist);
+      });
+
+  }
+
+  //eine Todo aus der Liste löschen
+  deleteTodolist(id: any): void {
+    this.todolistService.deleteTodolist(id)
+      .subscribe(() => {
+        this.todolist = this.todolist.filter(todolist => todolist.id != id);
+      });
+  }
+
+  //eine Todo aus der Liste aktualisieren
+  updateTodolist(todoData: Todolist): void {
+    console.log(todoData);
+    this.todolistService.updateTodolist(todoData)
+      .subscribe(updatedTodo => {
+        let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
+        Object.assign(existingTodo, updatedTodo);
+        this.clearEditing();
+      });
+  }
+
+  //Todo aus der Liste abchecken
+  toggleCompleted(todoData: Todolist): void {
+    todoData.finished = !todoData.finished;
+    this.todolistService.updateTodolist(todoData)
+      .subscribe(updatedTodo => {
+        let existingTodo = this.todolist.find(todolist => todolist.id === updatedTodo.id);
+        Object.assign(existingTodo, updatedTodo);
+      });
+  }
+
+  editTodolist(todoData: Todolist): void {
+    this.editing = true;
+    Object.assign(this.editingTodolist, todoData);
+  }
+
+  clearEditing(): void {
+    this.editingTodolist = new Todolist();
+    this.editing = false;
+  }
+
+
   ///_----------------------------------------------------------------------------------------------------------------------
   saveTodo(): void {
     if (this.id) {
@@ -220,38 +225,33 @@ todolist: Todolist[];
       this.createTodo();
     }
   }
-  
-      //Todos mit Titel und Todolist erstellen
-      createTodo(): void {
-  
-        this.todoService.createTodo(this.newTodo)
-          .subscribe(createTodo => {
-            this.newTodo= new Todo();
-            this.todos.unshift(createTodo);
-          
-            console.log(this.todos);
-            
-          });     
-          this.modalController.dismiss();
-          this.reloadService.reload();
-      }
 
-      updateTodo(): void {
-        console.log(this.id);
-        console.log(this.editingTodo.title)
-        this.editing = true;
-        this.todoService.updateTodo(this.id,this.editingTodo).subscribe(updatedTodo => {
-         this.todolist.find(todolist => todolist.id === updatedTodo.id);
+  //Todos mit Titel und Todolist erstellen
+  createTodo(): void {
+
+    this.todoService.createTodo(this.newTodo)
+      .subscribe(createTodo => {
+        this.newTodo = new Todo();
+        this.todos.unshift(createTodo);
       });
-      this.modalController.dismiss();
-      this.reloadService.reload();
-    }
-  
-    abbrechen(){
-      this.modalController.dismiss();
-    }
-  
-    
+    this.modalController.dismiss();
+    this.reloadService.reload();
+  }
+
+  updateTodo(): void {
+    this.editing = true;
+    this.todoService.updateTodo(this.id, this.editingTodo).subscribe(updatedTodo => {
+      this.todolist.find(todolist => todolist.id === updatedTodo.id);
+    });
+    this.modalController.dismiss();
+    this.reloadService.reload();
+  }
+
+  abbrechen() {
+    this.modalController.dismiss();
+  }
+
+
 }
 
 
