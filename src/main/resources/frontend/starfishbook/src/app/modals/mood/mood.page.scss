@@ -21,7 +21,7 @@ ion-header {
         position: relative;
         font-size: 18px;
         left: 100px;
-        color: #092c5e;
+        color:var(--ion-color-tertiary);
         
     }
 }
@@ -49,11 +49,11 @@ section {
 }
 
 ion-footer{
-    background: #092c5e;
+    background:  var(--ion-color-secondary);
 }
 
 ion-content{
-    --background: #092c5e;
+    --background:  var(--ion-color-secondary);
     position: relative;
     top: 20px;
 }

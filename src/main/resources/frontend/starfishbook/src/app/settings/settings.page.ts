@@ -15,12 +15,15 @@ export class SettingsPage implements OnInit {
 
   darkMode: boolean;
   show: boolean;
+   toggle = document.querySelector('input[name=theme]');
 
   ngOnInit() {
 
 
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.darkMode = prefersDark.matches;
+   
+    
   }
 
   backtoPage() {

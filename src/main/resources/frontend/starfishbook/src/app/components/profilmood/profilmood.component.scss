@@ -3,24 +3,33 @@ ion-img{
     bottom: 45px;
 }
 
+ion-card{
+    background-color: var(--ion-color-primary-contrast);
+}
 
 ion-card-title{
     font-size:18px;
     text-transform: uppercase;
+    
 }
 
 ion-card-subtitle{
     text-transform: capitalize;
+    color:var(--ion-color-tertiary);
+
 }
 
 .content1{
     position: relative;
     top: 20px;
+    color:var(--ion-color-tertiary);
 }
 
 .content2{
     position: relative;
     top: 30px;
+    color:var(--ion-color-tertiary);
+
 }
 
 .ion-text-wrap{
@@ -36,6 +45,10 @@ ion-card-subtitle{
 ion-card-header {
     display: flex;
     justify-content: flex-end;
+    ion-icon{
+        color:var(--ion-color-tertiary);
+    
+    }
 }
 
 .date{

@@ -1,5 +1,6 @@
 ion-content {
   bottom: 1px;
+  --background: #092c5e;
 }
 
 .label {
@@ -12,7 +13,7 @@ ion-header {
   background-color: white;
   align-items: center;
   height: 16%;
-  background-color: #092c5e;
+  background-color: #092C5E;
 
   ion-title {
     --color: #cedbed;
@@ -54,3 +55,4 @@ ion-toggle {
   --handle-width: 25px;
   --handle-height: 25px;
 }
+
