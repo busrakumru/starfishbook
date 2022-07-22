@@ -24,8 +24,8 @@ export class NotesService {
       return this.http.get(`${this.baseUrl}/${id}`);
     }
 
-    createNote(note:Notes): Observable<Notes[]>{
-      return this.http.post<Notes[]>(`${this.baseUrl}`,note);
+    createNote(note:Notes): Observable<Notes>{
+      return this.http.post<Notes>(`${this.baseUrl}`,note);
     }
 
     deleteNote(id:any):Observable<any> {

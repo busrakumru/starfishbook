@@ -40,12 +40,12 @@ public class NotesController {
   private FileStorageService storageService;
 
   @Autowired
-  private FileDBRepository fileDBRepository;
+  private FileDBRepository fileDBRepository;*/
 
   @Autowired
   public NotesController(NotesRepository notesRepository) {
     this.notesRepository = notesRepository;
-  }*/
+  }
 
 
   @GetMapping("notes")
