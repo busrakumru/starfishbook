@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-
-
 const routes: Routes = [
   {
     path: 'tabs',
@@ -27,6 +25,14 @@ const routes: Routes = [
   {
     path: 'todo',
     loadChildren: () => import('./modals/todo/todo.module').then( m => m.TodoPageModule)
+  },
+  {
+    path: 'mood',
+    loadChildren: () => import('./modals/mood/mood.module').then(m => m.MoodPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
   }
 
 ];

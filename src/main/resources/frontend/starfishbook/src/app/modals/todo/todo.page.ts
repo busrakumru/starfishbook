@@ -102,7 +102,6 @@ export class TodoPage implements OnInit {
     this.editing = false;
   }
 
-  ///_----------------------------------------------------------------------------------------------------------------------
   saveTodo(): void {
     if (this.id) {
       this.updateTodo();
