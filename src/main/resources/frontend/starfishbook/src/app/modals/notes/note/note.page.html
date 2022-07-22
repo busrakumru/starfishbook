@@ -9,43 +9,30 @@
           <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
       </div>
-      <!--div>
-        <ion-button size="small" fill="clear">
-          <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
-        </ion-button>
-      </div-->
     </div>
 
-    <input placeholder="Titel" type="text" formControlName="title" class="title"/>
-    <textarea placeholder="Text" type="text" formControlName="text" class="text"></textarea>
+    <input  type="text" formControlName="title" class="title" [value]="newNote.value.title"/>
+    <textarea [placeholder]="placeholderText" type="text" formControlName="text" class="text"></textarea>
         
-
-
-     
-
-
- 
-      <!--div class="col-4">
+      <div>
         <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
           Upload
         </button>
-      </div-->
+      </div>
     
-
-    <div>
-      <ul class="list-group list-group-flush" *ngFor="let f of file">
-        <li class="list-group-item">
-          <a href="{{ file.url }}">{{ file.name }}</a>
+    <!--AUSGEWÄHLTE DATEI/IMG LÖSCHEN-->
+    <!--div>
+      <ul *ngFor="let f of file">
+        <li>
+          <a href="{{ f.url }}">{{ f.name }}</a>
           <ion-icon name="trash-outline" (click)="deleteFile(file)"></ion-icon>
         </li>
       </ul>
-    </div>
+    </div-->
 
     <p>{{imgName}}</p>
     <p>{{fileName}}</p>
 
-
-    
     <ion-input formControlName="color"></ion-input>
 
     <div class="footer">
@@ -54,10 +41,6 @@
         <div *ngFor="let file of files.controls;index as i">
           <div [formGroupName]="i">
 
-
-            <!--input type="text" placeholder="hallo" formControlName="name"-->
-
-            <!--input type="file" (change)="selectFile($event)" /-->
             <input onchange="console.log(event.target.files)" formControlName="name" type="file"
               (change)="selectImg($event)" #imageUpload accept="image/*" class="file-input" />
             <div class="imageUpload">
@@ -83,7 +66,6 @@
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
           [hideColorPicker]="true" [hideTextInput]="true">
         </ngx-colors>
-        <!--p>{{selectedColor}}</p-->
       </div>
     </div>
   </form>

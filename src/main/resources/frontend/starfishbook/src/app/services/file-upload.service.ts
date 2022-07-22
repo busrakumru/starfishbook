@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FileUploadService {
 
-  private baseUrl = 'https://localhost:8443/auth/users/notes';
+  private baseUrl = 'https://localhost:8443/auth/users/files';
 
   constructor(private http: HttpClient) { }
 
@@ -20,14 +20,11 @@ export class FileUploadService {
     });
     return this.http.request(req);
   }
-  getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getFiles(): Observable<File[]> {
+    return this.http.get<File[]>(`${this.baseUrl}`);
   }
 
-
-  deleteFile(id:any):Observable<any> {
+  deleteFile(id: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-
-
 }

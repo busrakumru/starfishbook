@@ -1,5 +1,6 @@
 package de.beuth.starfishbook.controller;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import javax.validation.Valid;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Notes;
+import de.beuth.starfishbook.repository.FileDBRepository;
 import de.beuth.starfishbook.repository.NotesRepository;
+import de.beuth.starfishbook.service.FileStorageService;
+import de.beuth.starfishbook.service.NotesService;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
@@ -27,60 +31,54 @@ public class NotesController {
   private NotesRepository notesRepository;
 
   @Autowired
+  private NotesService notesService;
+
+  @Autowired
+  FileController fileController;
+
+  /*@Autowired
+  private FileStorageService storageService;
+
+  @Autowired
+  private FileDBRepository fileDBRepository;
+
+  @Autowired
   public NotesController(NotesRepository notesRepository) {
     this.notesRepository = notesRepository;
+  }*/
+
+
+  @GetMapping("notes")
+  public List<Notes> getNotes() {
+    return this.notesService.getAll();
   }
 
-  // get all notes
-    @GetMapping("notes")
-    public List<Notes> getNotes() {
-    return this.notesRepository.findAll(); 
-   }
-   
-  // Get a Single Note
   @GetMapping("notes/{id}")
   public Notes getNotesById(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
-    return this.notesRepository.findById(noteId)
+    return this.notesService.findById(noteId)
         .orElseThrow(() -> new NoteNotFoundException(noteId));
   }
 
   @PostMapping("notes")
-  public ResponseEntity<Notes> createNote(@Valid @RequestBody Notes notes) {
+  public ResponseEntity<Notes> createNote(@Valid @RequestBody Notes notes)
+      throws IOException {
     Notes savedNotes = notesRepository.save(notes);
     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
         .buildAndExpand(savedNotes.getId()).toUri();
-        //this.fileController.uploadFile(file);
-    
+
     return ResponseEntity.created(location).body(savedNotes);
   }
 
-  // Update a Note
   @PutMapping("notes/{id}")
-  public Notes updateNote(@PathVariable(value = "id") Long noteId, @RequestBody Notes noteDetail)
+  public Notes updateNote(@PathVariable(value = "id") Long noteId, @RequestBody Notes noteDetails)
       throws NoteNotFoundException {
-
-    Notes notes = this.notesRepository.findById(noteId)
-        .orElseThrow(() -> new NoteNotFoundException(noteId));
-
-    notes.setTitle(noteDetail.getTitle());
-    // notes.setText(noteDetail.getText());
-    // notes.setColor(noteDetail.getColor());
-
-    Notes updatedNote = this.notesRepository.save(notes);
-
-    return updatedNote;
+    Notes updatedNotes = this.notesService.update(noteId, noteDetails);
+    return updatedNotes;
   }
 
-
-  // Delete a Note
   @DeleteMapping("/notes/{id}")
-  public ResponseEntity<?> deleteNote(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
-    Notes notes = this.notesRepository.findById(noteId)
-        .orElseThrow(() -> new NoteNotFoundException(noteId));
-
-    this.notesRepository.delete(notes);
-
-    return ResponseEntity.ok().build();
+    public Boolean delete(@PathVariable Long id) {
+      return this.notesService.delete(id);
   }
 
   // partially update a Note
@@ -102,6 +100,5 @@ public class NotesController {
    * 
    * }
    */
-
 
 }

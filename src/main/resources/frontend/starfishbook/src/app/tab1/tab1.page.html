@@ -2,10 +2,6 @@
   <img src="assets/img/starfish_happy.png">
   <ion-title>starfishbook</ion-title>
 
-  <!--ion-button fill="clear">
-    <ion-icon name="search" size="large"></ion-icon>
-  </ion-button-->
-
   <div class="container">
     <div class="searchbox">
       <input type="text" class="searchbox__input" placeholder="Suche.." [(ngModel)]="searchTerm" />
@@ -17,10 +13,28 @@
 
 <ion-content>
 
-  <div class="toggle">
-    <ion-icon name="grid" size="large" color="primary"></ion-icon>
-    <ion-toggle (ionChange)="changeView()"></ion-toggle>
-    <ion-icon name="list" size="large" color="primary"></ion-icon>
+  <div style="display: flex; justify-content: space-between;">
+
+    <ion-segment scrollable value="heart" class="categories">
+      <ion-segment-button *ngFor="let c of categories">
+        <ion-label>
+          {{c.title}}
+        </ion-label>
+      </ion-segment-button>
+
+      <ion-button (click)="addCategory()" fill="clear">
+        <ion-icon name="add" color="secondary" size="large"></ion-icon>
+      </ion-button>
+    </ion-segment>
+
+
+    <div class="toggle">
+      <ion-icon (click)="mytoggle.checked = !mytoggle.checked" name="grid-sharp" size="large" *ngIf="list"
+        color="secondary"></ion-icon>
+      <ion-toggle #mytoggle (ionChange)="changeView()" style="display: none;"></ion-toggle>
+      <ion-icon (click)="mytoggle.checked = !mytoggle.checked" name="menu-sharp" size="large" *ngIf="!list"
+        color="secondary"></ion-icon>
+    </div>
   </div>
 
 
@@ -30,20 +44,6 @@
     </ion-fab-button>
   </ion-fab>
 
-  <!--div class="categories">
-
-    <ion-item *ngFor="let c of categories">
-      <ion-label>
-        {{c}}
-      </ion-label>
-    </ion-item>
-  </div-->
-
-  <!--ion-searchbar placeholder="suche nach notizen"
-                 [(ngModel)]="searchTerm"
-                 showCancelButton="focus"
-                animated></ion-searchbar-->
-
   <div class="searchColorsContainer">
     <div *ngFor="let c of colorPalette" class="c" (click)="passValue(c)" [style.background]="c">
     </div>
@@ -51,8 +51,6 @@
       <ion-icon name="close" size="large"></ion-icon>
     </div>
   </div>
-
-
 
   <div class="grid" *ngIf="!list">
     <ion-card *ngFor="let note of notes | filter: searchTerm" [style.background]="note.color">
@@ -67,7 +65,6 @@
       <ion-card-content>
         <p>{{note.text}}</p>
 
-
         <div *ngFor="let file of note.files">
           <a href="{{ file.url }}">{{ file.name }}</a>
         </div>
@@ -75,6 +72,10 @@
 
     </ion-card>
 
+  </div>
+
+  <div *ngFor="let file of files">
+    <a href="{{ file.url }}">{{ file.name }}</a>
   </div>
 
   <div *ngIf="list" class="list">
@@ -90,7 +91,6 @@
       <ion-card-content>
         <p>{{note.text}}</p>
 
-
         <div *ngFor="let file of note.files">
           <a href="{{ file.url }}">{{ file.name }}</a>
         </div>
@@ -99,17 +99,4 @@
     </ion-card>
 
   </div>
-
-
-
-  <!--div *ngIf="show" class="grid">
-  <p>HALLLO</p>
-</div>
-
-<div *ngIf="!show" class="list">
-  <p>HALLLO</p>
-</div-->
-
-
-
 </ion-content>

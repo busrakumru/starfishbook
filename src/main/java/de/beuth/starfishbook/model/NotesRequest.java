@@ -1,11 +1,15 @@
 package de.beuth.starfishbook.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class NotesRequest {
 
     private Long id;
     private String title;
     private String text;
     private String color;
+    private Set<FileDB> files= new HashSet<>();
     
     public Long getId() {
         return id;
@@ -39,5 +43,8 @@ public class NotesRequest {
         this.text = text;
     }
 
+    public Set<FileDB> getFiles() {
+        return files;
+    }
 
 }

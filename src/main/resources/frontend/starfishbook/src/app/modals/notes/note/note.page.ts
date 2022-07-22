@@ -1,4 +1,4 @@
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActionSheetController, ModalController } from '@ionic/angular';
@@ -23,19 +23,19 @@ export class NotePage implements OnInit {
   fileName = '';
   imgName = '';
   currentFile?: File;
-  progress = 0;
   message = '';
   fileInfos?: Observable<any>;
 
   file: File[];
+
+  placeholderTitel = 'Titel';
+  placeholderText = 'Text';
 
 
 
   constructor(
     private notesService: NotesService,
     private modalController: ModalController,
-    private actionSheetController: ActionSheetController,
-    private http: HttpClient,
     private uploadService: FileUploadService,
     private filesService: FileUploadService
   ) { }
@@ -49,13 +49,14 @@ export class NotePage implements OnInit {
     '#98C3B0',
     '#FEC888',
     '#C6BBBA',
-
   ]
-  ngOnInit(): void {
-    //this.fileInfos = this.uploadService.getFiles();
-    if (this.id) { console.log(this.id) }
-    if (this.id) { this.fileInfos = this.uploadService.getFiles(); }
 
+  ngOnInit(): void {
+    if (this.id) {
+      this.fileInfos = this.uploadService.getFiles();
+      this.placeholderTitel = this.title;
+      this.placeholderText = this.text;
+    }
   }
 
   /*newFile: FormGroup = new FormGroup({
@@ -69,12 +70,13 @@ export class NotePage implements OnInit {
     color: new FormControl(''),
     files: new FormArray([
       new FormGroup({
-        name: new FormControl('')})])
-  
+        name: new FormControl('')
+      })])
+
     //files: new FormArray([this.newFile])
   })
 
-  
+
 
   /*add() {
     (this.newNote.controls['files'] as FormArray).push(this.newFile)
@@ -87,6 +89,7 @@ export class NotePage implements OnInit {
   saveNote(): void {
     if (this.id) {
       this.updateNote();
+
     } else {
       this.createNewNote();
     }
@@ -94,8 +97,6 @@ export class NotePage implements OnInit {
   }
 
   createNewNote() {
-    console.log(this.newNote.value);
-
 
     this.notesService.createNote(this.newNote.value)
       .subscribe(
@@ -139,23 +140,18 @@ export class NotePage implements OnInit {
   }
 
   upload(): void {
-    this.progress = 0;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
         this.uploadService.upload(this.currentFile).subscribe(
           (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round(100 * event.loaded / event.total);
-            } else if (event instanceof HttpResponse) {
+            if (event instanceof HttpResponse) {
               this.message = event.body.message;
               this.fileInfos = this.uploadService.getFiles();
             }
           },
           (err: any) => {
-            console.log(err);
-            this.progress = 0;
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -169,7 +165,6 @@ export class NotePage implements OnInit {
   }
 
   deleteFile(file) {
-    console.log(file.id);
     this.filesService.deleteFile(file.id)
       .subscribe(
         (response) => console.log(response),
@@ -178,25 +173,4 @@ export class NotePage implements OnInit {
 
         });
   }
-
-  /* refresh(): void {
-     window.location.reload();
-   }*/
-
-  async openCard() {
-
-    const modal = await this.actionSheetController.create({
-      buttons: [{
-        icon: 'document'
-      }, {
-        icon: 'image'
-      }],
-      animated: true
-    });
-    return await modal.present();
-  }
-
-
-
-
 }

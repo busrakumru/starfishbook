@@ -1,9 +1,7 @@
 package de.beuth.starfishbook.service;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import de.beuth.starfishbook.model.FileDB;
-import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.FileDBRepository;
 
 @Service
@@ -74,6 +71,4 @@ public class FileStorageService {
         this.fileDBRepository.deleteById(id);
         return this.fileDBRepository.existsById(id);
     }
-
-
 }

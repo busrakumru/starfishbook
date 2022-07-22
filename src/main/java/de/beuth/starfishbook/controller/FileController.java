@@ -1,15 +1,8 @@
 package de.beuth.starfishbook.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +11,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,25 +19,23 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import de.beuth.starfishbook.message.ResponseFile;
 import de.beuth.starfishbook.message.ResponseMessage;
 import de.beuth.starfishbook.model.FileDB;
-import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.FileDBRepository;
 import de.beuth.starfishbook.repository.NotesRepository;
 import de.beuth.starfishbook.service.FileStorageService;
-import de.beuth.starfishbook.service.NotesService;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
 @RequestMapping("auth/users/")
 public class FileController {
 
-    private FileDBRepository filesRepository;
+    /*private FileDBRepository filesRepository;
     private NotesRepository notesRepository;
 
   @Autowired
   public FileController(FileDBRepository filesRepository, NotesRepository notesRepository) {
     this.filesRepository = filesRepository;
     this.notesRepository = notesRepository;
-  }
+  }*/
 
     @Autowired
     private FileStorageService storageService;
@@ -131,13 +121,13 @@ public class FileController {
      * }
      */
 
-    @GetMapping("files")
-    public ResponseEntity<Page<FileDB>> getAll(Pageable pageable) {
-        return ResponseEntity.ok(filesRepository.findAll(pageable));
-    }
-
-
     /*@GetMapping("files")
+    public ResponseEntity<List<FileDB>> getAll() {
+        return ResponseEntity.ok(filesRepository.findAll());
+    }*/
+
+
+    @GetMapping("files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
         List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
@@ -154,7 +144,7 @@ public class FileController {
                     dbFile.getNotes());
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
-    }*/
+    }
 
     /*@PostMapping("files")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
