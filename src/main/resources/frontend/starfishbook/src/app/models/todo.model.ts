@@ -5,4 +5,5 @@ export class Todo {
     title?:string='';
     createt?: Date;
     todolist?: Todolist;
+    appointmentTime?:Date;
   }

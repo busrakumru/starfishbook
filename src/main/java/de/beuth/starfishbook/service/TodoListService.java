@@ -26,38 +26,27 @@ public class TodoListService {
         return todoListRepository.findTodoListById(id);
     }
 
-   
-
-    public List<TodoList> findByFinished(Boolean finished) {
-        return todoListRepository.findByFinished(finished);
-    }
-
     public List<TodoList> findByTodosId(Long todoId) {
         return todoListRepository.findByTodosId(todoId);
-    }
-
-    public TodoList findByIdAndTodosId(Long id, Long todoId) {
-        return todoListRepository.findByIdAndTodosId(id, todoId);
-
     }
 
     public TodoList save(TodoList request) {
         return this.todoListRepository.save(request);
     }
 
-    public TodoList addTodoList ( TodoList request){  
+    public TodoList addTodoList(TodoList request) {
         TodoList todo = new TodoList();
-          todo.setText(request.getText());
-          todo.setFinished(request.isFinished());
-          todo.setTodos(request.getTodos());
-          return this.todoListRepository.save(todo);
-      }
-      
+        todo.setText(request.getText());
+        todo.setFinished(request.isFinished());
+        todo.setTodos(request.getTodos());
+        return this.todoListRepository.save(todo);
+    }
+
     public TodoList updateTodo(Long id, TodoList request) {
         TodoList update = todoListRepository.findTodoListById(id);
         update.setText(request.getText());
         update.setFinished(request.isFinished());
-        //update.setTodos(request.getTodos());
+        // update.setTodos(request.getTodos());
         return this.todoListRepository.save(update);
     }
 
@@ -66,9 +55,4 @@ public class TodoListService {
         return this.todoListRepository.existsById(id);
     }
 
-    public TodoList deleteTodo(Long id, Long todoId) {
-        TodoList todolist = this.todoListRepository.findByIdAndTodosId(id, todoId);
-        this.todoListRepository.delete(todolist);
-        return todolist;
-    }
 }

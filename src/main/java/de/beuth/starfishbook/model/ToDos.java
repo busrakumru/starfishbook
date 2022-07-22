@@ -2,15 +2,14 @@ package de.beuth.starfishbook.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import javax.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "toDos")
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
+@JsonIgnoreProperties(value = { "createdAt" }, allowGetters = true)
 
 public class ToDos {
 
@@ -21,29 +20,25 @@ public class ToDos {
     @Column(name = "title")
     private String title;
 
-    /*@OneToMany(mappedBy = "todos")
-    //@JoinColumn(name = "todolist")
-    List<TodoList> todolist;*/
-
     @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
     private Set<TodoList> todolist = new HashSet<>();
 
-    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date appointmentTime;
+
     @Column(name = "createdAt")
     private Date createdAt = new Date();
 
+    public ToDos(String title, Date createdAt, Set<TodoList> todolist, Date appointmentTime) {
+        this.title = title;
+        this.createdAt = createdAt;
+        this.todolist = todolist;
+        this.appointmentTime = appointmentTime;
 
-     public ToDos( String title, Date createdAt,  Set<TodoList>  todolist) {
-        this.title=title;
-        this.createdAt=createdAt;
-        this.todolist=todolist;
-    
     }
 
     public ToDos() {
-       
     }
-
 
     public Long getId() {
         return id;
@@ -52,7 +47,7 @@ public class ToDos {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getTitle() {
         return title;
     }
@@ -60,8 +55,7 @@ public class ToDos {
     public void setTitle(String title) {
         this.title = title;
     }
- 
-    
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -70,14 +64,6 @@ public class ToDos {
         this.createdAt = createdAt;
     }
 
-    /*public  List<TodoList>  getTodoList() {
-        return todolist;
-    }
-
-    public void setTodoList( List<TodoList>  todolist) {
-        this.todolist = todolist;
-    }      */
-    
     public Set<TodoList> getTodoList() {
         return todolist;
     }
@@ -85,8 +71,13 @@ public class ToDos {
     public void setTodoList(Set<TodoList> todolist) {
         this.todolist = todolist;
 
-        for(TodoList t : todolist) {
-            t.setTodos(this);
-        }
+    }
+
+    public Date getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(Date appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 }

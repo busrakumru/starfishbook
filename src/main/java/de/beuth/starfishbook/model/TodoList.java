@@ -1,7 +1,6 @@
 package de.beuth.starfishbook.model;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -13,33 +12,25 @@ public class TodoList {
     @GeneratedValue
     private Long id;
 
-    @Column (name = "text")
+    @Column(name = "text")
     private String text;
 
-    
-    @Column (name = "finished")
+    @Column(name = "finished")
     private boolean finished;
-    
-    
-    /*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "todos_id")
-    private ToDos todos;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todos_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ToDos todos;
 
-
-
-    public TodoList(String text,boolean finished) {
-        this.text=text;
-        this.finished=false;
+    public TodoList(String text, boolean finished) {
+        this.text = text;
+        this.finished = false;
     }
 
-	public TodoList() {		
-	}
-	
+    public TodoList() {
+    }
+
     public String getText() {
         return text;
     }
@@ -48,21 +39,21 @@ public class TodoList {
         this.text = text;
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public ToDos getTodos() {
-		return todos;
-	}
+    public ToDos getTodos() {
+        return todos;
+    }
 
-	public void setTodos(ToDos todos) {
-		this.todos = todos;
-	}
+    public void setTodos(ToDos todos) {
+        this.todos = todos;
+    }
 
     public boolean isFinished() {
         return finished;
@@ -71,5 +62,4 @@ public class TodoList {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
-
 }

@@ -1,149 +1,83 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-button size="small" fill="clear" (click)="saveTodo(newTodo)">
       <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
     </ion-button>
     <ion-button size="small" fill="clear" (click)="abbrechen()">
       <ion-icon slot="icon-only" name="close-outline"></ion-icon>
     </ion-button>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <div class="form">
-
-
-
     <div>
       <form #todoForm="ngForm">
-
-
-        <!--div *ngFor="let todo of todos">
-          <span class="todo-text">
-            {{todo.title}}
-          </span>
-
-        </div-->
-
-
-        <!--form [formGroup]="newTodo" >
-
-
-        <ion-input placeholder="Titel" class="form-control"  formControlName="title" [(ngModel)]="newTodo.title" id="title" type="text"
-        required name="title" >
-      </ion-input>
-
-      <ion-input placeholder="Titel ändern" [(ngModel)]="editingTodo.title" type="text" required name="editingtitle"
-       ></ion-input>
-
-      
-  
-        <div formArrayName="todolists">
-          <ng-container *ngFor="let todolist of todolists.controls; index as i">
-           
-              <div [formGroupName]="i">
-
-        <ion-input type="text" id="text" class="form-control" placeholder="todo" required name="text"
-        [(ngModel)]="newTodolist.text"></ion-input>
-              </div>
-          </ng-container>
-        </div>
-        
-        <button (click)="onAddSpecialRequest()">Speichern Todo in die Liste</button>
-
-
-</form-->
-
-
-
-
-
-
-
         <section>
-
           <div class="ion-padding-top">
-
             <div class="ion-padding-top" *ngIf="!show">
               <mat-form-field [hideRequiredMarker]="true">
-                <input matInput  [placeholder]="placeholderTitel" [(ngModel)]="newTodo.title" id="title" type="text" required
-                  name="title" #title="ngModel" >
+                <input matInput [placeholder]="placeholderTitel" [(ngModel)]="newTodo.title" id="title" type="text"
+                  required name="title" #title="ngModel">
               </mat-form-field>
             </div>
-
             <div *ngIf="show">
-              <mat-form-field [hideRequiredMarker]="true">
-                <input matInput [placeholder]="placeholderTitel" [(ngModel)]="editingTodo.title" type="text" required
-                  name="editingtitle" #editingtitle="ngModel"  >
+              <mat-form-field [hideRequiredMarker]="true" *ngIf="title">
+                <input matInput value="{{title}}" [(ngModel)]="editingTodo.title" type="text" required
+                  name="editingtitle" #editingtitle="ngModel">
               </mat-form-field>
             </div>
-
-            <div >
-              <mat-form-field  [hideRequiredMarker]="true">
-
+            <ion-item id="date">
+              <ion-label>Dateline</ion-label>
+              <ion-text slot="end">
+                {{newTodo.appointmentTime | date: 'dd.MM.yyyy' }}
+              </ion-text>
+            </ion-item>
+            <ion-popover trigger="date" size="cover">
+              <ng-template>
+                <ion-datetime presentation="date" name="date" [min]="minDate" [max]="maxDate"
+                  [(ngModel)]="newTodo.appointmentTime" locale="de-DE"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+            <div>
+              <mat-form-field [hideRequiredMarker]="true">
                 <input matInput placeholder="Todos erstellen" type="text" id="text" class="form-control" required
                   name="text" [(ngModel)]="newTodolist.text" #text="ngModel">
-
               </mat-form-field>
-
             </div>
           </div>
-
         </section>
-
         <ion-button class="save" size="small" (click)="createTodolist()">
           Todo speichern
         </ion-button>
-
       </form>
-
-
     </div>
-
-
-
     <div>
-
       <div *ngFor="let todo of todolist" [class.finished]="todo.finised === true">
-
         <div *ngIf="!editing || editingTodolist.id != todo.id" class="todo-list">
-          <a class="todo-completed">
-            <ion-checkbox [(ngModel)]="todo.finished" (click)="toggleCompleted(todo)"
-              class="material-icons toggle-completed-checkbox"></ion-checkbox>
+          <a>
+            <ion-checkbox [(ngModel)]="todo.finished" (click)="toggleCompleted(todo)" class="material-icons">
+            </ion-checkbox>
           </a>
-
           <span class="todo-text">
             {{todo.text}}
           </span>
-
           <span class="todo-actions">
             <a (click)="editTodolist(todo)">
-              <i class="material-icons edit" color="secondary">edit</i>
+              <i class="material-icons">edit</i>
             </a>
             <a (click)="deleteTodolist(todo.id)">
-              <i class="material-icons delete" color="secondary">clear</i>
+              <i class="material-icons">clear</i>
             </a>
           </span>
-
         </div>
-
-
-
         <div class="todo-edit" *ngIf="editing && editingTodolist.id === todo.id">
-
-          <!--input class="form-control" type="text" [(ngModel)]="editingTodolist.text" required-->
-
-
           <div>
             <mat-form-field style=" width: 120%;">
               <input matInput type="text" [(ngModel)]="editingTodolist.text" required>
             </mat-form-field>
           </div>
-
-          <span class="edit-actions">
+          <span>
             <a (click)="updateTodolist(editingTodolist)">
               <i class="material-icons">done</i>
             </a>
@@ -152,58 +86,7 @@
             </a>
           </span>
         </div>
-
       </div>
-
-
-      <!--div class="no-todos" *ngIf="todolist && todolist.length == 0">
-      <p>No
-         Todos Found!</p>
-    </div-->
     </div>
-
-
   </div>
-
-
 </ion-content>
-
-<!--ion-content>
-
-  <form [formGroup]="newTodo" (ngSubmit)="saveTodo(newTodo)" class="form">
-
-    <div class="toolbar">
-      <div>
-        <ion-button size="small" fill="clear" type="submit">
-          <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
-        </ion-button>
-        <ion-button size="small" fill="clear" (click)="abbrechen()">
-          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </ion-button>
-      </div>
-    </div>
-
-
-    <ion-input placeholder="Titel" type="text" formControlName="title" [(ngModel)]="newTodo.title"></ion-input>
-
-<div formArrayName="todolists">
-    <ng-container *ngFor="let todolist of todolists.controls; index as i">
-     
-        <div [formGroupName]="i">
-
-          <ion-input placeholder="Todo" type="text" formControlName="text"></ion-input>
-        
-          <ion-checkbox formControlName="finished"  (click)="toggleCompleted(todo)"
-          class="material-icons toggle-completed-checkbox"></ion-checkbox>
-
-      </div>
-    </ng-container>
-  
-  </div>
-
-    <button (click)="onAddSpecialRequest()">Speichern Todo in die Liste</button>
-
-  </form>
-
-
-</ion-content-->

@@ -20,46 +20,41 @@ ion-icon {
     display: flex;
     justify-content: flex-end;
 }
-section{
-
-mat-form-field {
-    width: 80%;
-    transform: translate(10%, 0);
-    font-size: 12px;
-}
-}
-
-/*.todos {
-    display: grid;
-    grid-template-columns: repeat(2, 50% 50%);
-    justify-items: center;
-
-    ion-button {
-        height: 60%;
+section {
+    mat-form-field{
+        width: 80%;
+        transform: translate(10%, 0);
+        font-size: 15px;
     }
 }
-*/
-.todo-list{
+
+ion-item{
+    width: 83%;
+    margin-bottom: 15px;
+    transform: translate(5%, 0);
+}
+
+.todo-list {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 5px;
     padding-top: 5px;
     position: relative;
-    top:20px;
+    top: 20px;
     width: 80%;
     transform: translate(10%, 0);
     font-size: 12px;
 }
 
-.todo-edit{
+.todo-edit {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 5px;
     padding-top: 5px;
     position: relative;
-    top:10px;
+    top: 10px;
     width: 80%;
     transform: translate(10%, 0);
     font-size: 12px;
@@ -70,7 +65,7 @@ ion-checkbox {
     top: 2px;
 }
 
-.save{
+.save {
     float: right;
     clear: left;
     margin-right: 45px;
@@ -83,29 +78,23 @@ ion-checkbox {
 }
 
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-    background-color: rgba(0,0,0,.10) !important; 
-  }
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
-    background-color: rgba(0,0,0,.10) !important; 
-  }
-  ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
     color: black !important;
-  }
-
+}
 
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: rgba(0,0,0,.42) !important; 
+    color: rgba(0, 0, 0, 0.42) !important;
 }
 
-::ng-deep .mat-form-field-invalid .mat-input-element{
+::ng-deep .mat-form-field-invalid .mat-input-element {
     caret-color: black;
 }
 
-::ng-deep .mat-form-field.mat-focused  .mat-input-element{
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
     caret-color: black;
 }
-
-
-  
- 
-

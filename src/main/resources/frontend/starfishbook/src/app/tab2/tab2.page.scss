@@ -1,13 +1,11 @@
-
 ion-card div {
     display: flex;
     justify-content: space-between;
 }
-ion-card-title{
+ion-card-title {
     margin: 10px;
     font-size: 140%;
 }
-
 
 ion-label {
     width: 100%;
@@ -17,12 +15,10 @@ ion-label {
     border-radius: 10px;
     color: White;
     font-size: 15px;
-    padding:12px;
+    padding: 12px;
 }
 
-
 .open {
-  
     display: grid;
     grid-template-columns: repeat(2, 50px 100%);
     grid-template-rows: 150px;
@@ -33,23 +29,22 @@ ion-label {
     justify-items: center;
 }
 
-
- .logo{
+.logo {
     max-width: 19%;
     margin: 10px 30px 0px 30px;
 }
-ion-header{
+ion-header {
     display: flex;
     background-color: white;
     align-items: center;
     justify-content: space-between;
 }
 
-ion-title{
+ion-title {
     margin-left: -34px;
 }
 
-.fixed_button{
+.fixed_button {
     position: fixed;
     z-index: 1;
     text-align: center;
@@ -58,11 +53,12 @@ ion-title{
     background: white;
 }
 
-.setting_icon{
-position: relative;
-    right: 30px;}
-    
-    ion-card{
-        position: relative;
-        top: 20%;
-    }
+.setting_icon {
+    position: relative;
+    right: 30px;
+}
+
+ion-card {
+    position: relative;
+    top: 20%;
+}
