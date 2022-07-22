@@ -21,25 +21,22 @@ ion-header {
         position: relative;
         font-size: 18px;
         left: 100px;
-        color:var(--ion-color-tertiary);
-        
+        color: var(--ion-color-tertiary);
     }
 }
 
 section {
-
     position: relative;
     top: 20px;
-   
 
     ion-label {
         position: relative;
         left: 60px;
-        font-size: 15px;  
-        color: #FFFFFF;
+        font-size: 15px;
+        color: #ffffff;
     }
     mat-form-field {
-        color: #FFFFFF;
+        color: #ffffff;
         width: 70%;
         position: relative;
         left: 50%;
@@ -48,25 +45,23 @@ section {
     }
 }
 
-ion-footer{
-    background:  var(--ion-color-secondary);
+ion-footer {
+    background: var(--ion-color-secondary);
 }
 
-ion-content{
-    --background:  var(--ion-color-secondary);
+ion-content {
+    --background: var(--ion-color-secondary);
     position: relative;
     top: 20px;
 }
 
-
 ::ng-deep .mat-input-element {
     color: white;
 }
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline  {
-    color: white!important;
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white !important;
 }
 
-::ng-deep .mat-form-field.mat-focused  .mat-input-element{
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
     caret-color: white;
 }
-

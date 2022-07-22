@@ -5,5 +5,4 @@ export class Mood {
     day?: string;
     createdAt?: Date;
     daily?:string;
-   
   }

@@ -1,17 +1,12 @@
-
-
 <ion-app>
-
-<ion-header [translucent]="true"  class="ion-no-border">
-  <img class="logo" src="assets/img/logo.png">
-  <ion-title>Profil</ion-title>
- <ion-button  class="setting_icon" fill="none" size="large" (click)="openModal()">
-          <ion-icon  name = "settings-outline" > </ion-icon >
-  </ion-button>       
-</ion-header>
-
-
-<ion-content>
-<app-profilmood></app-profilmood>
-</ion-content>
+  <ion-header [translucent]="true" class="ion-no-border">
+    <img class="logo" src="assets/img/logo.png">
+    <ion-title>Profil</ion-title>
+    <ion-button class="setting_icon" fill="none" size="large" (click)="openModal()">
+      <ion-icon name="settings-outline"> </ion-icon>
+    </ion-button>
+  </ion-header>
+  <ion-content>
+    <app-profilmood></app-profilmood>
+  </ion-content>
 </ion-app>

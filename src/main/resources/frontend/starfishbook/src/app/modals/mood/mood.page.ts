@@ -14,33 +14,30 @@ import { MoodService } from 'src/app/services/mood.service';
 export class MoodPage implements OnInit {
 
   moods: Mood[];
-  @Input() id:any;
-  @Input() name:String;
-  @Input() img:string;
-  @Input() color:string;
-  
-  
-  constructor(private moodService: MoodService, private modalController: ModalController, private route: Router) { }
   newMood: FormGroup;
-  
+  @Input() id: any;
+  @Input() name: String;
+  @Input() img: string;
+  @Input() color: string;
+
+  constructor(private moodService: MoodService, private modalController: ModalController, private route: Router) { }
 
   ngOnInit() {
-  this.newMood = new FormGroup({
-    name: new FormControl(this.name),
-    img: new FormControl(this.img),
-    day: new FormControl(''),
-    daily: new FormControl(''),
-    color: new FormControl(this.color)
-  })
+    this.newMood = new FormGroup({
+      name: new FormControl(this.name),
+      img: new FormControl(this.img),
+      day: new FormControl(''),
+      daily: new FormControl(''),
+      color: new FormControl(this.color)
+    })
 
   }
 
-  abbrechen(){
- 
+  abbrechen() {
     this.modalController.dismiss();
   }
 
-  speichern():void{
+  speichern(): void {
     this.moodService.createMood(this.newMood.value)
       .subscribe(
         (response) => console.log(response),
@@ -48,11 +45,8 @@ export class MoodPage implements OnInit {
           console.error(error);
         });
     this.modalController.dismiss();
-
     this.route.navigate(['/tabs/tab4']);
-  
- }
 
-
+  }
 
 }

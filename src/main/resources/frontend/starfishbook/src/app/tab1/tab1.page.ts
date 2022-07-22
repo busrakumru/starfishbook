@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
+import { CategoryPage } from '../modals/category/category.page';
 import { NotePage } from '../modals/notes/note/note.page';
+import { Category } from '../models/category.model';
 import { Notes } from '../models/notes.model';
+import { CategoriesService } from '../services/categories.service';
+import { FileUploadService } from '../services/file-upload.service';
 import { NotesService } from '../services/notes.service';
 
 @Component({
@@ -12,44 +15,49 @@ import { NotesService } from '../services/notes.service';
   styleUrls: ['tab1.page.scss']
 })
 
-export class Tab1Page  {
+export class Tab1Page {
 
+  searchTerm: string;
   notes: Notes[];
+  files: File[];
+  categories: Category[];
 
+  list: boolean;
+
+  colorPalette: Array<any> = [
+    '#D99274',
+    '#FAC9C1',
+    '#E9D8B8',
+    '#DACEE7',
+    '#C0C49C',
+    '#98C3B0',
+    '#FEC888',
+    '#C6BBBA',
+  ]
+
+  displayMode: number;
   constructor(private notesService: NotesService,
     public router: Router,
     public modalController: ModalController,
-    public alertController: AlertController
-  ) {}
+    public alertController: AlertController,
+    private filesService: FileUploadService,
+    private categoriesService: CategoriesService
+  ) { }
 
   ngOnInit(): void {
 
     this.notesService.getNotes().subscribe((data: Notes[]) => {
-
-      console.log(data);
       this.notes = data;
-    })
+    });
 
+    this.filesService.getFiles().subscribe((data: File[]) => {
+      this.files = data;
+    });
+
+    this.categoriesService.getCategories().subscribe((data: Category[]) => {
+      this.categories = data;
+    });
   }
-
-  newNote: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    text: new FormControl(''),
-    color: new FormControl('')
-  })
-
-
-  /*createNewNote() {
-    console.log(this.newNote.value);
-
-    this.notesService.createNote(this.newNote.value)
-      .subscribe(
-        (response) => console.log(response),
-        error => {
-          console.error(error);
-
-        });
-  }*/
 
   async deleteNote(note) {
 
@@ -103,6 +111,27 @@ export class Tab1Page  {
 
     const modal = await this.modalController.create({
       component: NotePage,
+    });
+    return await modal.present();
+  }
+
+  changeView() {
+    this.list = !this.list;
+  }
+
+  passValue(c) {
+    this.searchTerm = c;
+  }
+
+  clearSearch() {
+    this.searchTerm = '';
+  }
+
+  async addCategory() {
+    const modal = await this.modalController.create({
+      component: CategoryPage,
+      breakpoints: [0, 0.3, 0.5, 0.8],
+      initialBreakpoint: 0.3
     });
     return await modal.present();
   }

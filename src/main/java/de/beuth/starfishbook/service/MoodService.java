@@ -1,9 +1,8 @@
 package de.beuth.starfishbook.service;
-import java.util.List;
+
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import de.beuth.starfishbook.model.Mood;
 import de.beuth.starfishbook.repository.MoodRepository;
 
@@ -25,22 +24,19 @@ public class MoodService {
         return moodRepository.findMoodById(id);
     }
 
-
-    public Mood addMood ( Mood request){  
+    public Mood addMood(Mood request) {
         Mood mood = new Mood();
-          mood.setName(request.getName());
-          mood.setCreatedAt(request.getCreatedAt());
-          mood.setImg(request.getImg());
-          mood.setDay(request.getDay());
-          mood.setDaily(request.getDaily());
-          mood.setColor(request.getColor());
-          return this.moodRepository.save(mood);
-      }
+        mood.setName(request.getName());
+        mood.setCreatedAt(request.getCreatedAt());
+        mood.setImg(request.getImg());
+        mood.setDay(request.getDay());
+        mood.setDaily(request.getDaily());
+        mood.setColor(request.getColor());
+        return this.moodRepository.save(mood);
+    }
 
-      public Boolean delete(Long id) {
+    public Boolean delete(Long id) {
         this.moodRepository.deleteById(id);
         return this.moodRepository.existsById(id);
     }
 }
-
-

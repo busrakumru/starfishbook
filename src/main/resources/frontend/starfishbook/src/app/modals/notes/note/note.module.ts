@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 
@@ -17,7 +19,8 @@ import { IonicModule } from '@ionic/angular';
     IonicModule,
     NotePageRoutingModule,
     ReactiveFormsModule,
-    NgxColorsModule
+    NgxColorsModule,
+    MatIconModule
   ],
   declarations: [NotePage]
 })

@@ -1,7 +1,6 @@
 package de.beuth.starfishbook.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Mood;
 import de.beuth.starfishbook.service.MoodService;
@@ -28,14 +26,14 @@ public class MoodController {
   
     // get all notes
     @GetMapping("mood/all")
-    public List<Mood> getNotes() {
+    public List<Mood> getMood() {
       return this.moodService.getMood();
   
     }
   
     // Get a Single Note
     @GetMapping("moods/{id}")
-    public Mood getNotesById(@PathVariable(value = "id") Long moodId)  {
+    public Mood getMoodById(@PathVariable(value = "id") Long moodId)  {
       return this.moodService.findById(moodId);
     }
 

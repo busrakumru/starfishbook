@@ -26,27 +26,34 @@ public class NotesService {
         note.setTitle(request.getTitle());
         note.setText(request.getText());
         note.setColor(request.getColor());
+        note.setFiles(request.getFiles());
 
         return notesRepository.save(note).getId();
     }
 
-    public void update(Long id, NotesRequest request) {
-        Optional<Notes> note = findById(id);
-        if (note.isPresent()) {
-            Notes forUpdate = note.get();
-            forUpdate.setText(request.getText());
-            forUpdate.setTitle(request.getTitle());
-            forUpdate.setColor(request.getColor());
-            notesRepository.save(forUpdate);
-        }
+    public Notes update(Long id, Notes request) {
+        Notes note = findNotesById(id);
+        
+        note.setText(request.getText());
+        note.setTitle(request.getTitle());
+        note.setColor(request.getColor());
+
+            return notesRepository.save(note);
+        
     }
 
     public List<Notes> getAll() {
         return notesRepository.findAll();
     }
 
-    public void delete(Long id) {
-        Optional<Notes> post = findById(id);
-        post.ifPresent(notesRepository::delete);
-    }
+    public  Notes findNotesById(Long id){
+        return this.notesRepository.findNotesById(id);
+  }
+
+  public Boolean delete(Long id) {
+    this.notesRepository.deleteById(id);
+    return this.notesRepository.existsById(id);
+}
+
+  
 }

@@ -1,12 +1,8 @@
 package de.beuth.starfishbook.model;
 
-import java.sql.Blob;
 import java.util.Date;
-
 import lombok.Data;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -35,11 +31,4 @@ public class Mood {
 
     @Column(name = "color")
     private String color;
-
-
-
-
-
-
-
 }
