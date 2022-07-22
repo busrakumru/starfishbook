@@ -3,6 +3,8 @@ package de.beuth.starfishbook.request;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.beuth.starfishbook.model.FileDB;
+
 public class NotesRequest {
 
     private Long id;
