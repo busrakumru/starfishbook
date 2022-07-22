@@ -23,7 +23,12 @@ const routes: Routes = [
   {
     path: 'category',
     loadChildren: () => import('./modals/category/category.module').then( m => m.CategoryPageModule)
+  },
+  {
+    path: 'todo',
+    loadChildren: () => import('./modals/todo/todo.module').then( m => m.TodoPageModule)
   }
+
 ];
 @NgModule({
   imports: [

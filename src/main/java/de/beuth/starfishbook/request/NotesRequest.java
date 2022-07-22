@@ -1,4 +1,4 @@
-package de.beuth.starfishbook.model;
+package de.beuth.starfishbook.request;
 
 import java.util.HashSet;
 import java.util.Set;
