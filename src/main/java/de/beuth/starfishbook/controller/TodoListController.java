@@ -13,82 +13,76 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import de.beuth.starfishbook.model.TodoList;
-//import de.beuth.starfishbook.service.ToDosService;
-import de.beuth.starfishbook.service.TodoListService;
+import de.beuth.starfishbook.model.Todolist;
+//import de.beuth.starfishbook.service.TodosService;
+import de.beuth.starfishbook.service.TodolistService;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
 @RequestMapping("/auth/users/")
-public class TodoListController {
+public class TodolistController {
 
     @Autowired
-    private final TodoListService todoListService;
-    // private final ToDosService todoService;
+    private final TodolistService todoListService;
+    // private final TodosService todoService;
 
-    public TodoListController(TodoListService todoListService) {
+    public TodolistController(TodolistService todoListService) {
         // this.todoService = todoService;
         this.todoListService = todoListService;
     }
 
     @GetMapping("todolist")
-    public List<TodoList> getTodoList() {
-        return this.todoListService.getTodoList();
+    public List<Todolist> getTodolist() {
+        return this.todoListService.getTodolist();
     }
 
     @GetMapping("todolist/{id}")
-    public TodoList getTodoListById(@PathVariable(value = "id") Long todolistId) {
-        return this.todoListService.findTodoListById(todolistId);
+    public Todolist getTodolistById(@PathVariable(value = "id") Long todolistId) {
+        return this.todoListService.findTodolistById(todolistId);
     }
 
     @GetMapping("todo/{todoId}/todolist")
-    public ResponseEntity<List<TodoList>> getTodolistsByTodosId(@PathVariable(value = "todoId") Long todoId) {
-        List<TodoList> todolist = todoListService.findByTodosId(todoId);
+    public ResponseEntity<List<Todolist>> getTodolistsByTodosId(@PathVariable(value = "todoId") Long todoId) {
+        List<Todolist> todolist = todoListService.findByTodosId(todoId);
         return new ResponseEntity<>(todolist, HttpStatus.OK);
     }
 
     @PostMapping("todolist")
-    public TodoList addTodoList(@RequestBody TodoList todosList) {
-        return this.todoListService.addTodoList(todosList);
+    public Todolist addTodolist(@RequestBody Todolist todoslist) {
+        return this.todoListService.addTodolist(todoslist);
     }
 
     /*
      * @PostMapping("todo/{todoId}/todolist")
-     * public TodoList createTodolistByTodosId(@PathVariable(value = "todoId") Long
+     * public Todolist createTodolistByTodosId(@PathVariable(value = "todoId") Long
      * todoId,
      * 
-     * @RequestBody TodoList request) {
+     * @RequestBody Todolist request) {
      * 
-     * ToDos todos = this.todoService.findTodoById(todoId);
+     * Todos todos = this.todoService.findTodoById(todoId);
      * request.setTodos(todos);
      * return this.todoListService.save(request);
      * }
      */
 
     @PutMapping("todolist/{id}")
-    public TodoList updateTodolistbyTodosId(@PathVariable(value = "id") Long todolistId,
-            @RequestBody TodoList todoslist) {
-
-        TodoList todolist = this.todoListService.findTodoListById(todolistId);
-        todolist.setText(todoslist.getText());
-        todolist.setFinished(todoslist.isFinished());
-        todolist.setTodos(todoslist.getTodos());
-        TodoList updatedTodoList = this.todoListService.save(todolist);
-        return updatedTodoList;
+    public Todolist updateTodolistbyTodosId(@PathVariable(value = "id") Long todolistId,
+            @RequestBody Todolist todoslist) {
+                return this.todoListService.updateTodo(todolistId,todoslist);
     }
 
     /*
      * @PutMapping("todo/{todoId}/todolist/{id}")
-     * public TodoList updateTodoList(@PathVariable(value = "id") Long todolistId,
+     * public Todolist updateTodolist(@PathVariable(value = "id") Long todolistId,
      * 
-     * @PathVariable(value = "todoId") Long todoId, @RequestBody TodoList todoList)
+     * @PathVariable(value = "todoId") Long todoId, @RequestBody Todolist todoList)
      * throws NoteNotFoundException {
-     * TodoList todolist = todoListService.findByIdAndTodosId(todolistId, todoId);
+     * Todolist todolist = todoListService.findByIdAndTodosId(todolistId, todoId);
      * todolist.setText(todoList.getText());
      * todolist.setFinished(todoList.isFinished());
      * todolist.setTodos(todoList.getTodos());
-     * TodoList updatedTodoList = this.todoListService.save(todolist);
-     * return updatedTodoList;
+     * Todolist updatedTodolist = this.todoListService.save(todolist);
+     * return updatedTodolist;
      * }
      */
 
@@ -99,7 +93,7 @@ public class TodoListController {
 
     /*
      * @DeleteMapping("todo/{todoId}/todolist/{id}")
-     * public ResponseEntity<List<TodoList>>
+     * public ResponseEntity<List<Todolist>>
      * deleteTodolistbyTodosId(@PathVariable(value = "todoId") Long todoId,
      * 
      * @PathVariable(value = "id") Long todolistId) {

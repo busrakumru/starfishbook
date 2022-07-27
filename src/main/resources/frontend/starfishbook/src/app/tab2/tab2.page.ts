@@ -15,9 +15,8 @@ import { TodolistService } from '../services/todolist.service';
 })
 export class Tab2Page implements OnInit {
 
-
-  //todolists: Todolist[] = [];
   todos: Todo[] = [];
+ 
 
   newTodo: FormGroup = new FormGroup({
     title: new FormControl(''),
@@ -32,6 +31,7 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
     this.getTodo();
+    
   }
 
   /* logout() {
@@ -46,10 +46,7 @@ export class Tab2Page implements OnInit {
       });
   }
 
-  /*getTodoList(): void {
-    this.todolistService.getTodolist()
-      .subscribe(todolist => this.todolists = todolist);
-  }*/
+  
 
   async openCard() {
     const modal = await this.modalController.create({
