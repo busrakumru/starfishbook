@@ -1,6 +1,12 @@
 package de.beuth.starfishbook.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "categories")
@@ -12,6 +18,13 @@ public class Categories {
 
     @Column(name = "title")
     private String title;
+
+
+
+    /*@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Notes> notes;
+    //private Set<Notes> notes= new HashSet<>();*/
 
     public Categories() {
     }
@@ -35,6 +48,14 @@ public class Categories {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    /*public List<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Notes> notes) {
+        this.notes = notes;
+    }*/
 
     
 }

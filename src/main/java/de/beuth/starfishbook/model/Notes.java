@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "notes")
 
@@ -27,6 +29,11 @@ public class Notes {
     //@JsonIgnore
     //private List<FileDB> files;
     private Set<FileDB> files= new HashSet<>();
+
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    //@JsonIgnore
+    private Categories categories;*/
 
     public Notes() {
     }
@@ -89,4 +96,12 @@ public class Notes {
             file.setNotes(this);
         }
     }
+
+    /*public Categories getCategories() {
+        return categories;
+    }
+  
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }*/
 }

@@ -11,15 +11,15 @@
       </div>
     </div>
 
-    <input [placeholder]="placeholderTitel" type="text" formControlName="title" class="title"/>
+    <input [placeholder]="placeholderTitel" type="text" formControlName="title" class="title" />
     <textarea [placeholder]="placeholderText" type="text" formControlName="text" class="text"></textarea>
-        
-      <div>
+
+    <!--div>
         <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
           Upload
         </button>
-      </div>
-    
+      </div-->
+
     <!--AUSGEWÄHLTE DATEI/IMG LÖSCHEN-->
     <!--div>
       <ul *ngFor="let f of file">
@@ -37,6 +37,10 @@
 
     <div class="footer">
 
+      <ion-button (click)="showC()" fill="clear">
+        <ion-icon name="albums"></ion-icon>
+      </ion-button>
+
       <ng-container formArrayName="files">
         <div *ngFor="let file of files.controls;index as i">
           <div [formGroupName]="i">
@@ -50,9 +54,10 @@
               </ion-button>
             </div>
 
-            <input formControlName="name" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt" class="file-input" />
+            <input formControlName="name" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt"
+              class="file-input" />
             <div class="imageUpload">
-    
+
               <ion-button fill="clear" (click)="fileUpload.click()">
                 <ion-icon name="document"></ion-icon>
               </ion-button>

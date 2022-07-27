@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { Category } from 'src/app/models/category.model';
+import { Categories } from 'src/app/models/categories.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -11,8 +11,9 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoryPage implements OnInit {
 
-  @Input() title: string;
-  categories: Category[];
+  /*@Input() id: any;
+  @Input() title: string;*/
+  categories: Categories[];
 
   constructor(
     private categoriesService: CategoriesService,
@@ -20,9 +21,13 @@ export class CategoryPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categoriesService.getCategories().subscribe((data: Category[]) => {
+    this.categoriesService.getCategories().subscribe((data: Categories[]) => {
       this.categories = data;
     });
+
+    /*if (this.id){
+      console.log(this.id, this.title);
+    }*/
   }
 
 
@@ -42,5 +47,12 @@ export class CategoryPage implements OnInit {
 
   cancel() {
     this.modalController.dismiss();
+  }
+
+  delete(id: any): void {
+    this.categoriesService.delete(id)
+      .subscribe(() => {
+        this.categories = this.categories.filter(categories => categories.id != id);
+      });
   }
 }

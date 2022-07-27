@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>categoryList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor="let c of categories">
+
+ 
+      <span (click)="passId(c)">
+        {{ c.title }}
+      </span>
+    
+
+  </div>
+</ion-content>

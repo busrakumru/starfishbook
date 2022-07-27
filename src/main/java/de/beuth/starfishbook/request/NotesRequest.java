@@ -3,6 +3,7 @@ package de.beuth.starfishbook.request;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.beuth.starfishbook.model.Categories;
 import de.beuth.starfishbook.model.FileDB;
 
 public class NotesRequest {
@@ -12,6 +13,8 @@ public class NotesRequest {
     private String text;
     private String color;
     private Set<FileDB> files= new HashSet<>();
+    private Categories categories;
+
     
     public Long getId() {
         return id;
@@ -49,4 +52,11 @@ public class NotesRequest {
         return files;
     }
 
+    public Categories getCategories() {
+        return categories;
+    }
+  
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }
 }

@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
+  },
+  {
+    path: 'category-list',
+    loadChildren: () => import('./modals/category-list/category-list.module').then( m => m.CategoryListPageModule)
   }
 
 ];
