@@ -8,10 +8,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "toDos")
+@Table(name = "todos")
 @JsonIgnoreProperties(value = { "createdAt" }, allowGetters = true)
 
-public class ToDos {
+public class Todos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +21,7 @@ public class ToDos {
     private String title;
 
     @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
-    private Set<TodoList> todolist = new HashSet<>();
+    private Set<Todolist> todolists = new HashSet<>();
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date appointmentTime;
@@ -29,15 +29,15 @@ public class ToDos {
     @Column(name = "createdAt")
     private Date createdAt = new Date();
 
-    public ToDos(String title, Date createdAt, Set<TodoList> todolist, Date appointmentTime) {
+    public Todos(String title, Date createdAt, Set<Todolist> todolists, Date appointmentTime) {
         this.title = title;
         this.createdAt = createdAt;
-        this.todolist = todolist;
+        this.todolists = todolists;
         this.appointmentTime = appointmentTime;
 
     }
 
-    public ToDos() {
+    public Todos() {
     }
 
     public Long getId() {
@@ -64,12 +64,16 @@ public class ToDos {
         this.createdAt = createdAt;
     }
 
-    public Set<TodoList> getTodoList() {
-        return todolist;
+    public Set<Todolist> getTodolist() {
+        return todolists;
     }
 
-    public void setTodoList(Set<TodoList> todolist) {
-        this.todolist = todolist;
+    public void setTodolist(Set<Todolist> todolists) {
+        this.todolists = todolists;
+
+        for(Todolist todolist:todolists){
+            todolist.setTodos(this);
+        }
 
     }
 

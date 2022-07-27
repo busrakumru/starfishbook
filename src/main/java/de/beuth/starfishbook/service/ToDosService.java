@@ -4,44 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import de.beuth.starfishbook.model.ToDos;
-import de.beuth.starfishbook.repository.ToDosRepository;
+import de.beuth.starfishbook.model.Todos;
+import de.beuth.starfishbook.repository.TodosRepository;
 
 @Service
-public class ToDosService {
+public class TodosService {
 
-    private final ToDosRepository todoRepository;
+    private final TodosRepository todoRepository;
 
     @Autowired
-    public ToDosService(ToDosRepository todoRepository) {
+    public TodosService(TodosRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
-    public List<ToDos> getTodos() {
-        List<ToDos> allTodos = new ArrayList<>();
+    public List<Todos> getTodos() {
+        List<Todos> allTodos = new ArrayList<>();
         todoRepository.findAll().forEach(allTodos::add);
         return allTodos;
     }
 
-    public ToDos findTodoById(Long id) {
+    public Todos findTodoById(Long id) {
         return this.todoRepository.findTodoById(id);
     }
 
-    public ToDos addTodo(ToDos request) {
-        ToDos todo = new ToDos();
+    public Todos addTodo(Todos request) {
+        Todos todo = new Todos();
         todo.setTitle(request.getTitle());
         todo.setCreatedAt(request.getCreatedAt());
-        todo.setTodoList(request.getTodoList());
+        todo.setTodolist(request.getTodolist());
         todo.setAppointmentTime(request.getAppointmentTime());
         return this.todoRepository.save(todo);
     }
 
-    public ToDos save(ToDos request) {
+    public Todos save(Todos request) {
         return this.todoRepository.save(request);
     }
 
-    public ToDos updateTodo(Long id, ToDos request) {
-        ToDos forUpdate = this.todoRepository.findTodoById(id);
+    public Todos updateTodo(Long id, Todos request) {
+        Todos forUpdate = this.todoRepository.findTodoById(id);
         forUpdate.setTitle(request.getTitle());
         forUpdate.setCreatedAt(request.getCreatedAt());
         forUpdate.setAppointmentTime(request.getAppointmentTime());

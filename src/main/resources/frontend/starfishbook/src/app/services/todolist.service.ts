@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Todo } from '../models/todo.model';
 import { Todolist } from '../models/todolist.model';
 
 @Injectable({
@@ -26,7 +27,14 @@ export class TodolistService {
         catchError(this.handleError)
       );
   }
-
+  
+  getTodolistByTodo(todoId:Todo): Observable<Todolist[]> {
+    return this.http.get<Todolist[]>(this.baseUrl + '/auth/users/todolist/'+ todoId.id +'/todolist')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+  
   createTodolist(todolistData: Todolist): Observable<Todolist> {
     return this.http.post<Todolist>(this.baseUrl + '/auth/users/todolist', todolistData)
       .pipe(

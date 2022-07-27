@@ -6,6 +6,33 @@ ion-toolbar {
     --border: none;
 }
 
+ion-card {
+    width: 90%;
+    position: relative;
+    left: 10px;
+    top: 20px;
+
+    ion-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--ion-color-medium);
+
+        ion-button {
+            position: relative;
+            bottom: 8px;
+            left: 20px;
+
+            ion-icon{
+                color:white;
+            }
+        }
+
+        ion-text {
+            color: black;
+        }
+    }
+}
 .form {
     height: 100%;
     display: flex;
@@ -21,44 +48,28 @@ ion-icon {
     justify-content: flex-end;
 }
 section {
-    mat-form-field{
+    mat-form-field {
         width: 80%;
         transform: translate(10%, 0);
         font-size: 15px;
     }
 }
 
-ion-item{
-    width: 83%;
+ion-item {
+    width: 80%;
     margin-bottom: 15px;
-    transform: translate(5%, 0);
+    transform: translate(6%, 0);
 }
 
 .todo-list {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-bottom: 5px;
     padding-top: 5px;
     position: relative;
     top: 20px;
-    width: 80%;
-    transform: translate(10%, 0);
     font-size: 12px;
 }
 
-.todo-edit {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    position: relative;
-    top: 10px;
-    width: 80%;
-    transform: translate(10%, 0);
-    font-size: 12px;
-}
 
 ion-checkbox {
     --size: 20px;
@@ -73,8 +84,8 @@ ion-checkbox {
 }
 .todo-text {
     width: 73%;
-    padding-left: 5px;
-    border-radius: 5px;
+    padding-left: 25px;
+    font-size: 15px;
 }
 
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {

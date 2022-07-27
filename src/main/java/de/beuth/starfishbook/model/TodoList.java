@@ -4,9 +4,9 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "todoList")
+@Table(name = "todolist")
 
-public class TodoList {
+public class Todolist {
 
     @Id
     @GeneratedValue
@@ -21,14 +21,14 @@ public class TodoList {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "todos_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private ToDos todos;
+    private Todos todos;
 
-    public TodoList(String text, boolean finished) {
+    public Todolist(String text, boolean finished) {
         this.text = text;
         this.finished = false;
     }
 
-    public TodoList() {
+    public Todolist() {
     }
 
     public String getText() {
@@ -47,11 +47,11 @@ public class TodoList {
         this.id = id;
     }
 
-    public ToDos getTodos() {
+    public Todos getTodos() {
         return todos;
     }
 
-    public void setTodos(ToDos todos) {
+    public void setTodos(Todos todos) {
         this.todos = todos;
     }
 

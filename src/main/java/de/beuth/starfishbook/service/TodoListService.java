@@ -3,50 +3,76 @@ package de.beuth.starfishbook.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import de.beuth.starfishbook.model.TodoList;
-import de.beuth.starfishbook.repository.TodoListRepository;
+
+import de.beuth.starfishbook.model.Todos;
+import de.beuth.starfishbook.model.Todolist;
+import de.beuth.starfishbook.repository.TodosRepository;
+import de.beuth.starfishbook.repository.TodolistRepository;
 
 @Service
-public class TodoListService {
-
-    public final TodoListRepository todoListRepository;
+public class TodolistService {
 
     @Autowired
-    public TodoListService(TodoListRepository todoListRepository) {
+    public final TodolistRepository todoListRepository;
+
+    @Autowired
+    public final TodosRepository todosRepository;
+    
+
+  
+    public TodolistService(TodolistRepository todoListRepository, TodosRepository todosRepository) {
         this.todoListRepository = todoListRepository;
+        this.todosRepository= todosRepository;
+
     }
 
-    public List<TodoList> getTodoList() {
-        List<TodoList> allTodos = new ArrayList<>();
+    public List<Todolist> getTodolist() {
+        List<Todolist> allTodos = new ArrayList<>();
         todoListRepository.findAll().forEach(allTodos::add);
         return allTodos;
     }
 
-    public TodoList findTodoListById(Long id) {
-        return todoListRepository.findTodoListById(id);
+    public Todolist findTodolistById(Long id) {
+        return todoListRepository.findTodolistById(id);
     }
 
-    public List<TodoList> findByTodosId(Long todoId) {
+    public List<Todolist> findByTodosId(Long todoId) {
         return todoListRepository.findByTodosId(todoId);
     }
 
-    public TodoList save(TodoList request) {
+    public Todolist save(Todolist request) {
         return this.todoListRepository.save(request);
     }
 
-    public TodoList addTodoList(TodoList request) {
-        TodoList todo = new TodoList();
+    /*public Todolist addTodolist(Todolist request) {
+        Todolist todo = new Todolist();
         todo.setText(request.getText());
         todo.setFinished(request.isFinished());
         todo.setTodos(request.getTodos());
         return this.todoListRepository.save(todo);
+    }*/
+
+    public Todolist addTodolist(Todolist request) {
+       /*  Todos todos= todosRepository.findById(request.getTodos().getId()).orElse(null);
+        if (null == todos) {
+            todos = new Todos();
+        }*/
+        
+       // todos.setId(request.getTodos().getId());
+        //request.setTodos(todos);
+         Todolist todo = new Todolist();
+         todo.setText(request.getText());
+         todo.setFinished(request.isFinished());
+        todo.setTodos(request.getTodos());
+        return this.todoListRepository.save(request);
     }
 
-    public TodoList updateTodo(Long id, TodoList request) {
-        TodoList update = todoListRepository.findTodoListById(id);
+
+    public Todolist updateTodo(Long id, Todolist request) {
+        Todolist update = todoListRepository.findTodolistById(id);
         update.setText(request.getText());
         update.setFinished(request.isFinished());
-        // update.setTodos(request.getTodos());
+        update.setTodos(request.getTodos());
         return this.todoListRepository.save(update);
     }
 
