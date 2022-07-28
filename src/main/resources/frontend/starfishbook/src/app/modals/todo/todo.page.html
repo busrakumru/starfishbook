@@ -10,16 +10,15 @@
 </ion-header>
 
 <ion-content>
-  <div class="form" >
-    <form [formGroup]="newTodo"  #todoForm="ngForm">
+  <div class="form">
+    <form [formGroup]="newTodo" #todoForm="ngForm">
       <section>
 
         <div class="ion-padding-top">
           <div class="ion-padding-top">
 
-            <mat-form-field >
-              <input matInput placeholder="Titel" formControlName="title" id="title" type="text" 
-                name="title" > 
+            <mat-form-field>
+              <input matInput placeholder="Titel" formControlName="title" id="title" type="text" name="title">
             </mat-form-field>
 
           </div>
@@ -33,7 +32,7 @@
           <ion-popover trigger="date" size="cover">
             <ng-template>
               <ion-datetime presentation="date" name="date" [min]="minDate" [max]="maxDate"
-              [(ngModel)]="todos.appointmentTime" formControlName="appointmentTime" locale="de-DE"></ion-datetime>
+                [(ngModel)]="todos.appointmentTime" formControlName="appointmentTime" locale="de-DE"></ion-datetime>
             </ng-template>
           </ion-popover>
 
@@ -46,7 +45,7 @@
           <ion-text>
             Todos erstellen
           </ion-text>
-          <ion-button class="save"  (click)="addProduct()">
+          <ion-button class="save" (click)="addProduct()">
             <ion-icon name="add-outline"> </ion-icon>
           </ion-button>
         </ion-card-header>
@@ -58,23 +57,23 @@
             <div [formGroupName]="i" class="todo-list">
 
               <div>
-                <ion-checkbox  type="checkbox" formControlName="finished"></ion-checkbox>
+                <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
               </div>
 
               <div class="todo-text">
 
                 <mat-form-field [hideRequiredMarker]="true">
-                  <input matInput placeholder="Todo" type="text" id="text" class="form-control" 
-                    formControlName="text"  value="{{t.text}}">
+                  <input matInput   name="{{ t.text }}" attr.type="{{ t.text }}" placeholder="{{t.text}}" type="text" id="{{t.text}}" class="form-control" formControlName="text">
+                  
                 </mat-form-field>
 
               </div>
-
+              <span   >{{t.value.text}}</span>
               <div>
-                  <ion-button (click)="delete(id)" fill="clear">
-                    <ion-icon name="close-outline"></ion-icon>
-                  </ion-button>
-             
+                <ion-button (click)="delete(id)" fill="clear">
+                  <ion-icon name="close-outline"></ion-icon>
+                </ion-button>
+
               </div>
             </div>
           </div>

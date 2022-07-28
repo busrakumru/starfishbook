@@ -35,4 +35,7 @@ export class CategoryListPage implements OnInit {
 
   }
 
+  closeModal(){
+    this.modalController.dismiss();
+  }
 }

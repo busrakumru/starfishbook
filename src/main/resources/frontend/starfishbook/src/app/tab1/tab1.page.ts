@@ -5,6 +5,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { CategoryPage } from '../modals/category/category.page';
 import { NotePage } from '../modals/notes/note/note.page';
 import { Categories } from '../models/categories.model';
+import { Files } from '../models/file.model';
 import { Notes } from '../models/notes.model';
 import { CategoriesService } from '../services/categories.service';
 import { FileUploadService } from '../services/file-upload.service';
@@ -20,7 +21,7 @@ export class Tab1Page {
 
   searchTerm: any;
   notes: Notes[];
-  files: File[];
+  files: Files[];
   categories: Categories[];
 
   list: boolean;
@@ -57,7 +58,7 @@ export class Tab1Page {
       console.log(data);
     });
 
-    this.filesService.getFiles().subscribe((data: File[]) => {
+    this.filesService.getFiles().subscribe((data: Files[]) => {
       this.files = data;
     });
 

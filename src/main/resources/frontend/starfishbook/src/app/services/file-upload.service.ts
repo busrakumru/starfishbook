@@ -1,6 +1,7 @@
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Files } from '../models/file.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class FileUploadService {
     });
     return this.http.request(req);
   }
-  getFiles(): Observable<File[]> {
-    return this.http.get<File[]>(`${this.baseUrl}`);
+  getFiles(): Observable<Files[]> {
+    return this.http.get<Files[]>(`${this.baseUrl}`);
   }
 
   deleteFile(id: any): Observable<any> {

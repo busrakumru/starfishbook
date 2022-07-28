@@ -8,6 +8,7 @@ import { Categories } from 'src/app/models/categories.model';
 import { Files } from 'src/app/models/file.model';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { NotesService } from 'src/app/services/notes.service';
+import { ReloadService } from 'src/app/services/reload.service';
 import { CategoryListPage } from '../../category-list/category-list.page';
 
 
@@ -40,6 +41,7 @@ export class NotePage implements OnInit {
 
 
   constructor(
+    public reloadService: ReloadService,
     private notesService: NotesService,
     private modalController: ModalController,
     private uploadService: FileUploadService,
@@ -142,6 +144,7 @@ export class NotePage implements OnInit {
     } else {
       this.createNewNote();
     }
+    this.reloadService.reload();
     this.modalController.dismiss();
   }
 

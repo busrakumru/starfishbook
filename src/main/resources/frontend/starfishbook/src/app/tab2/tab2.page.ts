@@ -89,6 +89,7 @@ export class Tab2Page implements OnInit {
       componentProps: {
         'id': todo.id,
         'title': todo.title,
+        'todolists':todo.todolist
       }
     });
     return await modal.present();

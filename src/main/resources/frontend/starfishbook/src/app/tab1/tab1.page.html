@@ -65,18 +65,13 @@
       <ion-card-content>
         <p>{{note.text}}</p>
 
-        <div *ngFor="let file of notes.files">
+        <div *ngFor="let file of note.files">
           <a href="{{ file.url }}">{{ file.name }}</a>
         </div>
       </ion-card-content>
-
     </ion-card>
-
   </div>
 
-  <div *ngFor="let file of notes.files">
-    <a href="{{ file.url }}">{{ file.name }}</a>
-  </div>
 
   <div *ngIf="list" class="list">
     <ion-card *ngFor="let note of notes | filter: searchTerm" [style.background]="note.color">

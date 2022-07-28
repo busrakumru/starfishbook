@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { Mood } from 'src/app/models/mood';
 import { MoodService } from 'src/app/services/mood.service';
+import { ReloadService } from 'src/app/services/reload.service';
 
 @Component({
   selector: 'app-mood',
@@ -20,7 +21,7 @@ export class MoodPage implements OnInit {
   @Input() img: string;
   @Input() color: string;
 
-  constructor(private moodService: MoodService, private modalController: ModalController, private route: Router) { }
+  constructor(public reloadService: ReloadService,private moodService: MoodService, private modalController: ModalController, private route: Router) { }
 
   ngOnInit() {
     this.newMood = new FormGroup({
@@ -46,6 +47,7 @@ export class MoodPage implements OnInit {
         });
     this.modalController.dismiss();
     this.route.navigate(['/tabs/tab4']);
+    this.reloadService.reload();
 
   }
 

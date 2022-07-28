@@ -27,7 +27,8 @@ export class TodoPage implements OnInit {
   ) { }
 
   newTodo: FormGroup;
-  todos: Todo = new Todo();;
+  todos: Todo = new Todo();
+  
 
   ngOnInit(): void {
   
@@ -37,6 +38,7 @@ export class TodoPage implements OnInit {
       todolist: this.fb.array([])
     })
     this.addProduct();
+   
 
   }
 
@@ -80,14 +82,17 @@ export class TodoPage implements OnInit {
   }
 
   updateTodo(): void {
-    this.todoService.updateTodo(this.id, this.newTodo.value);
 
-      
+    this.todoService.updateTodo(this.id, this.newTodo.value) .subscribe(response => {
+      console.log(response);
+    });
   }
-
+  
   abbrechen() {
     this.modalController.dismiss();
   }
+
+
 
   /*createTodolist(): void {
   
