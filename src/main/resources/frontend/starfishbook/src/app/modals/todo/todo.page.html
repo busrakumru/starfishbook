@@ -12,17 +12,19 @@
 <ion-content>
   <div class="form" >
     <form [formGroup]="newTodo"  #todoForm="ngForm">
+      <div>
       <section>
 
-        <div class="ion-padding-top">
+        <div class="ion-padding-top" >
           <div class="ion-padding-top">
 
             <mat-form-field >
               <input matInput placeholder="Titel" formControlName="title" id="title" type="text" 
-                name="title" > 
+              [(ngModel)]="todos.title"> {{ todos.title}}
             </mat-form-field>
 
           </div>
+
 
           <ion-item id="date">
             <ion-label>Dateline</ion-label>
@@ -65,13 +67,13 @@
 
                 <mat-form-field [hideRequiredMarker]="true">
                   <input matInput placeholder="Todo" type="text" id="text" class="form-control" 
-                    formControlName="text"  value="{{t.text}}">
+                    formControlName="text">
                 </mat-form-field>
 
               </div>
 
-              <div>
-                  <ion-button (click)="delete(id)" fill="clear">
+              <div *ngIf="i">
+                  <ion-button (click)="delete(i)" fill="clear">
                     <ion-icon name="close-outline"></ion-icon>
                   </ion-button>
              
@@ -83,6 +85,7 @@
         </ion-card-content>
 
       </ion-card>
+      </div>
     </form>
   </div>
 </ion-content>

@@ -22,22 +22,41 @@ export class TodoPage implements OnInit {
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
 
+  public newTodo: FormGroup;
+
   constructor(
     public reloadService: ReloadService, private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
-  ) { }
+  ) {
 
-  newTodo: FormGroup;
-  todos: Todo = new Todo();;
-
-  ngOnInit(): void {
-  
     this.newTodo = this.fb.group({
       title: [],
       appointmentTime: [],
       todolist: this.fb.array([])
     })
-    this.addProduct();
 
+   }
+
+
+  todos: Todo = new Todo();;
+
+  ngOnInit(): void {
+  
+   /* this.newTodo = this.fb.group({
+      title: [],
+      appointmentTime: [],
+      todolist: this.fb.array([])
+    })*/
+    
+   // this.addProduct();
+
+  }
+
+  private addTodolist():FormGroup{
+    return this.fb.group({
+      text: [],
+      finished: [false],
+      id: []
+    })
   }
 
   get todolist() {
@@ -56,18 +75,22 @@ export class TodoPage implements OnInit {
 
 
   addProduct() {
+    this.addressArray.push(this.addTodolist());
 
-    this.todolist.push(this.fb.group({
+   /* this.todolist.push(this.fb.group({
       text: [],
       finished: [false],
       id: []
-    }));
+    }));*/
   }
 
+  get addressArray(): FormArray {
+    return <FormArray>this.newTodo.get('todolist');
+  }
 
-
-  delete() {
-    this.todolist.removeAt(this.todolist.value.findIndex(todo => todo.id === this.todolist.value.id))
+  delete(index: number) {
+    //this.todolist.removeAt(this.todolist.value.findIndex(todo => todo.id === this.todolist.value.id))
+  this.addressArray.removeAt(index)
   }
 
   create() {
@@ -80,9 +103,12 @@ export class TodoPage implements OnInit {
   }
 
   updateTodo(): void {
-    this.todoService.updateTodo(this.id, this.newTodo.value);
 
-      
+    this.todoService.updateTodo(this.id, this.newTodo.value).subscribe(
+      (response) => console.log(response),
+      error => {
+        console.error(error);
+      });
   }
 
   abbrechen() {
