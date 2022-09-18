@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { AllMoodsComponent } from './components/all-moods/all-moods.component';
+import { NgCalendarModule } from 'ionic2-calendar';
 import { ProfilmoodComponent } from './components/profilmood/profilmood.component';
 @NgModule({
   declarations: [AppComponent,AllMoodsComponent],
@@ -37,6 +38,7 @@ import { ProfilmoodComponent } from './components/profilmood/profilmood.componen
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
+    NgCalendarModule,
     BrowserAnimationsModule],
     providers: [{ provide: {RouteReuseStrategy, LOCALE_ID} , useValue: 'de', useClass: IonicRouteStrategy }],  
   bootstrap: [AppComponent],
