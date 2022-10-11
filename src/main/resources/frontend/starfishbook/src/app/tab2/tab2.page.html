@@ -25,8 +25,15 @@
       <ion-card-title>{{todo.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>{{todo.appointmentTime | date: 'dd.MM.yyyy' }}</ion-item>
-     
+      <span>{{todo.appointmentTime | date: 'dd.MM.yyyy' }}</span>
+
+
+      <div *ngFor="let tlist of todo.todolist">
+        <ion-item >{{ tlist.text }}</ion-item>
+
+      </div>
+      
+
     </ion-card-content>
   </ion-card>
 </ion-content>

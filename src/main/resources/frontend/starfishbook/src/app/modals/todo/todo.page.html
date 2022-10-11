@@ -18,13 +18,20 @@
           <div class="ion-padding-top">
 
             <mat-form-field>
-              <input matInput placeholder="Titel" formControlName="title" id="title" type="text" name="title">
+              <input matInput ngModel="{{title}}" placeholder="Titel" formControlName="title" id="title" type="text" name="title">
             </mat-form-field>
 
           </div>
 
           <ion-item id="date">
             <ion-label>Dateline</ion-label>
+            <div *ngIf="appointmentTime">
+              
+              <ion-text slot="end" ngModel="{{appointmentTime}}">
+                {{appointmentTime | date: 'dd.MM.yyyy' }}
+              </ion-text>
+          
+            </div>
             <ion-text slot="end">
               {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
             </ion-text>
@@ -68,7 +75,9 @@
                 </mat-form-field>
 
               </div>
-              <span   >{{t.value.text}}</span>
+
+              <span >{{t.text}}</span>
+
               <div>
                 <ion-button (click)="delete(id)" fill="clear">
                   <ion-icon name="close-outline"></ion-icon>

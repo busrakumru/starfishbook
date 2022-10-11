@@ -18,6 +18,8 @@ export class TodoPage implements OnInit {
 
   @Input() id: any;
   @Input() title: string;
+  @Input() appointmentTime: Date;
+
 
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
