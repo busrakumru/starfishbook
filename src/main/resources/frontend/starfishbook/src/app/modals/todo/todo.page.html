@@ -25,16 +25,21 @@
 
           <ion-item id="date">
             <ion-label>Dateline</ion-label>
-            <div *ngIf="appointmentTime">
-              
-              <ion-text slot="end" ngModel="{{appointmentTime}}">
-                {{appointmentTime | date: 'dd.MM.yyyy' }}
-              </ion-text>
-          
-            </div>
-            <ion-text slot="end">
-              {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
+
+            <ng-container *ngIf="appointmentTime; else todo ">
+              <ion-text slot="end" >
+              {{appointmentTime | date: 'dd.MM.yyyy' }}
             </ion-text>
+            </ng-container>
+
+            <ng-template #todo>
+              <ion-text slot="end">
+                {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
+              </ion-text> 
+            </ng-template>
+
+          
+
           </ion-item>
           <ion-popover trigger="date" size="cover">
             <ng-template>
@@ -58,36 +63,33 @@
         </ion-card-header>
 
         <ion-card-content>
-
-
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
             <div [formGroupName]="i" class="todo-list">
-
               <div>
                 <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
               </div>
-
               <div class="todo-text">
-
                 <mat-form-field [hideRequiredMarker]="true">
-                  <input matInput   name="{{ t.text }}" attr.type="{{ t.text }}" placeholder="{{t.text}}" type="text" id="{{t.text}}" class="form-control" formControlName="text">
-                  
+                  <input matInput id="text" placeholder="Todoitem" type="text" class="form-control" formControlName="text">
                 </mat-form-field>
-
               </div>
-
-              <span >{{t.text}}</span>
-
               <div>
                 <ion-button (click)="delete(id)" fill="clear">
                   <ion-icon name="close-outline"></ion-icon>
                 </ion-button>
-
               </div>
+
+                
+              <span>{{t.text}}
+
+              </span>
             </div>
+          
+            <span>{{t.text}}
+
+            </span>
+              
           </div>
-
-
         </ion-card-content>
 
       </ion-card>

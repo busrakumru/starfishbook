@@ -24,6 +24,9 @@ export class TodoPage implements OnInit {
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
 
+
+  change=true;
+
   constructor(
     public reloadService: ReloadService, private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
   ) { }
