@@ -10,17 +10,15 @@
 </ion-header>
 
 <ion-content>
-  <div class="form" >
-    <form [formGroup]="newTodo"  #todoForm="ngForm">
-      <div>
+  <div class="form">
+    <form [formGroup]="newTodo" #todoForm="ngForm">
       <section>
 
         <div class="ion-padding-top" >
           <div class="ion-padding-top">
 
-            <mat-form-field >
-              <input matInput placeholder="Titel" formControlName="title" id="title" type="text" 
-              [(ngModel)]="todos.title"> {{ todos.title}}
+            <mat-form-field>
+              <input matInput ngModel="{{title}}" placeholder="Titel" formControlName="title" id="title" type="text" name="title">
             </mat-form-field>
 
           </div>
@@ -28,18 +26,32 @@
 
           <ion-item id="date">
             <ion-label>Dateline</ion-label>
-            <ion-text slot="end">
-              {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
+
+            <ng-container *ngIf="appointmentTime; else todo ">
+              <ion-text slot="end" >
+              {{appointmentTime | date: 'dd.MM.yyyy' }}
             </ion-text>
+            </ng-container>
+
+            <ng-template #todo>
+              <ion-text slot="end">
+                {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
+              </ion-text> 
+            </ng-template>
+
+          
+
           </ion-item>
           <ion-popover trigger="date" size="cover">
             <ng-template>
               <ion-datetime presentation="date" name="date" [min]="minDate" [max]="maxDate"
-              [(ngModel)]="todos.appointmentTime" formControlName="appointmentTime" locale="de-DE"></ion-datetime>
+                [(ngModel)]="appointmentTime" formControlName="appointmentTime" locale="de-DE"></ion-datetime>
             </ng-template>
           </ion-popover>
 
         </div>
+
+
       </section>
 
 
@@ -48,44 +60,72 @@
           <ion-text>
             Todos erstellen
           </ion-text>
-          <ion-button class="save"  (click)="addProduct()">
+          <ion-button class="save" (click)="addProduct()">
             <ion-icon name="add-outline"> </ion-icon>
           </ion-button>
         </ion-card-header>
 
         <ion-card-content>
-
-
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
             <div [formGroupName]="i" class="todo-list">
-
-              <div>
-                <ion-checkbox  type="checkbox" formControlName="finished"></ion-checkbox>
-              </div>
-
-              <div class="todo-text">
-
-                <mat-form-field [hideRequiredMarker]="true">
-                  <input matInput placeholder="Todo" type="text" id="text" class="form-control" 
-                    formControlName="text">
-                </mat-form-field>
-
-              </div>
-
-              <div *ngIf="i">
-                  <ion-button (click)="delete(i)" fill="clear">
+              <!--div *ngFor="let tlist of oldTodolist" style="display:flex">
+                <div>
+                  <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+                </div>
+                <div class="todo-text">
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input matInput ngModel="{{tlist.text}}" type="text" class="form-control" formControlName="text2">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <ion-button (click)="delete(i.id)" fill="clear">
                     <ion-icon name="close-outline"></ion-icon>
                   </ion-button>
+                </div>
+
+              </div-->
              
+              <!--span>{{t.text}}</span-->
+
+
+              <div>
+                <div>
+                  <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+                </div>
+                <div class="todo-text">
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input matInput id="text" placeholder="text" type="text" class="form-control" formControlName="text">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <ion-button (click)="delete(id)" fill="clear">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
+              
             </div>
+
+          
+
+
+
+            
+          
+            <span>{{t.appointmentTime}}</span>
+              
           </div>
-
-
         </ion-card-content>
 
       </ion-card>
-      </div>
+
+     
     </form>
+
+    <div *ngFor="let tlist of oldTodolist" style="margin: 20px">
+      <span >{{ tlist.text }}</span>
+
+    </div>
+
   </div>
 </ion-content>

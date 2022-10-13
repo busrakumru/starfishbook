@@ -1,26 +1,98 @@
+<ion-header class="ion-no-border">
+  <img src="assets/img/starfish_happy.png">
+  <ion-title>starfishbook</ion-title>
+
+  <div class="container">
+    <div class="searchbox">
+      <input type="text" class="searchbox__input" placeholder="Suche.." [(ngModel)]="searchTerm" />
+      <ion-icon name="search"></ion-icon>
+    </div>
+  </div>
+
+</ion-header>
+
 <ion-content>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openCard()">
+
+  <div style="display: flex; justify-content: space-between;">
+
+    <ion-segment scrollable value="heart" class="categories">
+      <ion-segment-button *ngFor="let category of categories" (click)="test(category)">
+        <ion-label>
+          {{category.title}}
+        </ion-label>
+      </ion-segment-button>
+
+      <ion-button (click)="addCategory()" fill="clear">
+        <ion-icon name="add" color="secondary" size="large"></ion-icon>
+      </ion-button>
+    </ion-segment>
+
+
+    <div class="toggle">
+      <ion-icon (click)="mytoggle.checked = !mytoggle.checked" name="grid-sharp" size="large" *ngIf="list"
+        color="secondary"></ion-icon>
+      <ion-toggle #mytoggle (ionChange)="changeView()" style="display: none;"></ion-toggle>
+      <ion-icon (click)="mytoggle.checked = !mytoggle.checked" name="menu-sharp" size="large" *ngIf="!list"
+        color="secondary"></ion-icon>
+    </div>
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openCard()" color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-<div class="cards">
-  <ion-card *ngFor = "let note of notes" [style.background]="note.color">
-    <ion-card-header>
-      <div>
-        <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
-        <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
-      </div>
-      <ion-card-title>{{note.title}}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content >
-      <p>{{note.text}}</p>
-    </ion-card-content>
+  <div class="searchColorsContainer">
+    <div *ngFor="let c of colorPalette" class="c" (click)="passValue(c)" [style.background]="c">
+    </div>
+    <div (click)="clearSearch()" class="clear">
+      <ion-icon name="close" size="large"></ion-icon>
+    </div>
+  </div>
 
-  </ion-card>
+  <div class="grid" *ngIf="!list">
+    <ion-card *ngFor="let note of notes | filter: searchTerm" [style.background]="note.color">
+      <ion-card-header>
+        <div>
+          <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
+          <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
+        </div>
+        <ion-card-title>{{note.title}}</ion-card-title>
+      </ion-card-header>
 
-</div>
+      <ion-card-content>
+        <p>{{note.text}}</p>
+
+        <div *ngFor="let file of note.files">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="list" class="list">
+    <ion-card *ngFor="let note of notes | filter: searchTerm" [style.background]="note.color">
+      <ion-card-header>
+        <div>
+          <ion-icon name="create-outline" (click)="updateNote(note)"></ion-icon>
+          <ion-icon name="trash-outline" (click)="deleteNote(note)"></ion-icon>
+        </div>
+        <ion-card-title>{{note.title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>{{note.text}}</p>
+
+        <div *ngFor="let file of note.files">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </div>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
 
 </ion-content>

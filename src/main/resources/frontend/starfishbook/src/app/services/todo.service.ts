@@ -30,7 +30,7 @@ export class TodoService {
   }
 
   updateTodo(id: any, todoData: Todo): Observable<Todo> {
-    return this.http.put<Todo>(this.baseUrl + '/auth/users/todo/' + id, todoData)
+    return this.http.patch<Todo>(this.baseUrl + '/auth/users/todo/' + id, todoData)
       .pipe(
         catchError(this.handleError)
       );

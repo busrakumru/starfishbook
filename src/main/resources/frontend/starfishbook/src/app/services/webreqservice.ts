@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-//const baseUrl = 'http://localhost:8080';
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +8,6 @@ import { Observable } from 'rxjs';
 export class WebReqService {
 
   readonly ROOT_URL;
-
 
   constructor(private http: HttpClient) { 
     this.ROOT_URL = 'https://localhost:8443';
@@ -33,28 +28,4 @@ export class WebReqService {
   delete(uri:string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`);
   }
-
-
-  /*getAll(): Observable<any> {
-    return this.http.get(baseUrl);
-  }
-
-  get(id: any): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
-  }
-  create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
-  }
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
-  }
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
-  }
-  deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
-  }
-  findByTitle(title: any): Observable<Notes[]> {
-    return this.http.get<Notes[]>(`${baseUrl}?title=${title}`);
-  }*/
 }

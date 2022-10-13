@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { AllMoodsComponent } from '../components/all-moods/all-moods.component';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +9,18 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
+  
+  constructor(public popoverController: PopoverController) {}
+  
+  async presentPopover(e: Event) {
+    const popover = await this.popoverController.create({
+      component: AllMoodsComponent,
+      event: e,
+      cssClass: 'popover_setting',
+    });
 
-  constructor() {}
-
+    await popover.present();
+  
+  }
 }
+
