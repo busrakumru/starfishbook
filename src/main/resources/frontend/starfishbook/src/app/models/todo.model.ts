@@ -4,6 +4,6 @@ export class Todo {
     id?: number;
     title?:string='';
     createdAt?: Date;
-    todolist: Todolist[];
+    todolist?: Todolist[];
     appointmentTime?:Date;
   }

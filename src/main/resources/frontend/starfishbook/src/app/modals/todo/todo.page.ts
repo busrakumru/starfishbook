@@ -28,6 +28,10 @@ export class TodoPage implements OnInit {
 
   change=true;
 
+  public newData : any = {
+    'title': 'Büsra'
+  }
+
   constructor(
     public reloadService: ReloadService, private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
   ) { }
@@ -39,7 +43,7 @@ export class TodoPage implements OnInit {
   ngOnInit(): void {
   
     this.newTodo = this.fb.group({
-      title: [],
+      title: [''],
       appointmentTime: [],
       todolist: this.fb.array([])
     })
@@ -58,7 +62,7 @@ export class TodoPage implements OnInit {
     } else {
       this.create();
     }
-    this.reloadService.reload();
+    //this.reloadService.reload();
     this.modalController.dismiss();
   }
 
@@ -67,7 +71,7 @@ export class TodoPage implements OnInit {
 
     this.todolist.push(this.fb.group({
       //text2: [],
-      text: [],
+      text: [''],
       finished: [false],
       id: []
     }));
@@ -90,10 +94,12 @@ export class TodoPage implements OnInit {
 
   updateTodo(): void {
 
-    this.todoService.updateTodo(this.id, this.newTodo.value).subscribe(response => {
-      console.log(response);
+    this.todoService.updateTodo(this.id, this.newData).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log('DONE')
 
-    });
+    );
   }
   
   abbrechen() {
