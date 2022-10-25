@@ -1,9 +1,20 @@
 package de.beuth.starfishbook.model;
 
-import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "categories")
+
 public class Categories {
 
     @Id
@@ -13,11 +24,16 @@ public class Categories {
     @Column(name = "title")
     private String title;
 
-    public Categories() {
+    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    private Set<Notes> notes = new HashSet<>();
+
+    
+    public Categories(String title, Set<Notes> notes) {
+        this.title = title;
+        this.notes = notes;
     }
 
-    public Categories(String title) {
-        this.title = title;
+    public Categories() {
     }
 
     public Long getId() {
@@ -36,5 +52,17 @@ public class Categories {
         this.title = title;
     }
 
-    
+
+    public Set<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Notes> notes) {
+        this.notes = notes;
+
+        for(Notes note : notes) {
+            note.setCategories(this);
+        }
+    }
+
 }
