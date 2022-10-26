@@ -4,8 +4,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import de.beuth.starfishbook.model.Notes;
-import de.beuth.starfishbook.model.NotesRequest;
 import de.beuth.starfishbook.repository.NotesRepository;
+import de.beuth.starfishbook.request.NotesRequest;
 
 @Service
 public class NotesService {
@@ -54,6 +54,5 @@ public class NotesService {
     this.notesRepository.deleteById(id);
     return this.notesRepository.existsById(id);
 }
-
   
 }

@@ -3,7 +3,7 @@ package de.beuth.starfishbook.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +25,9 @@ import de.beuth.starfishbook.service.NotesService;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
-@RequestMapping("auth/users/")
+
+@RequestMapping("/auth/users/")
+
 public class NotesController {
 
   private NotesRepository notesRepository;
@@ -40,12 +42,12 @@ public class NotesController {
   private FileStorageService storageService;
 
   @Autowired
-  private FileDBRepository fileDBRepository;
+  private FileDBRepository fileDBRepository;*/
 
   @Autowired
   public NotesController(NotesRepository notesRepository) {
     this.notesRepository = notesRepository;
-  }*/
+  }
 
 
   @GetMapping("notes")
@@ -60,7 +62,7 @@ public class NotesController {
   }
 
   @PostMapping("notes")
-  public ResponseEntity<Notes> createNote(@Valid @RequestBody Notes notes)
+  public ResponseEntity<Notes> createNote( @RequestBody Notes notes)
       throws IOException {
     Notes savedNotes = notesRepository.save(notes);
     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

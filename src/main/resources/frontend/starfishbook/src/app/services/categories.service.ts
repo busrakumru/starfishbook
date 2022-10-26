@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
+import { Categories } from '../models/categories.model';
 
 
 @Injectable({
@@ -14,11 +14,15 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(`${this.baseUrl}`);
+  getCategories(): Observable<Categories[]>{
+    return this.http.get<Categories[]>(`${this.baseUrl}`);
   }
 
-  createCategory(category:Category): Observable<Category[]>{
-    return this.http.post<Category[]>(`${this.baseUrl}`,category);
+  createCategory(category:Categories): Observable<Categories[]>{
+    return this.http.post<Categories[]>(`${this.baseUrl}`,category);
+  }
+
+  delete(id:any):Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 }

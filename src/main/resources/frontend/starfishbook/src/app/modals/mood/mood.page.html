@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <div *ngIf="name">
+    <div *ngIf="img">
+      <ion-img src="{{img}}"></ion-img>
+      <ion-label *ngIf="color" class="label_text">Du fühlst dich
+        <ion-label [ngStyle]="{'color': color}">{{name}}?</ion-label>
+      </ion-label>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="newMood">
+    <section>
+      <div class="ion-padding-top">
+        <ion-label>Beschreib dein Tag mit einem Wort?</ion-label>
+        <mat-form-field appearance="outline" class="ion-padding-top">
+          <textarea matInput style="height:40px" formControlName="day"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="ion-padding-top">
+        <ion-label>Was hast du alles gemacht?</ion-label>
+        <mat-form-field appearance="outline" class="ion-padding-top">
+          <textarea matInput style="height:100px" formControlName="daily"></textarea>
+        </mat-form-field>
+      </div>
+    </section>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <form [formGroup]="newMood">
+    <div class="col">
+      <ion-button (click)="speichern(newMood)">Ok</ion-button>
+      <ion-button (click)="abbrechen()">Abbrechen</ion-button>
+    </div>
+  </form>
+</ion-footer>

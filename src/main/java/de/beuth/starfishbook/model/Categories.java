@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "categories")
 
@@ -31,7 +34,6 @@ public class Categories {
     public Categories(String title, Set<Notes> notes) {
         this.title = title;
         this.notes = notes;
-    }
 
     public Categories() {
     }
@@ -64,5 +66,6 @@ public class Categories {
             note.setCategories(this);
         }
     }
+
 
 }

@@ -16,9 +16,9 @@
   <div style="display: flex; justify-content: space-between;">
 
     <ion-segment scrollable value="heart" class="categories">
-      <ion-segment-button *ngFor="let c of categories">
+      <ion-segment-button *ngFor="let category of categories" (click)="test(category)">
         <ion-label>
-          {{c.title}}
+          {{category.title}}
         </ion-label>
       </ion-segment-button>
 
@@ -69,14 +69,9 @@
           <a href="{{ file.url }}">{{ file.name }}</a>
         </div>
       </ion-card-content>
-
     </ion-card>
-
   </div>
 
-  <div *ngFor="let file of files">
-    <a href="{{ file.url }}">{{ file.name }}</a>
-  </div>
 
   <div *ngIf="list" class="list">
     <ion-card *ngFor="let note of notes | filter: searchTerm" [style.background]="note.color">
@@ -99,4 +94,5 @@
     </ion-card>
 
   </div>
+
 </ion-content>

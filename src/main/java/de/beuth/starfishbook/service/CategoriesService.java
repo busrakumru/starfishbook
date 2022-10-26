@@ -29,10 +29,12 @@ public class CategoriesService {
 
     public List<Categories> getAllCategories() {
         List<Categories> allCategories = new ArrayList<>();
-
         categoriesRepository.findAll().forEach(allCategories::add);
-
         return allCategories;
     }
-    
+
+    public Boolean delete(Long id) {
+        this.categoriesRepository.deleteById(id);
+        return this.categoriesRepository.existsById(id);
+    }
 }

@@ -1,18 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-       Login geschafft
-    </ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true"  class="ion-no-border">
+  <img src="assets/img/logo.png">
+  <ion-title>To-Dos</ion-title>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-
-  <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+  <div class="fixed_button">
+    <ion-fab horizontal="center" class="open">
+      <ion-fab-button (click)="openCard()" color="primary-contrast">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-label>Was steht heute an?</ion-label>
+    </ion-fab>
+  </div>
+  <!--ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
     <li class="nav-item">
       <a href class="nav-link" (click)="logout()">LogOut</a>
     </li>
-  </ul>
- 
+  </ul-->
+  <ion-card *ngFor="let todo of todos">
+    <ion-card-header>
+      <div>
+        <ion-icon name="create-outline" (click)="update(todo)"></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteTodo(todo)"></ion-icon>
+      </div>
+      <ion-card-title>{{todo.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <span>{{todo.appointmentTime | date: 'dd.MM.yyyy' }}</span>
 
+
+      <div *ngFor="let tlist of todo.todolist">
+        <ion-item >{{ tlist.text }}</ion-item>
+
+      </div>
+      
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { CategoryPage } from '../modals/category/category.page';
 import { NotePage } from '../modals/notes/note/note.page';
-import { Category } from '../models/category.model';
+import { Categories } from '../models/categories.model';
+import { Files } from '../models/file.model';
 import { Notes } from '../models/notes.model';
 import { CategoriesService } from '../services/categories.service';
 import { FileUploadService } from '../services/file-upload.service';
@@ -17,12 +19,16 @@ import { NotesService } from '../services/notes.service';
 
 export class Tab1Page {
 
-  searchTerm: string;
+  searchTerm: any;
   notes: Notes[];
-  files: File[];
-  categories: Category[];
+  files: Files[];
+  categories: Categories[];
 
   list: boolean;
+
+  z: boolean;
+
+  fileName = '';
 
   colorPalette: Array<any> = [
     '#D99274',
@@ -41,21 +47,25 @@ export class Tab1Page {
     public modalController: ModalController,
     public alertController: AlertController,
     private filesService: FileUploadService,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
 
     this.notesService.getNotes().subscribe((data: Notes[]) => {
       this.notes = data;
+      console.log(data);
     });
 
-    this.filesService.getFiles().subscribe((data: File[]) => {
+    this.filesService.getFiles().subscribe((data: Files[]) => {
       this.files = data;
     });
 
-    this.categoriesService.getCategories().subscribe((data: Category[]) => {
+    this.categoriesService.getCategories().subscribe((data: Categories[]) => {
       this.categories = data;
+      console.log(data);
+
     });
   }
 
@@ -79,12 +89,9 @@ export class Tab1Page {
           id: 'confirm-button',
           handler: () => {
             this.notesService.deleteNote(note.id)
-              .subscribe(
-                (response) => console.log(response),
-                error => {
-                  console.error(error);
-
-                });
+            .subscribe(() => {
+              this.notes = this.notes.filter(notes => notes.id != note.id);
+            });
           }
         }
       ]
@@ -130,9 +137,23 @@ export class Tab1Page {
   async addCategory() {
     const modal = await this.modalController.create({
       component: CategoryPage,
-      breakpoints: [0, 0.3, 0.5, 0.8],
-      initialBreakpoint: 0.3
+      /*breakpoints: [0, 0.3, 0.5, 0.8],
+      initialBreakpoint: 0.3*/
     });
     return await modal.present();
   }
+
+  /*async openCategory(category) {
+
+    const modal = await this.modalController.create({
+      component: CategoryPage,
+      componentProps: {
+        'id': category.id,
+        'title': category.title,
+      }
+    });
+    return await modal.present();
+
+  }*/
+
 }

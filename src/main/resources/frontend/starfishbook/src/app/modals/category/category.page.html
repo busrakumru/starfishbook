@@ -8,6 +8,9 @@
 
     <input placeholder="Titel" type="text" formControlName="title"/>
 
+    
+
+
     <div class="buttons">
       <ion-button type="submit">OK</ion-button>
       <ion-button (click)="cancel()" fill="clear" style="border: 0.5px solid rgba(0, 0, 0, 0.07);
@@ -17,6 +20,16 @@
 
 
   </form>
+
+
+  <div *ngFor="let c of categories" style="display:flex">
+    <input value="{{c.title}}"/>
+    <button (click)="delete(c.id)"><i class="material-icons">clear</i></button>
+  </div>
+
+
+  
+ 
 
 
 </ion-content>

@@ -37,6 +37,7 @@ $app-theme: mat.define-light-theme((
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+
 :root {
 
   --ion-card-background: var(#d7d56d);
@@ -58,7 +59,7 @@ $app-theme: mat.define-light-theme((
   --ion-color-secondary-tint: #50c8ff;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary: #092C5E;
   --ion-color-tertiary-rgb: 82, 96, 255;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
@@ -98,7 +99,7 @@ $app-theme: mat.define-light-theme((
   --ion-color-dark-tint: #383a3e;
 
   /** medium **/
-  --ion-color-medium: #92949c;
+  --ion-color-medium: #c3c4c8;
   --ion-color-medium-rgb: 146, 148, 156;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
@@ -115,28 +116,28 @@ $app-theme: mat.define-light-theme((
 
 }
 
-@media (prefers-color-scheme: dark) {
+//@media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
    * -------------------------------------------
    */
 
-  body {
-    --ion-color-primary: #428cff;
+  body.dark{
+    --ion-color-primary: #EB8E71;;
     --ion-color-primary-rgb: 66,140,255;
-    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast: #456086;
     --ion-color-primary-contrast-rgb: 255,255,255;
     --ion-color-primary-shade: #3a7be0;
     --ion-color-primary-tint: #5598ff;
 
-    --ion-color-secondary: #50c8ff;
+    --ion-color-secondary: #456086;
     --ion-color-secondary-rgb: 80,200,255;
-    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast: #092C5E;
     --ion-color-secondary-contrast-rgb: 255,255,255;
     --ion-color-secondary-shade: #46b0e0;
     --ion-color-secondary-tint: #62ceff;
 
-    --ion-color-tertiary: #6a64ff;
+    --ion-color-tertiary: #ffffff;
     --ion-color-tertiary-rgb: 106,100,255;
     --ion-color-tertiary-contrast: #ffffff;
     --ion-color-tertiary-contrast-rgb: 255,255,255;
@@ -191,21 +192,21 @@ $app-theme: mat.define-light-theme((
    * -------------------------------------------
    */
 
-  .ios body {
-    --ion-background-color: #000000;
+  .ios body.dark  {
+    --ion-background-color: #092C5E;
     --ion-background-color-rgb: 0,0,0;
 
     --ion-text-color: #ffffff;
     --ion-text-color-rgb: 255,255,255;
 
     --ion-color-step-50: #0d0d0d;
-    --ion-color-step-100: #1a1a1a;
+    --ion-color-step-100: #092C5E;
     --ion-color-step-150: #262626;
     --ion-color-step-200: #333333;
     --ion-color-step-250: #404040;
     --ion-color-step-300: #4d4d4d;
     --ion-color-step-350: #595959;
-    --ion-color-step-400: #666666;
+    --ion-color-step-400: #ffffff;
     --ion-color-step-450: #737373;
     --ion-color-step-500: #808080;
     --ion-color-step-550: #8c8c8c;
@@ -235,8 +236,8 @@ $app-theme: mat.define-light-theme((
    * -------------------------------------------
    */
 
-  .md body {
-    --ion-background-color: #121212;
+  .md body.dark  {
+    --ion-background-color: #092C5E;
     --ion-background-color-rgb: 18,18,18;
 
     --ion-text-color: #ffffff;
@@ -254,8 +255,8 @@ $app-theme: mat.define-light-theme((
     --ion-color-step-400: #717171;
     --ion-color-step-450: #7d7d7d;
     --ion-color-step-500: #898989;
-    --ion-color-step-550: #949494;
-    --ion-color-step-600: #a0a0a0;
+    --ion-color-step-550: #ffffff;
+    --ion-color-step-600: #ffffff;
     --ion-color-step-650: #acacac;
     --ion-color-step-700: #b8b8b8;
     --ion-color-step-750: #c4c4c4;
@@ -274,4 +275,4 @@ $app-theme: mat.define-light-theme((
   }
 
   //$card-md-background-color: #DACEE7;
-}
+//}

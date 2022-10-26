@@ -5,7 +5,9 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "notes")
@@ -28,10 +30,12 @@ public class Notes {
     @OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
     private Set<FileDB> files= new HashSet<>();
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Categories categories;
+
 
     public Notes() {
     }
@@ -102,4 +106,12 @@ public class Notes {
             file.setNotes(this);
         }
     }
+
+    /*public Categories getCategories() {
+        return categories;
+    }
+  
+    public void setCategories(Categories categories) {
+        this.categories = categories;
+    }*/
 }
