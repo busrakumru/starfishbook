@@ -30,14 +30,14 @@ public class Categories {
     @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     private Set<Notes> notes = new HashSet<>();
 
+    public Categories() {
+    }
     
     public Categories(String title, Set<Notes> notes) {
         this.title = title;
         this.notes = notes;
-
-    public Categories() {
     }
-
+   
     public Long getId() {
         return id;
     }

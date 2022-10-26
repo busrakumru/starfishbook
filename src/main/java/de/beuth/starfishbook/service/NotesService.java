@@ -21,14 +21,14 @@ public class NotesService {
         return notesRepository.findById(id);
     }
 
-    public Long save(NotesRequest request) {
+    public Notes save(NotesRequest request) {
         Notes note = new Notes();
         note.setTitle(request.getTitle());
         note.setText(request.getText());
         note.setColor(request.getColor());
         note.setFiles(request.getFiles());
 
-        return notesRepository.save(note).getId();
+        return notesRepository.save(note);
     }
 
     public Notes update(Long id, Notes request) {
