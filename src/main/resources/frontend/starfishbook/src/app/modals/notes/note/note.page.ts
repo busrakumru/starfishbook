@@ -144,13 +144,13 @@ export class NotePage implements OnInit {
     } else {
       this.createNewNote();
     }
-    this.reloadService.reload();
+    //this.reloadService.reload();
     this.modalController.dismiss();
   }
 
   createNewNote() {
     
-    this.notesService.createNote(this.newNote.value)
+    this.notesService.createNotes(this.newNote.value)
       .subscribe(
         (response) => console.log(response),
         error => {
@@ -182,7 +182,8 @@ export class NotePage implements OnInit {
       }
       this.selectedFiles = undefined;
     }
-    this.notesService.updateNote(this.id, this.newNote.value).subscribe(
+
+    this.notesService.updateNotes(this.id, this.newNote.value).subscribe(
       //(response) => console.log(response),
       error => {
         console.error(error);

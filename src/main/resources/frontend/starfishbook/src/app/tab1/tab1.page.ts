@@ -88,7 +88,7 @@ export class Tab1Page {
           text: 'Löschen',
           id: 'confirm-button',
           handler: () => {
-            this.notesService.deleteNote(note.id)
+            this.notesService.deleteNotes(note.id)
             .subscribe(() => {
               this.notes = this.notes.filter(notes => notes.id != note.id);
             });

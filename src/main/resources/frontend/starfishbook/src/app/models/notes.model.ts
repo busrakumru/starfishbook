@@ -6,5 +6,5 @@ export class Notes {
     text: string;
     color: string;
     files: Array<any>;
-    //categories: string;
+    categories: Categories;
 }
