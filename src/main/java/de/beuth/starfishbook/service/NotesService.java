@@ -27,6 +27,7 @@ public class NotesService {
         note.setText(request.getText());
         note.setColor(request.getColor());
         note.setFiles(request.getFiles());
+        note.setCategories(request.getCategories());
 
         return notesRepository.save(note);
     }
