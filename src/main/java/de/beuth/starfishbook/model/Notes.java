@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Entity
@@ -106,7 +107,6 @@ public class Notes {
             file.setNotes(this);
         }
     }
-
     /*public Categories getCategories() {
         return categories;
     }

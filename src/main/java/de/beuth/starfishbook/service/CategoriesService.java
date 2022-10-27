@@ -18,7 +18,7 @@ public class CategoriesService {
     }
 
 
-    public Categories save(Categories request) {
+    public Categories addCategory(Categories request) {
         Categories category = new Categories();
         category.setTitle(request.getTitle());
         category.setNotes(request.getNotes());

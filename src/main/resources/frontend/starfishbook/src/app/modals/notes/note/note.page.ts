@@ -80,11 +80,35 @@ export class NotePage implements OnInit {
 
     })
     this.newFile();*/
+
+   
+
+
+
   }
+
+  newNote: FormGroup= new FormGroup({
+    title: new FormControl(''),
+    text: new FormControl(''),
+    color: new FormControl(''),
+    files: new FormArray([
+      new FormGroup({
+        name: new FormControl('')
+      })]),
+    categories: this.fb.array([])
+
+    //files: new FormArray([this.newFile])
+  })
 
   get files() {
     return this.newNote.get('files') as FormArray;
   }
+
+  get categories() {
+    return this.newNote.get('categories') as FormArray;
+  }
+
+  
 
   /*newFile(){
 
@@ -112,18 +136,7 @@ export class NotePage implements OnInit {
   })*/
   ca = '';
 
-  newNote: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    text: new FormControl(''),
-    color: new FormControl(''),
-    files: new FormArray([
-      new FormGroup({
-        name: new FormControl('')
-      })]),
-    categories: new FormControl(this.ca)
-
-    //files: new FormArray([this.newFile])
-  })
+  
 
   
 
@@ -137,28 +150,7 @@ export class NotePage implements OnInit {
 
   
 
-  saveNote(): void {
-    if (this.id) {
-      this.updateNote();
-
-    } else {
-      this.createNewNote();
-    }
-    //this.reloadService.reload();
-    this.modalController.dismiss();
-  }
-
-  createNewNote() {
-    
-    this.notesService.createNotes(this.newNote.value)
-      .subscribe(
-        (response) => console.log(response),
-        error => {
-          console.error(error);
-        });
-    this.modalController.dismiss();
-  }
-
+  
   updateNote() {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
@@ -268,10 +260,46 @@ export class NotePage implements OnInit {
       this.ca = ctgry;
       console.log(this.ca);
 
+      this.addProduct(ctgry);
+      console.log(this.newNote.value);
+
+
       
     })
 
     return await modal.present();
 
   }
+
+  addProduct(a:number) {
+
+    this.categories.push(this.fb.group({
+      id: [a]
+    }));  
+    console.log("HALLOOO I GOT IT" , a);
+  }
+
+  saveNote(): void {
+    if (this.id) {
+      this.updateNote();
+
+    } else {
+      this.createNewNote();
+    }
+    //this.reloadService.reload();
+    this.modalController.dismiss();
+  }
+
+  createNewNote() {
+    
+    this.notesService.createNotes(this.newNote.value)
+      .subscribe(
+        (response) => console.log(response),
+        error => {
+          console.error(error);
+        });
+    this.modalController.dismiss();
+  }
+
+  
 }

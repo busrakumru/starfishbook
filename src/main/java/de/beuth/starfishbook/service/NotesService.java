@@ -44,7 +44,7 @@ public class NotesService {
     }
 
     public List<Notes> getAll() {
-        return notesRepository.findAll();
+    return notesRepository.findAll();
     }
 
     public  Notes findNotesById(Long id){
@@ -54,6 +54,16 @@ public class NotesService {
   public Boolean delete(Long id) {
     this.notesRepository.deleteById(id);
     return this.notesRepository.existsById(id);
+}
+
+public Notes addNotes(Notes request) {
+Notes note = new Notes();
+note.setTitle(request.getTitle());
+note.setText(request.getText());
+note.setColor(request.getColor());
+note.setFiles(request.getFiles());
+note.setCategories(request.getCategories());
+return this.notesRepository.save(request);
 }
   
 }

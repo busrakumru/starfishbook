@@ -26,6 +26,7 @@ export class CategoryListPage implements OnInit {
   }
 
   passId(c) {
+    
     console.log(c.id);
 
     this.modalController.dismiss({

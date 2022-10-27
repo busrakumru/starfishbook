@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import de.beuth.starfishbook.exception.NoteNotFoundException;
+import de.beuth.starfishbook.model.Categories;
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.FileDBRepository;
 import de.beuth.starfishbook.repository.NotesRepository;
@@ -52,8 +56,12 @@ public class NotesController {
 
   @GetMapping("notes")
   public List<Notes> getNotes() {
-    return this.notesService.getAll();
+  return this.notesService.getAll();
+
+
   }
+
+
 
   @GetMapping("notes/{id}")
   public Notes getNotesById(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
@@ -61,7 +69,7 @@ public class NotesController {
         .orElseThrow(() -> new NoteNotFoundException(noteId));
   }
 
-  @PostMapping("notes")
+  /*@PostMapping("notes")
   public ResponseEntity<Notes> createNote( @RequestBody Notes notes)
       throws IOException {
     Notes savedNotes = notesRepository.save(notes);
@@ -69,6 +77,11 @@ public class NotesController {
         .buildAndExpand(savedNotes.getId()).toUri();
 
     return ResponseEntity.created(location).body(savedNotes);
+  }*/
+
+  @PostMapping("notes")
+  public Notes addNotes(@RequestBody Notes notes) {
+      return this.notesService.addNotes(notes);
   }
 
   @PutMapping("notes/{id}")
