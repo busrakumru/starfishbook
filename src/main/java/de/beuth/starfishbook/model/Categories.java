@@ -27,15 +27,15 @@ public class Categories {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
-    private Set<Notes> notes = new HashSet<>();
+    /*@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    private Set<Notes> notes = new HashSet<>();*/
 
     public Categories() {
     }
     
     public Categories(String title, Set<Notes> notes) {
         this.title = title;
-        this.notes = notes;
+        //this.notes = notes;
     }
    
     public Long getId() {
@@ -55,7 +55,7 @@ public class Categories {
     }
 
 
-    public Set<Notes> getNotes() {
+    /*public Set<Notes> getNotes() {
         return notes;
     }
 
@@ -65,7 +65,7 @@ public class Categories {
         for(Notes note : notes) {
             note.setCategories(this);
         }
-    }
+    }*/
 
 
 }

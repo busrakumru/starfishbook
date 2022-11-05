@@ -32,10 +32,10 @@ public class Notes {
     private Set<FileDB> files= new HashSet<>();
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "categories_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Categories categories;
+    private Categories categories;*/
 
 
     public Notes() {
@@ -88,13 +88,13 @@ public class Notes {
         this.files = files;
     }*/
 
-    public Categories getCategories() {
+    /*public Categories getCategories() {
         return categories;
     }
 
     public void setCategories(Categories categories) {
         this.categories = categories;
-    }
+    }*/
 
     public Set<FileDB> getFiles() {
         return files;

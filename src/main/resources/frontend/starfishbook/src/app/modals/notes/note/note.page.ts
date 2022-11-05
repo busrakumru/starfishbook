@@ -95,7 +95,7 @@ export class NotePage implements OnInit {
       new FormGroup({
         name: new FormControl('')
       })]),
-    categories: this.fb.array([])
+    //categories: this.fb.array([])
 
     //files: new FormArray([this.newFile])
   })
@@ -260,7 +260,7 @@ export class NotePage implements OnInit {
       this.ca = ctgry;
       console.log(this.ca);
 
-      this.addProduct(ctgry);
+      //this.addProduct(ctgry);
       console.log(this.newNote.value);
 
 
