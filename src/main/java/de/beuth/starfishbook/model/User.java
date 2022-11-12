@@ -18,4 +18,9 @@ public class User {
     @JsonIgnore
     private String password;
 
+    @Column(name = "verification_code")
+    private String verificationCode;
+
+    private boolean enabled;
+
 }
