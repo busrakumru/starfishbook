@@ -9,13 +9,22 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name= "user_id")
+    private Long userid;
+
+    
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String emailId;
 
     @Column(unique = true)
     private String email;
 
-    @JsonIgnore
+    //@JsonIgnore
     private String password;
+
+    private boolean isEnabled;
+
+
 
 }
