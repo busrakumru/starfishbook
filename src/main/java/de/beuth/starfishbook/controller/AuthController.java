@@ -59,17 +59,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "/register")
-    public String processRegister(User user, HttpServletRequest request)
-            throws UnsupportedEncodingException, MessagingException {
-        service.register(user, getSiteURL(request));       
-        return "register_success";
-    }
-     
-    private String getSiteURL(HttpServletRequest request) {
-        String siteURL = request.getRequestURL().toString();
-        return siteURL.replace(request.getServletPath(), "");
-    }  
-    /*public ResponseEntity<User> register(@RequestBody AuthRequest authRequest,HttpServletRequest request ) {
+    public ResponseEntity<User> register(@RequestBody AuthRequest authRequest,HttpServletRequest request ) throws UnsupportedEncodingException, MessagingException {
         Optional<User> userOptional = userRepository.findUserByEmail(authRequest.getEmail());
 
         if (userOptional.isPresent()) {
@@ -81,11 +71,22 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(authRequest.getPassword()));
         User created = userRepository.save(user);
 
-        service.register(user, getSiteURL(request));
+        service.register(created, getSiteURL(request));
 
 
-        return ResponseEntity.ok(created);
+        return ResponseEntity.ok().build();
+    }/* 
+    public String processRegister(User user, HttpServletRequest request)
+            throws UnsupportedEncodingException, MessagingException {
+        service.register(user, getSiteURL(request));       
+        return "register_success";
     }*/
+     
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
+    }  
+    
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {

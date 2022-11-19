@@ -9,4 +9,8 @@ public class AuthRequest {
 
     private String password;
 
+    private String verificationCode;
+
+    private boolean enabled;
+
 }
