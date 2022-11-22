@@ -29,10 +29,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
-@RequestMapping("auth/")
+@RequestMapping("/auth/")
 public class AuthController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class AuthController {
     // private UserRepository userRepository;
 
     @Autowired
-    //private UserRepository userRepository;
+    // private UserRepository userRepository;
     private UserAndCTRepository userctRepo;
 
     @Autowired
@@ -62,7 +63,7 @@ public class AuthController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping(value = "register")
     public ResponseEntity<User> register(@RequestBody User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
 
@@ -73,6 +74,8 @@ public class AuthController {
             // user = new User();
             // user.setEmail(authRequest.getEmail());
             // user.setPassword(passwordEncoder.encode(user.getPassword()));
+            //user.setEmailId(user.getEmail());
+            user.setEnabled(true);
             User c = userRepository.save(user);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
@@ -82,10 +85,10 @@ public class AuthController {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             mailMessage.setTo(user.getEmail());
-            mailMessage.setSubject("ConfirmationMail");
+            mailMessage.setSubject("Bitte bestätigen Sie ihre Anmeldung");
             mailMessage.setFrom("kkumrubusra@gmail.com");
-            mailMessage.setText("please verify yourself by clicking the following link:"
-                    + "http://localhost:8080/confirm-account?token=" +
+            mailMessage.setText("Bitte verifizieren Sie sich, indem sie auf den Link klicken! "
+                    + "http://localhost:8100/confirm-account?token=" +
                     confirmationToken.getConfirmationToken());
 
             emailService.sendEmail(mailMessage);
@@ -96,22 +99,53 @@ public class AuthController {
 
     }
 
-    @RequestMapping(value = "confirm-account", method = { RequestMethod.GET,
-            RequestMethod.POST })
-    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
+    @RequestMapping(value = "/confirm-account", method = { RequestMethod.GET, RequestMethod.POST })
+    public ResponseEntity<ConfirmationToken> confirmUserAccount( @RequestParam("token") String confirmationToken) {
+       
         ConfirmationToken token = confirmationRepository.findByConfirmationToken(confirmationToken);
-
         if (token != null) {
-            User user = userctRepo.findByEmailIdIgnoreCase(token.getUser().getEmailId());
-            user.setEnabled(true);
-            userRepository.save(user);
-            modelAndView.setViewName("accountVerified");
+
+            System.out.println("IF SCHLEIFE!! TOKEN DRINNE");
+            // User user = userctRepo.findByEmailIdIgnoreCase(token.getUser().getEmail());
+            // user.setEnabled(false);
+            // userRepository.save(user);
+        }
+        System.out.println("IF - FUNKTIONIER NICHT ");
+        return ResponseEntity.ok().build();
+    }
+
+    /*
+     * @RequestMapping(value = "confirm-account", method = { RequestMethod.GET,
+     * RequestMethod.POST })
+     * public User confirmUserAccount(User user, @RequestParam("token") String
+     * confirmationToken) {
+     * ConfirmationToken token =
+     * confirmationRepository.findByConfirmationToken(confirmationToken);
+     * 
+     * if (token != null) {
+     * userctRepo.findByEmailIdIgnoreCase(token.getUser().getEmailId());
+     * user.setEmailId("NEU");
+     * user.setEnabled(true);
+     * userRepository.save(user);
+     * }
+     * return user;
+     * }
+     */
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+
+        if (user.isEnabled() == true) {
+
+            user.setEmailId("hallo");
         } else {
-            modelAndView.addObject("message", "The link is invalid or broken!");
-            modelAndView.setViewName("error");
+
+            user.setEmailId("nope");
+
         }
 
-        return modelAndView;
+        userRepository.save(user);
+        return ResponseEntity.ok().build();
     }
 
     /*

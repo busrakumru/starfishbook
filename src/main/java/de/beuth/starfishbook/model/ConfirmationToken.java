@@ -18,14 +18,13 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name="confirmationToken")
 public class ConfirmationToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="token_id")
-    private long tokenid;
+    private Long tokenid;
 
     @Column(name="confirmation_token")
     private String confirmationToken;
@@ -45,6 +44,38 @@ public class ConfirmationToken {
         createdDate = new Date();
         confirmationToken = UUID.randomUUID().toString();
     }
+
+    public Long getTokenid() {
+		return tokenid;
+	}
+
+	public void setTokenid(Long tokenid) {
+		this.tokenid = tokenid;
+	}
+
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
     
