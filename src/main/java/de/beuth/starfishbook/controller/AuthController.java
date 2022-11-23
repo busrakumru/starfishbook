@@ -3,7 +3,6 @@ package de.beuth.starfishbook.controller;
 import de.beuth.starfishbook.model.ConfirmationToken;
 import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.ConfirmationTokenRepository;
-import de.beuth.starfishbook.repository.UserAndCTRepository;
 import de.beuth.starfishbook.repository.UserRepository;
 import de.beuth.starfishbook.request.AuthRequest;
 import de.beuth.starfishbook.response.JwtResponse;
@@ -40,9 +39,9 @@ public class AuthController {
     private UserRepository userRepository;
     // private UserRepository userRepository;
 
-    @Autowired
+    //@Autowired
     // private UserRepository userRepository;
-    private UserAndCTRepository userctRepo;
+    //private UserAndCTRepository userctRepo;
 
     @Autowired
     private ConfirmationTokenRepository confirmationRepository;
@@ -56,6 +55,11 @@ public class AuthController {
 
     private JwtTokenProvider jwtTokenProvider;
 
+    @GetMapping("users")
+     public List<User> getUsers() {
+     return this.userRepository.findAll();
+     }
+
     @GetMapping(value = "register")
     public ModelAndView displayRegistration(ModelAndView modelAndView, User user) {
         modelAndView.addObject("user", user);
@@ -65,33 +69,37 @@ public class AuthController {
 
     @PostMapping(value = "register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
+       User existingUser = userRepository.findUserByEmail(user.getEmail());
 
-        if (userOptional.isPresent()) {
+        if (existingUser != null) {
             return ResponseEntity.badRequest().build();
+        
         } else {
+//passwort encode hinzufügen
 
             // user = new User();
             // user.setEmail(authRequest.getEmail());
             // user.setPassword(passwordEncoder.encode(user.getPassword()));
             //user.setEmailId(user.getEmail());
-            user.setEnabled(true);
+            //user.setEnabled(true);
             User c = userRepository.save(user);
 
+            //token
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
-
             confirmationRepository.save(confirmationToken);
 
+            //sendeverification url
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-
             mailMessage.setTo(user.getEmail());
             mailMessage.setSubject("Bitte bestätigen Sie ihre Anmeldung");
-            mailMessage.setFrom("kkumrubusra@gmail.com");
+            //mailMessage.setFrom("kkumrubusra@gmail.com");
             mailMessage.setText("Bitte verifizieren Sie sich, indem sie auf den Link klicken! "
-                    + "http://localhost:8100/confirm-account?token=" +
+                    + "http://localhost:8443/auth/confirm?token=" +
                     confirmationToken.getConfirmationToken());
 
             emailService.sendEmail(mailMessage);
+
+            System.out.println("LINK WURDE VERSENDET");
 
             return ResponseEntity.ok(c);
 
@@ -99,21 +107,59 @@ public class AuthController {
 
     }
 
-    @RequestMapping(value = "/confirm-account", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResponseEntity<ConfirmationToken> confirmUserAccount( @RequestParam("token") String confirmationToken) {
-       
+    @RequestMapping(value = "confirm", method = { RequestMethod.GET, RequestMethod.POST })
+    public ModelAndView confirmUserAccount(ModelAndView modelAndView ,@RequestParam("token") String confirmationToken) {
+
         ConfirmationToken token = confirmationRepository.findByConfirmationToken(confirmationToken);
-        if (token != null) {
+        User user = userRepository.findUserByEmail(token.getUser().getEmail());
 
-            System.out.println("IF SCHLEIFE!! TOKEN DRINNE");
-            // User user = userctRepo.findByEmailIdIgnoreCase(token.getUser().getEmail());
-            // user.setEnabled(false);
-            // userRepository.save(user);
+                System.out.println("KEINE SCHLEIFE");
+
+
+        if (user == null || user.isEnabled()) {
+            System.out.println("IF - FUNKTIONIER NICHT ");
+
+        } else {
+            user.setEnabled(true);
+            userRepository.save(user);
+
+                    System.out.println("IF SCHLEIFE!! TOKEN DRINNE");
+
+
+                    modelAndView.setViewName("accountVerified");
         }
-        System.out.println("IF - FUNKTIONIER NICHT ");
-        return ResponseEntity.ok().build();
-    }
 
+        return modelAndView;
+
+    
+    // public ResponseEntity<ConfirmationToken> confirmUserAccount(@RequestParam("token") String confirmationToken) {
+
+    //     ConfirmationToken token = confirmationRepository.findByConfirmationToken(confirmationToken);
+    //     User user = userRepository.findUserByEmail(token.getUser().getEmail());
+
+    //             System.out.println("KEINE SCHLEIFE");
+
+
+    //     if (user == null || user.isEnabled()) {
+    //         System.out.println("IF - FUNKTIONIER NICHT ");
+    //         return ResponseEntity.badRequest().build();
+
+    //     } else {
+    //         user.setEnabled(true);
+    //         userRepository.save(user);
+
+    //                 System.out.println("IF SCHLEIFE!! TOKEN DRINNE");
+
+
+    //                 return ResponseEntity.ok().build();
+
+    //     }
+
+
+        // User user = userctRepo.findByEmailIdIgnoreCase(token.getUser().getEmail());
+        // user.setEnabled(false);
+        // userRepository.save(user);
+    }
     /*
      * @RequestMapping(value = "confirm-account", method = { RequestMethod.GET,
      * RequestMethod.POST })
@@ -130,7 +176,7 @@ public class AuthController {
      * }
      * return user;
      * }
-     */
+     
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody User user) {
@@ -146,7 +192,7 @@ public class AuthController {
 
         userRepository.save(user);
         return ResponseEntity.ok().build();
-    }
+    }*/
 
     /*
      * @PostMapping(value = "register")

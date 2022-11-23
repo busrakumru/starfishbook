@@ -14,7 +14,7 @@ public class User {
 
     
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String emailId;
+    //private String emailId;
 
     @Column(unique = true)
     private String email;
@@ -22,16 +22,18 @@ public class User {
     //@JsonIgnore
     private String password;
 
-    private boolean isEnabled;
+    @Column(name="enabled")
+    private boolean enabled;
 
 
 
-    public User(Long userid, String email, String emailId, String password, boolean isEnabled) {
+    public User(Long userid, String email, String password) {
        this. userid = userid;
        this.email = email;
-       this.emailId = emailId;
+       //this.emailId = emailId;
        this.password = password;
-       this.isEnabled = isEnabled;
+       //this.isEnabled = isEnabled;
+       this.enabled = false;
 
 
     }
@@ -39,21 +41,25 @@ public class User {
     public User() {
     }
 
-    public String getEmailId(){
-        return emailId;
-    }
+    // public String getEmailId(){
+    //     return emailId;
+    // }
 
-    public void setEmailId(String emailId){
-        this.emailId = emailId;
-    }
+    // public void setEmailId(String emailId){
+    //     this.emailId = emailId;
+    // }
 
     public boolean isEnabled() {
-		return isEnabled;
+		return enabled;
 	}
 
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
+
+  public Boolean getEnabled(){
+    return enabled;
+  }
 
     public String getPassword() {
 		return password;
