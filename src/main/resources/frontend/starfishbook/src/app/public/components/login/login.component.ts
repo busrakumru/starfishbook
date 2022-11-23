@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/services/notification.service';
 
 import { AuthService } from '../../services/auth-service/auth.service';
 import { TokenService } from '../../services/token/token.service';
@@ -22,7 +23,9 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
   });
 
-  constructor(private authService: AuthService, private router: Router, private tokenservice: TokenService) {}
+  constructor(private authService: AuthService, private router: Router, private tokenservice: TokenService,
+    private nofification: NotificationService
+    ) { }
 
   ngOnInit(): void {
     if (this.tokenservice.getToken()) {
@@ -47,6 +50,7 @@ export class LoginComponent implements OnInit {
 
         },
           err => {
+            this.nofification.showError("Dieser Nutzerkonto existiert nicht! Bitte geben Sie gültige Daten ein.");
             this.errorMessage = err.error.message;
             this.isLoginFailed = true;
           })

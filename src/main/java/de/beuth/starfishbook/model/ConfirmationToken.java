@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.Data;
-
 @Entity
 @Table(name="confirmationToken")
 public class ConfirmationToken {
@@ -24,7 +22,7 @@ public class ConfirmationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="token_id")
-    private Long tokenid;
+	public Long tokenid;
 
     @Column(name="confirmation_token")
     private String confirmationToken;
