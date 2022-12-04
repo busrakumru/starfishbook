@@ -1,7 +1,7 @@
 package de.beuth.starfishbook.security;
 
 import de.beuth.starfishbook.model.User;
-import de.beuth.starfishbook.repository.UserRepository;
+import de.beuth.starfishbook.repository.AuthCRepository;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,15 +13,15 @@ import java.util.Collections;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private AuthCRepository authRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(AuthCRepository authRepository) {
+        this.authRepository = authRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(username);
+        User user = authRepository.findUserByEmail(username);
                 //.orElseThrow(() -> new UsernameNotFoundException("Dieser Benutzer konnte nicht gefunden werden."));
 
         return new org.springframework.security.core.userdetails.User(

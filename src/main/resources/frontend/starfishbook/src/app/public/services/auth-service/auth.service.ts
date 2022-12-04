@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -15,7 +16,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private tokenStorageService: TokenService) { }
+  constructor(private http: HttpClient, private tokenStorageService: TokenService, private router: Router ) { }
 
   private baseUrl = 'https://localhost:8443/auth';
 
@@ -33,7 +34,7 @@ export class AuthService {
 
   logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    this.router.navigate(['../../login']);
   }
 
   handleError(error: HttpErrorResponse) {

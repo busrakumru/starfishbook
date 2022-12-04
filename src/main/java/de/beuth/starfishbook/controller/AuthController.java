@@ -4,10 +4,12 @@ import de.beuth.starfishbook.model.ConfirmationToken;
 import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.ConfirmationTokenRepository;
 import de.beuth.starfishbook.repository.UserRepository;
+import de.beuth.starfishbook.repository.AuthCRepository;
 import de.beuth.starfishbook.response.JwtResponse;
 import de.beuth.starfishbook.security.JwtTokenProvider;
 import de.beuth.starfishbook.service.ConfirmationTokenService;
 import de.beuth.starfishbook.service.EmailService;
+import de.beuth.starfishbook.service.UserService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -36,7 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthCRepository authRepository;
 
     @Autowired
     private ConfirmationTokenRepository confirmationRepository;
@@ -47,15 +49,18 @@ public class AuthController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private UserService userService;
+
     private PasswordEncoder passwordEncoder;
 
     private AuthenticationManager authenticationManager;
 
     private JwtTokenProvider jwtTokenProvider;
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder,
+    public AuthController(AuthCRepository authRepository, PasswordEncoder passwordEncoder,
             AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
-        this.userRepository = userRepository;
+        this.authRepository = authRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
@@ -63,19 +68,19 @@ public class AuthController {
 
     @GetMapping("users")
     public List<User> getUsers() {
-        return this.userRepository.findAll();
+        return this.authRepository.findAll();
     }
 
     @PostMapping(value = "register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        User existingUser = userRepository.findUserByEmail(user.getEmail());
+        User existingUser = authRepository.findUserByEmail(user.getEmail());
 
         if (existingUser != null) {
             return ResponseEntity.badRequest().build();
 
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User c = userRepository.save(user);
+            User c = authRepository.save(user);
 
             // token
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
@@ -100,14 +105,14 @@ public class AuthController {
     public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token") String confirmationToken) {
 
         ConfirmationToken token = confirmationRepository.findByConfirmationToken(confirmationToken);
-        User user = userRepository.findUserByEmail(token.getUser().getEmail());
+        User user = authRepository.findUserByEmail(token.getUser().getEmail());
 
         if (user == null || user.isEnabled()) {
             modelAndView.setViewName("error");
 
         } else {
             user.setEnabled(true);
-            userRepository.save(user);
+            authRepository.save(user);
             this.confirmationService.delete(token.tokenid);
 
             modelAndView.setViewName("accountVerified");
@@ -125,7 +130,7 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody User user) {
 
-        User existingUser = userRepository.findUserByEmail(user.getEmail());
+        User existingUser = authRepository.findUserByEmail(user.getEmail());
 
         if (existingUser.isEnabled() == true) {
 
@@ -142,4 +147,11 @@ public class AuthController {
         }
 
     }
+
+    @DeleteMapping("/users/{id}")
+    public Boolean deleteUser(@PathVariable Long id) {
+        return this.userService.delete(id);
+    }
+
+
 }

@@ -15,7 +15,6 @@ export class TokenService {
 
   signOut(): void {
     window.sessionStorage.clear();
-    this.router.navigate(['log-in']);
   }
 
   public saveToken(token: string): void {
