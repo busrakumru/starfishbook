@@ -27,7 +27,7 @@ public class NotesService {
         note.setText(request.getText());
         note.setColor(request.getColor());
         note.setFiles(request.getFiles());
-        note.setCategories(request.getCategories());
+        //note.setCategories(request.getCategories());
 
         return notesRepository.save(note);
     }
@@ -62,7 +62,7 @@ note.setTitle(request.getTitle());
 note.setText(request.getText());
 note.setColor(request.getColor());
 note.setFiles(request.getFiles());
-note.setCategories(request.getCategories());
+//note.setCategories(request.getCategories());
 return this.notesRepository.save(request);
 }
   

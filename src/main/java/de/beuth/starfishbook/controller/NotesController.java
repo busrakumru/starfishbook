@@ -69,7 +69,7 @@ public class NotesController {
         .orElseThrow(() -> new NoteNotFoundException(noteId));
   }
 
-  /*@PostMapping("notes")
+  @PostMapping("notes")
   public ResponseEntity<Notes> createNote( @RequestBody Notes notes)
       throws IOException {
     Notes savedNotes = notesRepository.save(notes);
@@ -77,12 +77,12 @@ public class NotesController {
         .buildAndExpand(savedNotes.getId()).toUri();
 
     return ResponseEntity.created(location).body(savedNotes);
-  }*/
+  }
 
-  @PostMapping("notes")
+  /*@PostMapping("notes")
   public Notes addNotes(@RequestBody Notes notes) {
       return this.notesService.addNotes(notes);
-  }
+  }*/
 
   @PutMapping("notes/{id}")
   public Notes updateNote(@PathVariable(value = "id") Long noteId, @RequestBody Notes noteDetails)
