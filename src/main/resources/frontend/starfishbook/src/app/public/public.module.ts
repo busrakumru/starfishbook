@@ -21,7 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ]
 })
 export class PublicModule { }

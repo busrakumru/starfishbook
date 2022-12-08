@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/services/notification.service';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { CustomValidators } from '../../_helpers/custom-validators';
 
@@ -20,7 +22,11 @@ export class RegisterComponent {
     { validators: CustomValidators.passwordsMatching }
   );
 
-  constructor(private authService: AuthService, private router: Router) { }
+
+  constructor(private authService: AuthService,
+    private router: Router,
+    private nofification: NotificationService
+    ) { }
 
   register() {
     if (this.form.valid) {
@@ -30,6 +36,7 @@ export class RegisterComponent {
       }).pipe(
         tap(() => this.router.navigate(['../login']))
       ).subscribe();
+      this.nofification.showSuccess("Super! Dir wurde ein Link zur Verifizierung an deiner E-Mail Adresse zugeschickt. Bitte bestätige es.");
     }
   }
 

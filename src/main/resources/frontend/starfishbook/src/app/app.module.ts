@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { AllMoodsComponent } from './components/all-moods/all-moods.component';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { ProfilmoodComponent } from './components/profilmood/profilmood.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent,AllMoodsComponent],
   entryComponents: [],
@@ -39,7 +40,11 @@ import { ProfilmoodComponent } from './components/profilmood/profilmood.componen
     MatInputModule,
     MatNativeDateModule,
     NgCalendarModule,
-    BrowserAnimationsModule],
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      "positionClass": "toast-bottom-full-width"
+    })
+  ],
     providers: [{ provide: {RouteReuseStrategy, LOCALE_ID} , useValue: 'de', useClass: IonicRouteStrategy }],  
   bootstrap: [AppComponent],
 })
