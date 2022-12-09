@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Todos;
 import de.beuth.starfishbook.repository.TodosRepository;

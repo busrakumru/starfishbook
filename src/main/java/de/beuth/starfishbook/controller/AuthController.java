@@ -3,14 +3,12 @@ package de.beuth.starfishbook.controller;
 import de.beuth.starfishbook.model.ConfirmationToken;
 import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.ConfirmationTokenRepository;
-import de.beuth.starfishbook.repository.UserRepository;
 import de.beuth.starfishbook.repository.AuthCRepository;
 import de.beuth.starfishbook.response.JwtResponse;
 import de.beuth.starfishbook.security.JwtTokenProvider;
 import de.beuth.starfishbook.service.ConfirmationTokenService;
 import de.beuth.starfishbook.service.EmailService;
 import de.beuth.starfishbook.service.UserService;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.AuthenticationManager;

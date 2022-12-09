@@ -3,10 +3,7 @@ package de.beuth.starfishbook.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import de.beuth.starfishbook.model.Todos;
 import de.beuth.starfishbook.model.Todolist;
-import de.beuth.starfishbook.repository.TodosRepository;
 import de.beuth.starfishbook.repository.TodolistRepository;
 
 @Service
@@ -17,12 +14,10 @@ public class TodolistService {
 
     @Autowired
     public final TodosRepository todosRepository;
-    
 
-  
     public TodolistService(TodolistRepository todoListRepository, TodosRepository todosRepository) {
         this.todoListRepository = todoListRepository;
-        this.todosRepository= todosRepository;
+        this.todosRepository = todosRepository;
 
     }
 
@@ -44,29 +39,33 @@ public class TodolistService {
         return this.todoListRepository.save(request);
     }
 
-    /*public Todolist addTodolist(Todolist request) {
+    /*
+     * public Todolist addTodolist(Todolist request) {
+     * Todolist todo = new Todolist();
+     * todo.setText(request.getText());
+     * todo.setFinished(request.isFinished());
+     * todo.setTodos(request.getTodos());
+     * return this.todoListRepository.save(todo);
+     * }
+     */
+
+    public Todolist addTodolist(Todolist request) {
+        /*
+         * Todos todos=
+         * todosRepository.findById(request.getTodos().getId()).orElse(null);
+         * if (null == todos) {
+         * todos = new Todos();
+         * }
+         */
+
+        // todos.setId(request.getTodos().getId());
+        // request.setTodos(todos);
         Todolist todo = new Todolist();
         todo.setText(request.getText());
         todo.setFinished(request.isFinished());
         todo.setTodos(request.getTodos());
-        return this.todoListRepository.save(todo);
-    }*/
-
-    public Todolist addTodolist(Todolist request) {
-       /*  Todos todos= todosRepository.findById(request.getTodos().getId()).orElse(null);
-        if (null == todos) {
-            todos = new Todos();
-        }*/
-        
-       // todos.setId(request.getTodos().getId());
-        //request.setTodos(todos);
-         Todolist todo = new Todolist();
-         todo.setText(request.getText());
-         todo.setFinished(request.isFinished());
-        todo.setTodos(request.getTodos());
         return this.todoListRepository.save(request);
     }
-
 
     public Todolist updateTodo(Long id, Todolist request) {
         Todolist update = todoListRepository.findTodolistById(id);

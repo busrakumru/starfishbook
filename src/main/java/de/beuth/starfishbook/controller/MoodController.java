@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import de.beuth.starfishbook.exception.NoteNotFoundException;
 import de.beuth.starfishbook.model.Mood;
 import de.beuth.starfishbook.service.MoodService;
 

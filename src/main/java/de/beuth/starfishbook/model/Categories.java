@@ -20,7 +20,6 @@ public class Categories {
     private String title;
 
 
-
     /*@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Notes> notes;
