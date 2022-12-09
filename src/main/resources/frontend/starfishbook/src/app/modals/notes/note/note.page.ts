@@ -59,7 +59,9 @@ export class NotePage implements OnInit {
     '#FEC888',
     '#C6BBBA',
   ]
+ ca = '';
 
+  
   //newNote: FormGroup;
 
   ngOnInit(): void {
@@ -91,12 +93,16 @@ export class NotePage implements OnInit {
     title: new FormControl(''),
     text: new FormControl(''),
     color: new FormControl(''),
+
     files: new FormArray([
       new FormGroup({
         name: new FormControl('')
       })]),
-    //categories: this.fb.array([])
 
+    categories: new FormArray([
+      new FormGroup({
+        title: new FormControl('')
+      })]),
     //files: new FormArray([this.newFile])
   })
 
@@ -134,9 +140,7 @@ export class NotePage implements OnInit {
     name: new FormControl(''),
     size: new FormControl('')
   })*/
-  ca = '';
-
-  
+ 
 
   
 
@@ -256,12 +260,14 @@ export class NotePage implements OnInit {
     });
 
     modal.onDidDismiss().then(data => {
-      const ctgry = data.data.id;
+      const ctgry = data.data;
+      //const title = data.data.title;
+      //this.ca =title;
       this.ca = ctgry;
       console.log(this.ca);
 
-      //this.addProduct(ctgry);
-      console.log(this.newNote.value);
+      this.addProduct();
+      //console.log(this.newNote.value);
 
 
       
@@ -271,12 +277,13 @@ export class NotePage implements OnInit {
 
   }
 
-  addProduct(a:number) {
+  addProduct() {
 
     this.categories.push(this.fb.group({
-      id: [a]
+      id: [],
+      title: []
     }));  
-    console.log("HALLOOO I GOT IT" , a);
+    console.log("HALLOOO I GOT IT" );
   }
 
   saveNote(): void {

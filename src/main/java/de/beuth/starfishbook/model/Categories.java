@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,8 +29,9 @@ public class Categories {
     @Column(name = "title")
     private String title;
 
-    /*@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
-    private Set<Notes> notes = new HashSet<>();*/
+    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Set<Notes> notes = new HashSet<>();
 
     public Categories() {
     }
@@ -55,7 +58,7 @@ public class Categories {
     }
 
 
-    /*public Set<Notes> getNotes() {
+    public Set<Notes> getNotes() {
         return notes;
     }
 
@@ -65,7 +68,7 @@ public class Categories {
         for(Notes note : notes) {
             note.setCategories(this);
         }
-    }*/
+    }
 
 
 }

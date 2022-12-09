@@ -30,7 +30,8 @@ export class CategoryListPage implements OnInit {
     console.log(c.id);
 
     this.modalController.dismiss({
-      id: c.id
+      id: c.id,
+      title:c.title
     });
 
 
