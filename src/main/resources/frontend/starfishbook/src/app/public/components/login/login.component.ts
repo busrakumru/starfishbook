@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private authService: AuthService, private router: Router, private tokenservice: TokenService,
-    private nofification: NotificationService
+    private nofification: NotificationService, public token:TokenService
     ) { }
 
   ngOnInit(): void {
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
         tap(data => {
 
           this.tokenservice.saveToken(data.accessToken);
+          this.token.saveUser(data);
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           //console.log(data.accessToken);

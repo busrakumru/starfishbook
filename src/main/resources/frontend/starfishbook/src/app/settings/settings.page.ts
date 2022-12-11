@@ -14,20 +14,20 @@ import { UserService } from '../services/user.service';
 })
 export class SettingsPage implements OnInit {
 
-  users: User[];
+  users: User[] = [];
 
 
   constructor(public modalCtrl: ModalController,
     private userService: UserService,
     public alertController: AlertController,
     private authService: AuthService,
-    private reloadService: ReloadService ) {
+    private reloadService: ReloadService,private router: Router ) {
 
   }
 
   darkMode: boolean;
   show: boolean;
-   toggle = document.querySelector('input[name=theme]');
+  toggle = document.querySelector('input[name=theme]');
 
   ngOnInit() {
 
@@ -39,7 +39,7 @@ export class SettingsPage implements OnInit {
       this.users = data;
       console.log(data);
     });
-    
+
   }
 
   backtoPage() {
@@ -64,11 +64,23 @@ export class SettingsPage implements OnInit {
     document.body.classList.toggle('dark')
   }
 
+  delete(user) {
+
+    this.authService.delete(user.userid).subscribe(
+      () => {
+        this.users = this.users.filter(users => users.userid != user.userid);
+        console.log('deleted response');
+        this.router.navigate(['../../login']);
+        this.reloadService.reload();  
+      });
+    
+  }
+
 
   /*async delete(){
-
+  
     const alert = await this.alertController.create({
-
+  
       header: 'Achtung!',
       message: 'Möchtest du dein Konto wirklich <strong>löschen</strong>?',
       buttons: [
@@ -92,13 +104,13 @@ export class SettingsPage implements OnInit {
         }
       ]
     });
-
+  
     await alert.present();
-
+  
   }*/
 
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.modalCtrl.dismiss();
     this.reloadService.reload();

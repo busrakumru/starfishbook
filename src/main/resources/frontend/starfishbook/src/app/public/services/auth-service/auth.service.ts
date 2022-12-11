@@ -37,6 +37,9 @@ export class AuthService {
     this.router.navigate(['../../login']);
   }
 
+  delete(id: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/users/${id}`);
+  }
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {

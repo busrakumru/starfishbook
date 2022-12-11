@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TokenService } from '../public/services/token/token.service';
 import { SettingsPage } from '../settings/settings.page';
 
 @Component({
@@ -9,9 +10,11 @@ import { SettingsPage } from '../settings/settings.page';
 })
 export class Tab4Page implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, public token: TokenService) { }
 
+  currentUser: any;
   ngOnInit() {
+    this.currentUser = this.token.getUser();
   }
 
   async openModal() {
