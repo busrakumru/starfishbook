@@ -19,6 +19,7 @@ import { AllMoodsComponent } from './components/all-moods/all-moods.component';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { ProfilmoodComponent } from './components/profilmood/profilmood.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
 @NgModule({
   declarations: [AppComponent,AllMoodsComponent],
   entryComponents: [],

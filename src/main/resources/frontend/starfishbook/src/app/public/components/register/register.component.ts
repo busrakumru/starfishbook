@@ -15,6 +15,7 @@ import { CustomValidators } from '../../_helpers/custom-validators';
 export class RegisterComponent {
 
   isLoginFailed = false;
+  isSuccessful = false;
   errorMessage = '';
 
   form: FormGroup = new FormGroup({
@@ -29,28 +30,28 @@ export class RegisterComponent {
   constructor(private authService: AuthService,
     private router: Router,
     private nofification: NotificationService
-    ) { }
- 
+  ) { }
+
 
   register() {
     if (this.form.valid) {
-      
+
       this.authService.register({
         email: this.email.value,
         password: this.password.value
       }).pipe(
-        tap(() => {this.router.navigate(['../login']);
-        this.nofification.showSuccess("Super! Dir wurde ein Link zur Verifizierung an deiner E-Mail Adresse zugeschickt. Bitte bestätige es.");
-      },
-        err => {
-          this.nofification.showError("Dieser Nutzerkonto existiert bereits!");
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-        })).subscribe();
-      
+        tap(() => {
+          this.router.navigate(['../login']);
+          this.nofification.showSuccess("Super! Dir wurde ein Link zur Verifizierung an deiner E-Mail Adresse zugeschickt. Bitte bestätige es.");
+          this.isSuccessful = true;
+          this.isLoginFailed = false;
+        },
+          err => {
+            this.nofification.showError("Dieser Nutzerkonto existiert bereits!");
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+          })).subscribe();
     }
-
-
   }
 
   get email(): FormControl {
