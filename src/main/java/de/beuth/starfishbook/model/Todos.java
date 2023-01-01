@@ -34,7 +34,6 @@ public class Todos {
         this.createdAt = createdAt;
         this.todolists = todolists;
         this.appointmentTime = appointmentTime;
-
     }
 
     public Todos() {
@@ -71,7 +70,7 @@ public class Todos {
     public void setTodolist(Set<Todolist> todolists) {
         this.todolists = todolists;
 
-        for(Todolist todolist:todolists){
+        for (Todolist todolist : todolists) {
             todolist.setTodos(this);
         }
 

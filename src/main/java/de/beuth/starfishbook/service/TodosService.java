@@ -4,10 +4,12 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.beuth.starfishbook.model.Todos;
 import de.beuth.starfishbook.repository.TodosRepository;
@@ -49,6 +51,7 @@ public class TodosService {
         Todos forUpdate = this.todoRepository.findTodoById(id);
         forUpdate.setTitle(request.getTitle());
         forUpdate.setCreatedAt(request.getCreatedAt());
+        forUpdate.setTodolist(request.getTodolist());
         forUpdate.setAppointmentTime(request.getAppointmentTime());
         return this.todoRepository.save(forUpdate);
     }
@@ -59,13 +62,16 @@ public class TodosService {
     }
 
     public Todos updateTodoWithMap(Long id, Map<Object, Object> objectMap) {
-        Todos todo = todoRepository.findTodoById(id);
+
+        Optional<Todos> todos = todoRepository.findById(id);
+
         objectMap.forEach((key, value) -> {
             Field field = ReflectionUtils.findField(Todos.class, (String) key);
             field.setAccessible(true);
-            ReflectionUtils.setField(field, todo, value);
+            ReflectionUtils.setField(field, todos.get(), value);
         });
 
-        return todoRepository.save(todo);
+        return todoRepository.save(todos.get());// todoService.updateTodo(todos);
     }
+
 }

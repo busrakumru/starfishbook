@@ -20,17 +20,13 @@ export class TodoPage implements OnInit {
   @Input() title: string;
   @Input() appointmentTime: Date;
   @Input() oldTodolist: Todolist[];
+ update:boolean = false;
 
-
+  
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
-
-
   change=true;
 
-  public newData : any = {
-    'title': 'Büsra'
-  }
 
   constructor(
     public reloadService: ReloadService, private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
@@ -44,12 +40,11 @@ export class TodoPage implements OnInit {
   
     this.newTodo = this.fb.group({
       title: [''],
-      appointmentTime: [],
+      appointmentTime: [''],
       todolist: this.fb.array([])
     })
-    this.addProduct();
-   
 
+    this.addProduct();
   }
 
   get todolist() {
@@ -77,28 +72,25 @@ export class TodoPage implements OnInit {
     }));
   }
 
-
-
   delete() {
     this.todolist.removeAt(this.todolist.value.findIndex(todo => todo.id === this.todolist.value.id))
   }
 
   create() {
+    this.update=false;
     this.todoService.createTodo(this.newTodo.value)
       .subscribe(response => {
         console.log(response);
       });
     this.newTodo.markAllAsTouched();
-    
   }
 
   updateTodo(): void {
-
-    this.todoService.updateTodo(this.id, this.newData).subscribe(
+ this.update=true;
+    this.todoService.updateTodo(this.id, this.newTodo.value).subscribe(
       (response) => console.log(response),
       (error: any) => console.log(error),
       () => console.log('DONE')
-
     );
   }
   
@@ -106,20 +98,16 @@ export class TodoPage implements OnInit {
     this.modalController.dismiss();
   }
 
-
-
   /*createTodolist(): void {
-  
     this.todolistService.createTodolist(this.newTodolist.value)
     .subscribe(createTodolist => {
-    
       //this.newTodolist = new Todolist();
       this.todolists.unshift(createTodolist);
-      console.log(createTodolist);
-    
+      console.log(createTodolist);  
     });
   }
   */
+
   /*
     placeholderTitel = "Titel";
     show: boolean;
