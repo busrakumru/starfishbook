@@ -36,12 +36,12 @@ public class FileDB {
     @JsonIgnore
     private Notes notes;*/
 
-    @ManyToOne(fetch = FetchType.LAZY)
+   /*  @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notes_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Notes notes;
 
-
+*/
     public FileDB() {
     }
     public FileDB(String name, String type, byte[] data) {
@@ -76,7 +76,7 @@ public class FileDB {
     public void setData(byte[] data) {
       this.data = data;
     }
-
+/* 
     public Notes getNotes() {
       return notes;
   }
@@ -84,5 +84,5 @@ public class FileDB {
   public void setNotes(Notes notes) {
       this.notes = notes;
   }
-    
+ */   
 }

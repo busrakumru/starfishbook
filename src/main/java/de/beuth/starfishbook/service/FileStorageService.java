@@ -18,10 +18,10 @@ public class FileStorageService {
     @Autowired
     private FileDBRepository fileDBRepository;
 
-    public List<FileDB> findByNotesId(Long notesId) {
+   /*  public List<FileDB> findByNotesId(Long notesId) {
         return fileDBRepository.findByNotesId(notesId);
     }
-
+*/
     /*public FileDB store(MultipartFile file, Notes notes) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);

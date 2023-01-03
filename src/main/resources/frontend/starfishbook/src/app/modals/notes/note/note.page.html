@@ -41,7 +41,7 @@
         <ion-icon name="albums"></ion-icon>
       </ion-button>
 
-      <ng-container formArrayName="files">
+      <!--ng-container formArrayName="files">
         <div *ngFor="let file of files.controls;index as i">
           <div [formGroupName]="i">
 
@@ -65,7 +65,7 @@
 
           </div>
         </div>
-      </ng-container>
+      </ng-container-->
 
       <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"

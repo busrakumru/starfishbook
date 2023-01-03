@@ -1,4 +1,4 @@
-package de.beuth.starfishbook.message;
+package de.beuth.starfishbook.response;
 
 import de.beuth.starfishbook.model.Notes;
 
@@ -10,15 +10,15 @@ public class ResponseFile {
     private String type;
     private long size;
 
-    private Notes notes;
+    //private Notes notes;
 
-    public ResponseFile(String id, String name, String url, String type, long size, Notes notes) {
+    public ResponseFile(String id, String name, String url, String type, long size) {
         this.id = id;
         this.name = name;
         this.url = url;
         this.type = type;
         this.size = size;
-        this.notes = notes;
+        //this.notes = notes;
     }
 
     public String getId() {
@@ -60,7 +60,7 @@ public class ResponseFile {
     public void setSize(long size) {
         this.size = size;
     }
-
+/* 
     public Notes getNotes() {
         return notes;
     }
@@ -68,5 +68,5 @@ public class ResponseFile {
     public void setNotes(Notes notes) {
         this.notes = notes;
     }
-
+*/
 }

@@ -39,9 +39,10 @@ public class NotesController {
   @Autowired
   private NotesService notesService;
 
+  /* 
   @Autowired
   FileController fileController;
-
+*/
   /*@Autowired
   private FileStorageService storageService;
 
@@ -57,8 +58,6 @@ public class NotesController {
   @GetMapping("notes")
   public List<Notes> getNotes() {
   return this.notesService.getAll();
-
-
   }
 
 

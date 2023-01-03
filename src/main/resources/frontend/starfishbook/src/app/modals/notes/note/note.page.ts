@@ -94,10 +94,10 @@ export class NotePage implements OnInit {
     text: new FormControl(''),
     color: new FormControl(''),
 
-    files: new FormArray([
+   /* files: new FormArray([
       new FormGroup({
         name: new FormControl('')
-      })]),
+      })]),*/
 
     categories: new FormArray([
       new FormGroup({
@@ -141,20 +141,10 @@ export class NotePage implements OnInit {
     size: new FormControl('')
   })*/
  
-
-  
-
-
-
-
-
   /*add() {
     (this.newNote.controls['files'] as FormArray).push(this.newFile)
   }*/
 
-  
-
-  
   updateNote() {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
