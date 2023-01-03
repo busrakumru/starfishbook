@@ -7,6 +7,6 @@ import de.beuth.starfishbook.model.ERoles;
 import de.beuth.starfishbook.model.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, String> {
 	Optional<Role> findByName(ERoles name);
 }

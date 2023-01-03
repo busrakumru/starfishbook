@@ -15,6 +15,7 @@ import de.beuth.starfishbook.service.EmailService;
 import de.beuth.starfishbook.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -80,12 +81,18 @@ public class AuthController {
     public List<User> getAllUser() {
         return userService.getAll();
     }
+    @GetMapping({"/forUser"})
+    @PreAuthorize("hasRole('User')")
+    public String forUser(){
+        return "This URL is only accessible to the user";
+    }
 
     @PostMapping(value = "register")
 
     public ResponseEntity<User> register(@RequestBody UserRequest userrequest) {
 
         User existingUser = authRepository.findUserByEmail(userrequest.getEmail());
+        Role role = roleRepository.findById("User").get();
 
         if (existingUser != null) {
             return ResponseEntity.badRequest().build();
@@ -93,17 +100,18 @@ public class AuthController {
         } else {
 
             User createUser = new User();
-
+            Set<Role> userRoles = new HashSet<>();
+            userRoles.add(role);
             createUser.setEmail(userrequest.getEmail());
             createUser.setPassword(passwordEncoder.encode(userrequest.getPassword()));
-
+            createUser.setRoles(userRoles);
            // Optional<Role> setrole = roleRepository.findByName(ERoles.USER);
-            Set<String> strRoles = userrequest.getRoles();
+            //Set<String> strRoles = userrequest.getRoles();
             
-            Set<Role> roles = new HashSet<>();
+           // Set<Role> roles = new HashSet<>();
             
 
-            if (strRoles == null) {
+          /*   if (strRoles == null) {
                 Role userRole = roleRepository.findByName(ERoles.USER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 roles.add(userRole);
@@ -122,8 +130,8 @@ public class AuthController {
                     }
                 });
             }
-
-            createUser.setRoles(roles);
+*/
+            //createUser.setRoles(roles);
             User newUser = authRepository.save(createUser);
 
             // token
