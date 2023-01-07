@@ -25,7 +25,6 @@ import de.beuth.starfishbook.service.NotesService;
 
 @CrossOrigin(origins = "https://localhost:8100")
 @RestController
-
 @RequestMapping("/auth/users/")
 
 public class NotesController {

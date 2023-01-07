@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,7 +25,9 @@ public class Todos {
     @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
     private Set<Todolist> todolists = new HashSet<>();
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date appointmentTime;
 
     @Column(name = "createdAt")

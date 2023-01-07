@@ -20,9 +20,7 @@ export class TodoPage implements OnInit {
   @Input() title: string;
   @Input() appointmentTime: Date;
   @Input() oldTodolist: Todolist[];
- update:boolean = false;
 
-  
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
   change=true;
@@ -77,7 +75,7 @@ export class TodoPage implements OnInit {
   }
 
   create() {
-    this.update=false;
+  
     this.todoService.createTodo(this.newTodo.value)
       .subscribe(response => {
         console.log(response);
@@ -86,7 +84,7 @@ export class TodoPage implements OnInit {
   }
 
   updateTodo(): void {
- this.update=true;
+
     this.todoService.updateTodo(this.id, this.newTodo.value).subscribe(
       (response) => console.log(response),
       (error: any) => console.log(error),

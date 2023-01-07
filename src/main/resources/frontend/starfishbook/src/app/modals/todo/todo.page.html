@@ -32,8 +32,8 @@
           </ion-item>
           <ion-popover trigger="date" size="cover">
             <ng-template>
-              <ion-datetime presentation="date" id="date" name="date" [min]="minDate" [max]="maxDate" [(ngModel)]="appointmentTime"
-              formControlName="appointmentTime" locale="de-DE">
+              <ion-datetime type="date" presentation="date" id="date" name="date" [min]="minDate" [max]="maxDate" [(ngModel)]="appointmentTime"
+              formControlName="appointmentTime" locale="de-DE" pattern = "dd.MM.yyyy">
               </ion-datetime>
             </ng-template>
           </ion-popover>
@@ -57,11 +57,11 @@
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
             <div [formGroupName]="i" class="todo-list"  >
                 <div>
-                  <ion-checkbox type="checkbox" id="finished" formControlName="finished" ngModel="{{t.i.finished}}" ></ion-checkbox>
+                  <ion-checkbox type="checkbox" id="finished" formControlName="finished"></ion-checkbox>
                 </div>
                 <div class="todo-text" >
                   <mat-form-field [hideRequiredMarker]="true">
-                    <input matInput id="text" placeholder="TodoItem" type="text" class="form-control" formControlName="text" ngModel="{{t.i.text}}">
+                    <input matInput id="text" placeholder="TodoItem" type="text" class="form-control" formControlName="text">
                   </mat-form-field>
                 </div>
                 <div>

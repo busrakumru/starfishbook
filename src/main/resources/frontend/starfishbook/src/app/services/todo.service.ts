@@ -24,15 +24,15 @@ export class TodoService {
       );
   }
 
-  createTodo(todoData: Todo): Observable<Todo> {
-    return this.http.post<Todo>(`${this.baseUrl}/todo`, todoData)
+  createTodo(todoData: Todo): Observable<Todo[]> {
+    return this.http.post<Todo[]>(`${this.baseUrl}/todo`, todoData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  updateTodo(id: any, todoData: Todo): Observable<Todo> {
-    return this.http.patch<Todo>(`${this.baseUrl}/todo/${id}`, todoData)
+  updateTodo(id: any, todoData: Map<Object, Object> ): Observable<Todo[]> {
+    return this.http.patch<Todo[]>(`${this.baseUrl}/todo/${id}`, todoData)
       .pipe(
         catchError(this.handleError)
       );
