@@ -32,20 +32,20 @@ public class Notes {
     private Set<FileDB> files= new HashSet<>();*/
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "categories_id")
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Categories categories;
-
+*/
 
     public Notes() {
     }
 
-    public Notes(String title, String text, String color,Categories categories) {
+    public Notes(String title, String text, String color) {
         this.title = title;
         this.text = text;
         this.color = color;
-        this.categories=categories;
+       // this.categories=categories;
         //this.files = files;
     }
 
@@ -87,7 +87,7 @@ public class Notes {
 
     public void setFiles(List<FileDB> files) {
         this.files = files;
-    }*/
+    }
 
     public Categories getCategories() {
         return categories;
@@ -95,7 +95,7 @@ public class Notes {
 
     public void setCategories(Categories categories) {
         this.categories = categories;
-    }
+    }*/
 
    /*   public Set<FileDB> getFiles() {
         return files;

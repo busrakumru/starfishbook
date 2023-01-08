@@ -99,20 +99,20 @@ export class NotePage implements OnInit {
         name: new FormControl('')
       })]),*/
 
-    categories: new FormArray([
+   /* categories: new FormArray([
       new FormGroup({
         title: new FormControl('')
-      })]),
+      })]),*/
     //files: new FormArray([this.newFile])
   })
 
-  get files() {
+ /* get files() {
     return this.newNote.get('files') as FormArray;
   }
 
   get categories() {
     return this.newNote.get('categories') as FormArray;
-  }
+  }*/
 
   
 
@@ -146,7 +146,7 @@ export class NotePage implements OnInit {
   }*/
 
   updateNote() {
-    if (this.selectedFiles) {
+   /* if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
@@ -163,11 +163,11 @@ export class NotePage implements OnInit {
             } else {
               this.message = 'Could not upload the file!';
             }
-            this.currentFile = undefined;
+            //this.currentFile = undefined;
           });
       }
-      this.selectedFiles = undefined;
-    }
+      //this.selectedFiles = undefined;
+    }*/
 
     this.notesService.updateNotes(this.id, this.newNote.value).subscribe(
       //(response) => console.log(response),
@@ -181,7 +181,7 @@ export class NotePage implements OnInit {
     this.modalController.dismiss();
   }
 
-
+/*
   selectImg(event: any): void {
     this.selectedFiles = event.target.files;
     const file: File = event.target.files[0];
@@ -204,7 +204,7 @@ export class NotePage implements OnInit {
 
             const upload$ = this.http.post("/auth/users/notes", formData);
 
-            upload$.subscribe();*/
+            upload$.subscribe();
     }
   }
 
@@ -242,7 +242,7 @@ export class NotePage implements OnInit {
 
         });
   }
-
+*/
   async showC() {
 
     const modal = await this.modalController.create({
@@ -256,7 +256,7 @@ export class NotePage implements OnInit {
       this.ca = ctgry;
       console.log(this.ca);
 
-      this.addProduct();
+      //this.addProduct();
       //console.log(this.newNote.value);
 
 
@@ -267,14 +267,14 @@ export class NotePage implements OnInit {
 
   }
 
-  addProduct() {
+  /*addProduct() {
 
     this.categories.push(this.fb.group({
       id: [],
       title: []
     }));  
     console.log("HALLOOO I GOT IT" );
-  }
+  }*/
 
   saveNote(): void {
     if (this.id) {

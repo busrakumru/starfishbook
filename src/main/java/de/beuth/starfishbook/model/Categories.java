@@ -29,14 +29,14 @@ public class Categories {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    /*@OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Notes> notes = new HashSet<>();
-
+*/
     public Categories() {
     }
     
-    public Categories(String title, Set<Notes> notes) {
+    public Categories(String title) {
         this.title = title;
         //this.notes = notes;
     }
@@ -57,7 +57,7 @@ public class Categories {
         this.title = title;
     }
 
-
+/* 
     public Set<Notes> getNotes() {
         return notes;
     }
@@ -69,6 +69,6 @@ public class Categories {
             note.setCategories(this);
         }
     }
-
+*/
 
 }

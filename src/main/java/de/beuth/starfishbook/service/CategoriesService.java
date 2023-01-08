@@ -17,11 +17,10 @@ public class CategoriesService {
         this.categoriesRepository = categoriesRepository;
     }
 
-
     public Categories addCategory(Categories request) {
         Categories category = new Categories();
         category.setTitle(request.getTitle());
-        category.setNotes(request.getNotes());
+       // category.setNotes(request.getNotes());
 
         return categoriesRepository.save(category);
     }

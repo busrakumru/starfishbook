@@ -3,12 +3,14 @@ package de.beuth.starfishbook.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 //import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,8 +62,6 @@ public class NotesController {
   return this.notesService.getAll();
   }
 
-
-
   @GetMapping("notes/{id}")
   public Notes getNotesById(@PathVariable(value = "id") Long noteId) throws NoteNotFoundException {
     return this.notesService.findById(noteId)
@@ -95,24 +95,11 @@ public class NotesController {
       return this.notesService.delete(id);
   }
 
-  // partially update a Note
-  /*
-   * @PatchMapping("/notes/{id}/{text}")
-   * public Notes updateNotePartially(@PathVariable(value = "id") Long
-   * noteId, @PathVariable(value = "text") String text)
-   * //try {
-   * throws NoteNotFoundException {
-   * 
-   * Notes notes = this.notesRepository.findById(noteId).get();
-   * notes.setText(text);
-   * 
-   * Notes updatedNote = this.notesRepository.save(notes);
-   * 
-   * return updatedNote;
-   * //return new ResponseEntity<Notes>(notesRepository.save(note),
-   * HttpStatus.OK);
-   * 
-   * }
-   */
+  @PatchMapping("notes/{id}")
+  public Notes updateTodoWithMap(@PathVariable(value="id") Long id, @RequestBody
+  Map<Object,Object> objectMap ){    
+ return notesService.updateWithMap(id, objectMap); 
+  
+  }
 
 }

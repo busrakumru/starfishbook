@@ -32,7 +32,7 @@ export class NotesService {
       return this.http.delete(`${this.baseUrl}/${id}`);
     }
 
-    updateNote(id: any, note: Notes): Observable<Notes> {
+    updateNote(id: any, note: Notes): Observable<Notes[]> {
     return this.http.put<Notes>(`${this.baseUrl}/${id}`, note);
     }
 
@@ -71,8 +71,8 @@ export class NotesService {
       );
   }
 
-  updateNotes(id: any, notesData: Notes): Observable<Notes> {
-    return this.http.put<Notes>(this.baseUrl + '/auth/users/notes/' + id, notesData)
+  updateNotes(id: any, notesData: Notes): Observable<Notes[]> {
+    return this.http.patch<Notes[]>(this.baseUrl + '/auth/users/notes/' + id, notesData)
       .pipe(
         catchError(this.handleError)
       );

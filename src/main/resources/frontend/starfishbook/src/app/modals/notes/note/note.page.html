@@ -11,8 +11,8 @@
       </div>
     </div>
 
-    <input [placeholder]="placeholderTitel" type="text" formControlName="title" class="title" />
-    <textarea [placeholder]="placeholderText" type="text" formControlName="text" class="text"></textarea>
+    <input type="text" formControlName="title" class="title" ngModel="{{title}}" />
+    <textarea type="text" formControlName="text" class="text" ngModel="{{text}}"></textarea>
 
     <!--div>
         <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
@@ -30,8 +30,8 @@
       </ul>
     </div-->
 
-    <p>{{imgName}}</p>
-    <p>{{fileName}}</p>
+    <!--p>{{imgName}}</p>
+    <p>{{fileName}}</p-->
 
     <ion-input formControlName="color"></ion-input>
 
