@@ -96,34 +96,9 @@ public class AuthController {
 
             createUser.setEmail(userrequest.getEmail());
             createUser.setPassword(passwordEncoder.encode(userrequest.getPassword()));
+            createUser.setRoles(ERoles.USER);
 
-           // Optional<Role> setrole = roleRepository.findByName(ERoles.USER);
-            Set<String> strRoles = userrequest.getRoles();
-            
-            Set<Role> roles = new HashSet<>();
-            
-
-            if (strRoles == null) {
-                Role userRole = roleRepository.findByName(ERoles.USER)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                roles.add(userRole);
-            } else {
-                strRoles.forEach(role -> {
-                    switch (role) {
-                        case "admin":
-                            Role adminRole = roleRepository.findByName(ERoles.ADMIN)
-                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                            roles.add(adminRole);
-                            break;
-                        default:
-                            Role userRole = roleRepository.findByName(ERoles.USER)
-                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                            roles.add(userRole);
-                    }
-                });
-            }
-
-            createUser.setRoles(roles);
+        
             User newUser = authRepository.save(createUser);
 
             // token
@@ -176,7 +151,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody UserRequest user) {
 
         User existingUser = authRepository.findUserByEmail(user.getEmail());
-
         if (existingUser.isEnabled() == true) {
 
             Authentication authentication = authenticationManager.authenticate(
