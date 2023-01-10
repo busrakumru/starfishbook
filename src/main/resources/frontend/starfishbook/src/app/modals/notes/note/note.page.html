@@ -11,8 +11,8 @@
       </div>
     </div>
 
-    <input [placeholder]="placeholderTitel" type="text" formControlName="title" class="title" />
-    <textarea [placeholder]="placeholderText" type="text" formControlName="text" class="text"></textarea>
+    <input type="text" formControlName="title" class="title" ngModel="{{title}}" />
+    <textarea type="text" formControlName="text" class="text" ngModel="{{text}}"></textarea>
 
     <!--div>
         <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
@@ -30,8 +30,8 @@
       </ul>
     </div-->
 
-    <p>{{imgName}}</p>
-    <p>{{fileName}}</p>
+    <!--p>{{imgName}}</p>
+    <p>{{fileName}}</p-->
 
     <ion-input formControlName="color"></ion-input>
 
@@ -41,7 +41,7 @@
         <ion-icon name="albums"></ion-icon>
       </ion-button>
 
-      <ng-container formArrayName="files">
+      <!--ng-container formArrayName="files">
         <div *ngFor="let file of files.controls;index as i">
           <div [formGroupName]="i">
 
@@ -65,7 +65,7 @@
 
           </div>
         </div>
-      </ng-container>
+      </ng-container-->
 
       <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"

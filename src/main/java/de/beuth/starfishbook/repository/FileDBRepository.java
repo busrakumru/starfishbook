@@ -8,6 +8,6 @@ import de.beuth.starfishbook.model.FileDB;
 
 public interface FileDBRepository extends JpaRepository<FileDB, String> {
 
-   List<FileDB> findByNotesId(Long notesId);
+   //List<FileDB> findByNotesId(Long notesId);
     
 }

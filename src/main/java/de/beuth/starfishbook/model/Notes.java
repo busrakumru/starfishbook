@@ -4,6 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 @Entity
 @Table(name = "notes")
 
@@ -22,24 +27,25 @@ public class Notes {
     @Column(name = "color")
     private String color;
 
-    @OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
-    //@JsonIgnore
-    //private List<FileDB> files;
-    private Set<FileDB> files= new HashSet<>();
+    /*@OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
+    private Set<FileDB> files= new HashSet<>();*/
 
-    /*@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
-    //@JsonIgnore
-    private Categories categories;*/
+
+   /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "categories_id")
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Categories categories;
+*/
 
     public Notes() {
     }
 
-    public Notes(String title, String text, String color, Set<FileDB> files) {
+    public Notes(String title, String text, String color) {
         this.title = title;
         this.text = text;
         this.color = color;
-        this.files = files;
+       // this.categories=categories;
+        //this.files = files;
     }
 
     public Long getId() {
@@ -80,25 +86,27 @@ public class Notes {
 
     public void setFiles(List<FileDB> files) {
         this.files = files;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
     }*/
 
-    public Set<FileDB> getFiles() {
+   /*   public Set<FileDB> getFiles() {
         return files;
     }
 
-    public void setFiles(Set<FileDB> files) {
+   public void setFiles(Set<FileDB> files) {
         this.files = files;
 
         for(FileDB file : files) {
             file.setNotes(this);
         }
     }
-
-    /*public Categories getCategories() {
-        return categories;
-    }
-  
-    public void setCategories(Categories categories) {
-        this.categories = categories;
+   
     }*/
 }

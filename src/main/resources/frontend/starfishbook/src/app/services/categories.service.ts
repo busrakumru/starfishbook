@@ -18,8 +18,8 @@ export class CategoriesService {
     return this.http.get<Categories[]>(`${this.baseUrl}`);
   }
 
-  createCategory(category:Categories): Observable<Categories[]>{
-    return this.http.post<Categories[]>(`${this.baseUrl}`,category);
+  createCategory(category:Categories): Observable<Categories>{
+    return this.http.post<Categories>(`${this.baseUrl}`,category);
   }
 
   delete(id:any):Observable<any> {

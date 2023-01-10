@@ -1,7 +1,10 @@
 package de.beuth.starfishbook.service;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.ReflectionUtils;
+import java.lang.reflect.Field;
 import org.springframework.stereotype.Service;
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.NotesRepository;
@@ -21,14 +24,15 @@ public class NotesService {
         return notesRepository.findById(id);
     }
 
-    public Long save(NotesRequest request) {
+    public Notes save(NotesRequest request) {
         Notes note = new Notes();
         note.setTitle(request.getTitle());
         note.setText(request.getText());
         note.setColor(request.getColor());
-        note.setFiles(request.getFiles());
+       // note.setFiles(request.getFiles());
+   // note.setCategories(request.getCategories());
 
-        return notesRepository.save(note).getId();
+        return notesRepository.save(note);
     }
 
     public Notes update(Long id, Notes request) {
@@ -43,7 +47,7 @@ public class NotesService {
     }
 
     public List<Notes> getAll() {
-        return notesRepository.findAll();
+    return notesRepository.findAll();
     }
 
     public  Notes findNotesById(Long id){
@@ -53,6 +57,30 @@ public class NotesService {
   public Boolean delete(Long id) {
     this.notesRepository.deleteById(id);
     return this.notesRepository.existsById(id);
+}
+
+public Notes addNotes(Notes request) {
+Notes note = new Notes();
+note.setTitle(request.getTitle());
+note.setText(request.getText());
+note.setColor(request.getColor());
+//note.setFiles(request.getFiles());
+//note.setCategories(request.getCategories());
+return this.notesRepository.save(request);
+}
+
+
+public Notes updateWithMap(Long id, Map<Object, Object> objectMap) {
+
+    Optional<Notes> notes = notesRepository.findById(id);
+
+    objectMap.forEach((key, value) -> {
+        Field field = ReflectionUtils.findRequiredField(Notes.class, (String) key);
+        field.setAccessible(true);
+        ReflectionUtils.setField(field, notes.get(), value);
+    });
+
+    return notesRepository.save(notes.get());
 }
   
 }

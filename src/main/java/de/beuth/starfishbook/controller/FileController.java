@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import de.beuth.starfishbook.message.ResponseFile;
+
 import de.beuth.starfishbook.message.ResponseMessage;
 import de.beuth.starfishbook.model.FileDB;
 import de.beuth.starfishbook.repository.FileDBRepository;
 import de.beuth.starfishbook.repository.NotesRepository;
+import de.beuth.starfishbook.response.ResponseFile;
 import de.beuth.starfishbook.service.FileStorageService;
 
 @CrossOrigin(origins = "https://localhost:8100")
@@ -40,11 +41,11 @@ public class FileController {
     @Autowired
     private FileStorageService storageService;
 
-    @GetMapping("notes/{notesId}/files")
+   /*  @GetMapping("notes/{notesId}/files")
     public ResponseEntity<List<FileDB>> getFilesByNotesId(@PathVariable(value = "notesId") Long notesId) {
         List<FileDB> files = storageService.findByNotesId(notesId);
         return new ResponseEntity<>(files, HttpStatus.OK);
-    }
+    }*/
   
     /*@PostMapping("notes/{notesId}/files")
     public ResponseEntity<ResponseMessage> createFileByNotesId(@PathVariable(value = "notesId") Long notesId,
@@ -140,8 +141,9 @@ public class FileController {
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
-                    dbFile.getData().length,
-                    dbFile.getNotes());
+                    dbFile.getData().length
+                   // dbFile.getNotes()
+                   );
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }

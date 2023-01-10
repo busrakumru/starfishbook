@@ -59,7 +59,9 @@ export class NotePage implements OnInit {
     '#FEC888',
     '#C6BBBA',
   ]
+ ca = '';
 
+  
   //newNote: FormGroup;
 
   ngOnInit(): void {
@@ -80,11 +82,39 @@ export class NotePage implements OnInit {
 
     })
     this.newFile();*/
+
+   
+
+
+
   }
 
-  get files() {
+  newNote: FormGroup= new FormGroup({
+    title: new FormControl(''),
+    text: new FormControl(''),
+    color: new FormControl(''),
+
+   /* files: new FormArray([
+      new FormGroup({
+        name: new FormControl('')
+      })]),*/
+
+   /* categories: new FormArray([
+      new FormGroup({
+        title: new FormControl('')
+      })]),*/
+    //files: new FormArray([this.newFile])
+  })
+
+ /* get files() {
     return this.newNote.get('files') as FormArray;
   }
+
+  get categories() {
+    return this.newNote.get('categories') as FormArray;
+  }*/
+
+  
 
   /*newFile(){
 
@@ -110,57 +140,13 @@ export class NotePage implements OnInit {
     name: new FormControl(''),
     size: new FormControl('')
   })*/
-  ca = '';
-
-  newNote: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    text: new FormControl(''),
-    color: new FormControl(''),
-    files: new FormArray([
-      new FormGroup({
-        name: new FormControl('')
-      })]),
-    categories: new FormControl(this.ca)
-
-    //files: new FormArray([this.newFile])
-  })
-
-  
-
-
-
-
-
+ 
   /*add() {
     (this.newNote.controls['files'] as FormArray).push(this.newFile)
   }*/
 
-  
-
-  saveNote(): void {
-    if (this.id) {
-      this.updateNote();
-
-    } else {
-      this.createNewNote();
-    }
-    this.reloadService.reload();
-    this.modalController.dismiss();
-  }
-
-  createNewNote() {
-    
-    this.notesService.createNote(this.newNote.value)
-      .subscribe(
-        (response) => console.log(response),
-        error => {
-          console.error(error);
-        });
-    this.modalController.dismiss();
-  }
-
   updateNote() {
-    if (this.selectedFiles) {
+   /* if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       if (file) {
         this.currentFile = file;
@@ -177,12 +163,13 @@ export class NotePage implements OnInit {
             } else {
               this.message = 'Could not upload the file!';
             }
-            this.currentFile = undefined;
+            //this.currentFile = undefined;
           });
       }
-      this.selectedFiles = undefined;
-    }
-    this.notesService.updateNote(this.id, this.newNote.value).subscribe(
+      //this.selectedFiles = undefined;
+    }*/
+
+    this.notesService.updateNotes(this.id, this.newNote.value).subscribe(
       //(response) => console.log(response),
       error => {
         console.error(error);
@@ -194,7 +181,7 @@ export class NotePage implements OnInit {
     this.modalController.dismiss();
   }
 
-
+/*
   selectImg(event: any): void {
     this.selectedFiles = event.target.files;
     const file: File = event.target.files[0];
@@ -217,7 +204,7 @@ export class NotePage implements OnInit {
 
             const upload$ = this.http.post("/auth/users/notes", formData);
 
-            upload$.subscribe();*/
+            upload$.subscribe();
     }
   }
 
@@ -255,7 +242,7 @@ export class NotePage implements OnInit {
 
         });
   }
-
+*/
   async showC() {
 
     const modal = await this.modalController.create({
@@ -263,9 +250,15 @@ export class NotePage implements OnInit {
     });
 
     modal.onDidDismiss().then(data => {
-      const ctgry = data.data.id;
+      const ctgry = data.data;
+      //const title = data.data.title;
+      //this.ca =title;
       this.ca = ctgry;
       console.log(this.ca);
+
+      //this.addProduct();
+      //console.log(this.newNote.value);
+
 
       
     })
@@ -273,4 +266,37 @@ export class NotePage implements OnInit {
     return await modal.present();
 
   }
+
+  /*addProduct() {
+
+    this.categories.push(this.fb.group({
+      id: [],
+      title: []
+    }));  
+    console.log("HALLOOO I GOT IT" );
+  }*/
+
+  saveNote(): void {
+    if (this.id) {
+      this.updateNote();
+
+    } else {
+      this.createNewNote();
+    }
+    //this.reloadService.reload();
+    this.modalController.dismiss();
+  }
+
+  createNewNote() {
+    
+    this.notesService.createNotes(this.newNote.value)
+      .subscribe(
+        (response) => console.log(response),
+        error => {
+          console.error(error);
+        });
+    this.modalController.dismiss();
+  }
+
+  
 }

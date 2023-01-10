@@ -5,6 +5,6 @@ export class Notes {
     title: string;
     text: string;
     color: string;
-    files: Array<any>;
-    //categories: string;
+    //files: Array<any>;
+    //categories?: Categories;
 }

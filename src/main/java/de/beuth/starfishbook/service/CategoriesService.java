@@ -1,8 +1,6 @@
 package de.beuth.starfishbook.service;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +17,12 @@ public class CategoriesService {
         this.categoriesRepository = categoriesRepository;
     }
 
-
-    public Long save(Categories request) {
+    public Categories addCategory(Categories request) {
         Categories category = new Categories();
         category.setTitle(request.getTitle());
+       // category.setNotes(request.getNotes());
 
-        return categoriesRepository.save(category).getId();
+        return categoriesRepository.save(category);
     }
 
     public List<Categories> getAllCategories() {

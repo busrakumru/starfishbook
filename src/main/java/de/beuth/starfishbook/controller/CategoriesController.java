@@ -26,8 +26,8 @@ public class CategoriesController {
     }
     
     @PostMapping("categories")
-    public Long createCategory(@RequestBody Categories category) {
-        return this.categoriesService.save(category);
+    public Categories createCategory(@RequestBody Categories category) {
+        return this.categoriesService.addCategory(category);
     }
 
     @GetMapping("categories")
