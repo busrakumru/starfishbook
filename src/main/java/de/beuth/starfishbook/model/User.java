@@ -1,7 +1,6 @@
 package de.beuth.starfishbook.model;
 
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,9 +11,10 @@ public class User {
   @Column(name = "user_id")
   private Long userid;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-  private Set<Role> roles;
+
+  @Enumerated(EnumType.STRING)
+  private ERoles roles;
+
 
   @Column(unique = true)
   private String email;
@@ -27,7 +27,7 @@ public class User {
 
   private String userName;
 
-  public User(Long userid, String email, String password,Set<Role> roles ) {
+  public User(Long userid, String email, String password,ERoles roles ) {
     this.userid = userid;
     this.email = email;
     this.password = password;
@@ -82,12 +82,13 @@ public void setUserName(String userName) {
   public void setEmail(String email) {
     this.email = email;
   }
-  
-  public Set<Role> getRoles() {
-		return roles;
-	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+  public ERoles getRoles() {
+    return roles;
+  }
+
+  public void setRoles(ERoles roles) {
+    this.roles = roles;
+  }
+ 
 }

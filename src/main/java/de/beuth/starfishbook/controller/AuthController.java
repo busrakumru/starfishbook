@@ -81,9 +81,10 @@ public class AuthController {
     public List<User> getAllUser() {
         return userService.getAll();
     }
-    @GetMapping({"/forUser"})
+
+    @GetMapping({ "/forUser" })
     @PreAuthorize("hasRole('User')")
-    public String forUser(){
+    public String forUser() {
         return "This URL is only accessible to the user";
     }
 
@@ -92,46 +93,16 @@ public class AuthController {
     public ResponseEntity<User> register(@RequestBody UserRequest userrequest) {
 
         User existingUser = authRepository.findUserByEmail(userrequest.getEmail());
-        Role role = roleRepository.findById("User").get();
-
+    
         if (existingUser != null) {
             return ResponseEntity.badRequest().build();
 
         } else {
 
             User createUser = new User();
-            Set<Role> userRoles = new HashSet<>();
-            userRoles.add(role);
             createUser.setEmail(userrequest.getEmail());
             createUser.setPassword(passwordEncoder.encode(userrequest.getPassword()));
-            createUser.setRoles(userRoles);
-           // Optional<Role> setrole = roleRepository.findByName(ERoles.USER);
-            //Set<String> strRoles = userrequest.getRoles();
-            
-           // Set<Role> roles = new HashSet<>();
-            
-
-          /*   if (strRoles == null) {
-                Role userRole = roleRepository.findByName(ERoles.USER)
-                        .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                roles.add(userRole);
-            } else {
-                strRoles.forEach(role -> {
-                    switch (role) {
-                        case "admin":
-                            Role adminRole = roleRepository.findByName(ERoles.ADMIN)
-                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                            roles.add(adminRole);
-                            break;
-                        default:
-                            Role userRole = roleRepository.findByName(ERoles.USER)
-                                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                            roles.add(userRole);
-                    }
-                });
-            }
-*/
-            //createUser.setRoles(roles);
+            createUser.setRoles(ERoles.USER);
             User newUser = authRepository.save(createUser);
 
             // token
@@ -145,13 +116,10 @@ public class AuthController {
             mailMessage.setText("Bitte verifizieren Sie sich, indem sie auf den Link klicken! "
                     + "http://localhost:8443/auth/confirm?token=" +
                     confirmationToken.getConfirmationToken());
-
             emailService.sendEmail(mailMessage);
 
             return ResponseEntity.ok(newUser);
-
         }
-
     }
 
     @RequestMapping(value = "confirm", method = { RequestMethod.GET, RequestMethod.POST })
@@ -184,7 +152,6 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody UserRequest user) {
 
         User existingUser = authRepository.findUserByEmail(user.getEmail());
-
         if (existingUser.isEnabled() == true) {
 
             Authentication authentication = authenticationManager.authenticate(
@@ -194,7 +161,7 @@ public class AuthController {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             final String token = jwtTokenProvider.generateToken(authentication);
-//roles
+
             return ResponseEntity.ok(new JwtResponse(token));
 
         } else {

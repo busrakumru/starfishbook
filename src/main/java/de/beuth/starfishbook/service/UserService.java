@@ -32,9 +32,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getSelf() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
+   
 
 }

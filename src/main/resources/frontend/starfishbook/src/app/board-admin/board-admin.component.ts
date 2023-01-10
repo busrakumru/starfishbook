@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service';
 })
 export class BoardAdminComponent implements OnInit {
 
-  content = '';
+  content = 'HALLOADMIN';
 
   constructor(private userService: UserService) { }
 

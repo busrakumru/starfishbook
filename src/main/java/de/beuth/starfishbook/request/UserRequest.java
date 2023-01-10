@@ -11,16 +11,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import de.beuth.starfishbook.model.ERoles;
 import de.beuth.starfishbook.model.Role;
 
 public class UserRequest {
  
 
     private Long userid;
-    private Set<String> roles = new HashSet<>();
+    //private Set<String> roles = new HashSet<>();
     private String email;
     private String password;
     private boolean enabled;
+    private ERoles roles;
 
       
     public boolean isEnabled() {
@@ -59,11 +61,11 @@ public class UserRequest {
       this.email = email;
     }
     
-    public Set<String> getRoles() {
+    public ERoles getRoles() {
           return roles;
       }
   
-      public void setRoles(Set<String> roles) {
+      public void setRoles(ERoles roles) {
           this.roles = roles;
       }
   }
