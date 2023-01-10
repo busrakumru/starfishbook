@@ -26,18 +26,18 @@
             <ion-label>Dateline</ion-label>
             <ng-container>
               <ion-text slot="end" >
-              {{appointmentTime | date: 'dd.MM.yyyy' }}
+              {{appointmentTime  | date:"dd.MM.yyyy"}}
             </ion-text>
             </ng-container>
           </ion-item>
           <ion-popover trigger="date" size="cover">
             <ng-template>
               <ion-datetime type="date" presentation="date" id="date" name="date" [min]="minDate" [max]="maxDate" [(ngModel)]="appointmentTime"
-              formControlName="appointmentTime" locale="de-DE" pattern = "dd.MM.yyyy">
-              </ion-datetime>
+              formControlName="appointmentTime" locale="de-DE" >
+              </ion-datetime>{{appointmentTime}} 
             </ng-template>
           </ion-popover>
-
+         
         </div>
       </section>
 
@@ -53,7 +53,7 @@
           </ion-button>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content >
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
             <div [formGroupName]="i" class="todo-list"  >
                 <div>

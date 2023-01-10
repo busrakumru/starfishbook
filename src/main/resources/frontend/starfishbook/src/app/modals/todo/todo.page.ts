@@ -21,9 +21,11 @@ export class TodoPage implements OnInit {
   @Input() appointmentTime: Date;
   @Input() oldTodolist: Todolist[];
 
+
+
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
-  change=true;
+  change = true;
 
 
   constructor(
@@ -32,13 +34,13 @@ export class TodoPage implements OnInit {
 
   newTodo: FormGroup;
   todos: Todo = new Todo();
-  
+
 
   ngOnInit(): void {
-  
+
     this.newTodo = this.fb.group({
       title: [''],
-      appointmentTime: [''],
+      appointmentTime: new Date(),
       todolist: this.fb.array([])
     })
 
@@ -60,10 +62,10 @@ export class TodoPage implements OnInit {
   }
 
 
+
   addProduct() {
 
     this.todolist.push(this.fb.group({
-      //text2: [],
       text: [''],
       finished: [false],
       id: []
@@ -75,7 +77,7 @@ export class TodoPage implements OnInit {
   }
 
   create() {
-  
+
     this.todoService.createTodo(this.newTodo.value)
       .subscribe(response => {
         console.log(response);
@@ -91,7 +93,7 @@ export class TodoPage implements OnInit {
       () => console.log('DONE')
     );
   }
-  
+
   abbrechen() {
     this.modalController.dismiss();
   }
