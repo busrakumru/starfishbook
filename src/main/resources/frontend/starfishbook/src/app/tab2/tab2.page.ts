@@ -42,11 +42,10 @@ export class Tab2Page implements OnInit {
     this.todoService.getTodos()
       .subscribe((data: Todo[]) => {
         this.todos = data
-
+ console.log(data);
       });
+     
   }
-
-  
 
   async openCard() {
     const modal = await this.modalController.create({
@@ -89,7 +88,8 @@ export class Tab2Page implements OnInit {
       componentProps: {
         'id': todo.id,
         'title': todo.title,
-        'appointmentTime': todo.appointmentTime
+        'appointmentTime': todo.appointmentTime,
+        'oldTodolist': todo.todolist
       }
     });
     return await modal.present();

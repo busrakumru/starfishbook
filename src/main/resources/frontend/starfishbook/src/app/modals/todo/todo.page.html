@@ -10,49 +10,40 @@
 </ion-header>
 
 <ion-content>
+  
   <div class="form">
     <form [formGroup]="newTodo" #todoForm="ngForm">
       <section>
-
-        <div class="ion-padding-top">
+        <div class="ion-padding-top" >
           <div class="ion-padding-top">
-
             <mat-form-field>
               <input matInput ngModel="{{title}}" placeholder="Titel" formControlName="title" id="title" type="text" name="title">
             </mat-form-field>
-
           </div>
+
 
           <ion-item id="date">
             <ion-label>Dateline</ion-label>
-
-            <ng-container *ngIf="appointmentTime; else todo ">
+            <ng-container>
               <ion-text slot="end" >
-              {{appointmentTime | date: 'dd.MM.yyyy' }}
+              {{appointmentTime  | date:"dd.MM.yyyy"}}
             </ion-text>
             </ng-container>
-
-            <ng-template #todo>
-              <ion-text slot="end">
-                {{todos.appointmentTime | date: 'dd.MM.yyyy' }}
-              </ion-text> 
-            </ng-template>
-
-          
-
           </ion-item>
           <ion-popover trigger="date" size="cover">
             <ng-template>
-              <ion-datetime presentation="date" name="date" [min]="minDate" [max]="maxDate"
-                [(ngModel)]="appointmentTime" formControlName="appointmentTime" locale="de-DE"></ion-datetime>
+              <ion-datetime type="date" presentation="date" id="date" name="date" [min]="minDate" [max]="maxDate" [(ngModel)]="appointmentTime"
+              formControlName="appointmentTime" locale="de-DE" >
+              </ion-datetime>{{appointmentTime}} 
             </ng-template>
           </ion-popover>
-
+         
         </div>
       </section>
 
 
       <ion-card>
+
         <ion-card-header>
           <ion-text>
             Todos erstellen
@@ -62,37 +53,27 @@
           </ion-button>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content >
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
-            <div [formGroupName]="i" class="todo-list">
-              <div>
-                <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
-              </div>
-              <div class="todo-text">
-                <mat-form-field [hideRequiredMarker]="true">
-                  <input matInput id="text" placeholder="Todoitem" type="text" class="form-control" formControlName="text">
-                </mat-form-field>
-              </div>
-              <div>
-                <ion-button (click)="delete(id)" fill="clear">
-                  <ion-icon name="close-outline"></ion-icon>
-                </ion-button>
-              </div>
-
-                
-              <span>{{t.text}}
-
-              </span>
+            <div [formGroupName]="i" class="todo-list"  >
+                <div>
+                  <ion-checkbox type="checkbox" id="finished" formControlName="finished"></ion-checkbox>
+                </div>
+                <div class="todo-text" >
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input matInput id="text" placeholder="TodoItem" type="text" class="form-control" formControlName="text">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <ion-button (click)="delete(id)" fill="clear">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </div>
             </div>
-          
-            <span>{{t.text}}
-
-            </span>
-              
           </div>
         </ion-card-content>
 
-      </ion-card>
+      </ion-card>  
     </form>
   </div>
 </ion-content>

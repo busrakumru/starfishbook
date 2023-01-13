@@ -19,13 +19,14 @@ export class TodoPage implements OnInit {
   @Input() id: any;
   @Input() title: string;
   @Input() appointmentTime: Date;
+  @Input() oldTodolist: Todolist[];
+
 
 
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
+  change = true;
 
-
-  change=true;
 
   constructor(
     public reloadService: ReloadService, private fb: FormBuilder, public modalController: ModalController, private todolistService: TodolistService, private todoService: TodoService
@@ -33,18 +34,17 @@ export class TodoPage implements OnInit {
 
   newTodo: FormGroup;
   todos: Todo = new Todo();
-  
+
 
   ngOnInit(): void {
-  
+
     this.newTodo = this.fb.group({
-      title: [],
-      appointmentTime: [],
+      title: [''],
+      appointmentTime: new Date(),
       todolist: this.fb.array([])
     })
-    this.addProduct();
-   
 
+    this.addProduct();
   }
 
   get todolist() {
@@ -57,60 +57,57 @@ export class TodoPage implements OnInit {
     } else {
       this.create();
     }
-    this.reloadService.reload();
+    //this.reloadService.reload();
     this.modalController.dismiss();
   }
+
 
 
   addProduct() {
 
     this.todolist.push(this.fb.group({
-      text: [],
+      text: [''],
       finished: [false],
       id: []
     }));
   }
-
-
 
   delete() {
     this.todolist.removeAt(this.todolist.value.findIndex(todo => todo.id === this.todolist.value.id))
   }
 
   create() {
+
     this.todoService.createTodo(this.newTodo.value)
       .subscribe(response => {
         console.log(response);
       });
     this.newTodo.markAllAsTouched();
-    
   }
 
   updateTodo(): void {
 
-    this.todoService.updateTodo(this.id, this.newTodo.value) .subscribe(response => {
-      console.log(response);
-    });
+    this.todoService.updateTodo(this.id, this.newTodo.value).subscribe(
+      (response) => console.log(response),
+      (error: any) => console.log(error),
+      () => console.log('DONE')
+    );
   }
-  
+
   abbrechen() {
     this.modalController.dismiss();
   }
 
-
-
   /*createTodolist(): void {
-  
     this.todolistService.createTodolist(this.newTodolist.value)
     .subscribe(createTodolist => {
-    
       //this.newTodolist = new Todolist();
       this.todolists.unshift(createTodolist);
-      console.log(createTodolist);
-    
+      console.log(createTodolist);  
     });
   }
   */
+
   /*
     placeholderTitel = "Titel";
     show: boolean;
