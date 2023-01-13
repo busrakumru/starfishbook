@@ -1,4 +1,5 @@
 package de.beuth.starfishbook.service;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,14 +9,14 @@ import java.lang.reflect.Field;
 import org.springframework.stereotype.Service;
 import de.beuth.starfishbook.model.Notes;
 import de.beuth.starfishbook.repository.NotesRepository;
-import de.beuth.starfishbook.request.NotesRequest;
 
 @Service
 public class NotesService {
 
+    @Autowired
     private final NotesRepository notesRepository;
 
-    @Autowired
+
     public NotesService(NotesRepository notesRepository) {
         this.notesRepository = notesRepository;
     }
@@ -24,63 +25,52 @@ public class NotesService {
         return notesRepository.findById(id);
     }
 
-    public Notes save(NotesRequest request) {
+    /*
+     * public Notes update(Long id, Notes request) {
+     * 
+     * Notes note = findNotesById(id);
+     * note.setText(request.getText());
+     * note.setTitle(request.getTitle());
+     * note.setColor(request.getColor());
+     * note.setCategories(request.getCategories());
+     * return notesRepository.save(note);
+     * 
+     * }
+     */
+
+    public List<Notes> getAll() {
+        return notesRepository.findAll();
+    }
+
+    public Notes findNotesById(Long id) {
+        return this.notesRepository.findNotesById(id);
+    }
+
+    public Boolean delete(Long id) {
+        this.notesRepository.deleteById(id);
+        return this.notesRepository.existsById(id);
+    }
+
+    public Notes addNotes(Notes request) {
         Notes note = new Notes();
         note.setTitle(request.getTitle());
         note.setText(request.getText());
         note.setColor(request.getColor());
-       // note.setFiles(request.getFiles());
-   // note.setCategories(request.getCategories());
-
-        return notesRepository.save(note);
+        note.setCategories(request.getCategories());
+        return this.notesRepository.save(request);
     }
 
-    public Notes update(Long id, Notes request) {
-        Notes note = findNotesById(id);
-        
-        note.setText(request.getText());
-        note.setTitle(request.getTitle());
-        note.setColor(request.getColor());
+    public Notes updateWithMap(Long id, Map<Object, Object> objectMap) {
 
-            return notesRepository.save(note);
-        
+        Optional<Notes> notes = notesRepository.findById(id);
+
+        objectMap.forEach((key, value) -> {
+            Field field = ReflectionUtils.findRequiredField(Notes.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, notes.get(), value);
+        });
+
+        return notesRepository.save(notes.get());
     }
 
-    public List<Notes> getAll() {
-    return notesRepository.findAll();
-    }
-
-    public  Notes findNotesById(Long id){
-        return this.notesRepository.findNotesById(id);
-  }
-
-  public Boolean delete(Long id) {
-    this.notesRepository.deleteById(id);
-    return this.notesRepository.existsById(id);
-}
-
-public Notes addNotes(Notes request) {
-Notes note = new Notes();
-note.setTitle(request.getTitle());
-note.setText(request.getText());
-note.setColor(request.getColor());
-//note.setFiles(request.getFiles());
-//note.setCategories(request.getCategories());
-return this.notesRepository.save(request);
-}
-
-
-public Notes updateWithMap(Long id, Map<Object, Object> objectMap) {
-
-    Optional<Notes> notes = notesRepository.findById(id);
-
-    objectMap.forEach((key, value) -> {
-        Field field = ReflectionUtils.findRequiredField(Notes.class, (String) key);
-        field.setAccessible(true);
-        ReflectionUtils.setField(field, notes.get(), value);
-    });
-
-    return notesRepository.save(notes.get());
-}
-  
 }

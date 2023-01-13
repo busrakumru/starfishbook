@@ -19,5 +19,5 @@ public class ConfirmationTokenService {
         this.confirmationTokenRepository.deleteById(id);
         return this.confirmationTokenRepository.existsById(id);
     }
-    
+
 }

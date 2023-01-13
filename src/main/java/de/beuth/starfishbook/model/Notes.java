@@ -1,13 +1,12 @@
 package de.beuth.starfishbook.model;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 @Entity
 @Table(name = "notes")
@@ -27,25 +26,22 @@ public class Notes {
     @Column(name = "color")
     private String color;
 
-    /*@OneToMany(mappedBy = "notes", cascade = CascadeType.ALL)
-    private Set<FileDB> files= new HashSet<>();*/
-
-
-   /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "categories_id")
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    //@JsonIgnore
     private Categories categories;
-*/
 
     public Notes() {
     }
 
-    public Notes(String title, String text, String color) {
+    public Notes(String title, String text, String color, Categories categories) {
         this.title = title;
         this.text = text;
         this.color = color;
-       // this.categories=categories;
-        //this.files = files;
+        this.categories = categories;
+
     }
 
     public Long getId() {
@@ -80,33 +76,11 @@ public class Notes {
         this.text = text;
     }
 
-    /*public List<FileDB> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<FileDB> files) {
-        this.files = files;
-    }
-
     public Categories getCategories() {
         return categories;
     }
 
     public void setCategories(Categories categories) {
         this.categories = categories;
-    }*/
-
-   /*   public Set<FileDB> getFiles() {
-        return files;
     }
-
-   public void setFiles(Set<FileDB> files) {
-        this.files = files;
-
-        for(FileDB file : files) {
-            file.setNotes(this);
-        }
-    }
-   
-    }*/
 }

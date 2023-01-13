@@ -40,27 +40,8 @@ public class TodolistService {
         return this.todoListRepository.save(request);
     }
 
-    /*
-     * public Todolist addTodolist(Todolist request) {
-     * Todolist todo = new Todolist();
-     * todo.setText(request.getText());
-     * todo.setFinished(request.isFinished());
-     * todo.setTodos(request.getTodos());
-     * return this.todoListRepository.save(todo);
-     * }
-     */
-
     public Todolist addTodolist(Todolist request) {
-        /*
-         * Todos todos=
-         * todosRepository.findById(request.getTodos().getId()).orElse(null);
-         * if (null == todos) {
-         * todos = new Todos();
-         * }
-         */
 
-        // todos.setId(request.getTodos().getId());
-        // request.setTodos(todos);
         Todolist todo = new Todolist();
         todo.setText(request.getText());
         todo.setFinished(request.isFinished());

@@ -11,10 +11,8 @@ public class User {
   @Column(name = "user_id")
   private Long userid;
 
-
   @Enumerated(EnumType.STRING)
   private ERoles roles;
-
 
   @Column(unique = true)
   private String email;
@@ -24,8 +22,6 @@ public class User {
 
   @Column(name = "enabled")
   private boolean enabled;
-
-  private String userName;
 
   public User(Long userid, String email, String password,ERoles roles ) {
     this.userid = userid;
@@ -39,13 +35,6 @@ public class User {
   public User() {
   }
 	
-  public String getUserName() {
-    return userName;
-}
-
-public void setUserName(String userName) {
-    this.userName = userName;
-}
 
   public boolean isEnabled() {
     return enabled;

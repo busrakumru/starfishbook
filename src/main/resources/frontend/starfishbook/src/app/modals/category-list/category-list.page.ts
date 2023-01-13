@@ -21,23 +21,18 @@ export class CategoryListPage implements OnInit {
       this.categories = data;
       console.log(data);
     });
-
-
   }
 
   passId(c) {
-    
-    console.log(c.id);
 
+    console.log(c.id);
     this.modalController.dismiss({
       id: c.id,
-      title:c.title
+      title: c.title
     });
-
-
   }
 
-  closeModal(){
+  closeModal() {
     this.modalController.dismiss();
   }
 }

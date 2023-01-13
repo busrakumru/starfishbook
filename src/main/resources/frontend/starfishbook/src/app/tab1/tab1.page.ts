@@ -21,7 +21,6 @@ export class Tab1Page {
 
   searchTerm: any;
   notes: Notes[];
-  files: Files[];
   categories: Categories[];
 
   list: boolean;
@@ -58,10 +57,6 @@ export class Tab1Page {
       console.log(data);
     });
 
-    this.filesService.getFiles().subscribe((data: Files[]) => {
-      this.files = data;
-    });
-
     this.categoriesService.getCategories().subscribe((data: Categories[]) => {
       this.categories = data;
       console.log(data);
@@ -89,9 +84,9 @@ export class Tab1Page {
           id: 'confirm-button',
           handler: () => {
             this.notesService.deleteNotes(note.id)
-            .subscribe(() => {
-              this.notes = this.notes.filter(notes => notes.id != note.id);
-            });
+              .subscribe(() => {
+                this.notes = this.notes.filter(notes => notes.id != note.id);
+              });
           }
         }
       ]
@@ -108,7 +103,8 @@ export class Tab1Page {
       componentProps: {
         'id': note.id,
         'title': note.title,
-        'text': note.text
+        'text': note.text,
+        'color': note.color
       }
     });
     return await modal.present();
@@ -137,8 +133,6 @@ export class Tab1Page {
   async addCategory() {
     const modal = await this.modalController.create({
       component: CategoryPage,
-      /*breakpoints: [0, 0.3, 0.5, 0.8],
-      initialBreakpoint: 0.3*/
     });
     return await modal.present();
   }

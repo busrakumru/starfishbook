@@ -1,12 +1,9 @@
 package de.beuth.starfishbook.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-
 import de.beuth.starfishbook.model.User;
+import org.springframework.stereotype.Service;
 import de.beuth.starfishbook.repository.UserRepository;
 
 @Service
@@ -31,7 +28,5 @@ public class UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
-
-   
 
 }

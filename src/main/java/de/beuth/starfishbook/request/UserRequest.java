@@ -2,7 +2,6 @@ package de.beuth.starfishbook.request;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,15 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
 import de.beuth.starfishbook.model.ERoles;
-import de.beuth.starfishbook.model.Role;
+
 
 public class UserRequest {
  
 
     private Long userid;
-    //private Set<String> roles = new HashSet<>();
     private String email;
     private String password;
     private boolean enabled;

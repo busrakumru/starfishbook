@@ -19,12 +19,12 @@ import de.beuth.starfishbook.service.CategoriesService;
 public class CategoriesController {
 
     @Autowired
-    private final CategoriesService categoriesService; 
-  
+    private final CategoriesService categoriesService;
+
     public CategoriesController(CategoriesService categoriesService) {
-          this.categoriesService = categoriesService;
+        this.categoriesService = categoriesService;
     }
-    
+
     @PostMapping("categories")
     public Categories createCategory(@RequestBody Categories category) {
         return this.categoriesService.addCategory(category);
@@ -32,10 +32,10 @@ public class CategoriesController {
 
     @GetMapping("categories")
     public List<Categories> getCategories() {
-    return this.categoriesService.getAllCategories(); 
-   }
+        return this.categoriesService.getAllCategories();
+    }
 
-   @DeleteMapping("categories/{id}")
+    @DeleteMapping("categories/{id}")
     public Boolean delete(@PathVariable Long id) {
         return this.categoriesService.delete(id);
     }

@@ -2,10 +2,8 @@ package de.beuth.starfishbook.controller;
 
 import de.beuth.starfishbook.model.ConfirmationToken;
 import de.beuth.starfishbook.model.ERoles;
-import de.beuth.starfishbook.model.Role;
 import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.ConfirmationTokenRepository;
-import de.beuth.starfishbook.repository.RoleRepository;
 import de.beuth.starfishbook.request.UserRequest;
 import de.beuth.starfishbook.repository.AuthCRepository;
 import de.beuth.starfishbook.response.JwtResponse;
@@ -15,7 +13,6 @@ import de.beuth.starfishbook.service.EmailService;
 import de.beuth.starfishbook.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,12 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -53,9 +45,6 @@ public class AuthController {
 
     @Autowired
     private ConfirmationTokenService confirmationService;
-
-    @Autowired
-    RoleRepository roleRepository;
 
     @Autowired
     private EmailService emailService;
@@ -82,18 +71,12 @@ public class AuthController {
         return userService.getAll();
     }
 
-    @GetMapping({ "/forUser" })
-    @PreAuthorize("hasRole('User')")
-    public String forUser() {
-        return "This URL is only accessible to the user";
-    }
-
     @PostMapping(value = "register")
 
     public ResponseEntity<User> register(@RequestBody UserRequest userrequest) {
 
         User existingUser = authRepository.findUserByEmail(userrequest.getEmail());
-    
+
         if (existingUser != null) {
             return ResponseEntity.badRequest().build();
 

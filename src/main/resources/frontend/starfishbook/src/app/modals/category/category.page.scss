@@ -1,42 +1,35 @@
-
-.label{
-
+.label {
     display: flex;
     justify-content: center;
 
-    ion-label{
+    ion-label {
         height: auto;
         margin-top: 41px;
         font-size: 20px;
     }
-    
 }
 
-input{
+input {
+    border: #00000024 1px solid;
+    border-radius: 30px;
+    margin: 7px;
+    width: 97%;
 
-        border: #00000024 1px solid;
-        border-radius: 30px;
-        margin: 7px;
-        width: 97%;
-    
-        height: 50px;
-        font-size: 20px;
-        padding: 0px 10px;
-    
+    height: 50px;
+    font-size: 20px;
+    padding: 0px 10px;
 }
 
-.buttons{
-
+.buttons {
     display: flex;
     justify-content: space-evenly;
 
-    ion-button{
+    ion-button {
         width: 150px;
         height: 48px;
     }
 }
 
-form{
+form {
     margin-top: 30px;
-
 }

@@ -12,8 +12,6 @@ import { ReloadService } from 'src/app/services/reload.service';
 })
 export class CategoryPage implements OnInit {
 
-  /*@Input() id: any;
-  @Input() title: string;*/
   categories: Categories[];
 
   constructor(public reloadService: ReloadService,
@@ -25,15 +23,11 @@ export class CategoryPage implements OnInit {
     this.categoriesService.getCategories().subscribe((data: Categories[]) => {
       this.categories = data;
     });
-
-    /*if (this.id){
-      console.log(this.id, this.title);
-    }*/
   }
 
 
   newCategory: FormGroup = new FormGroup({
-    title: new FormControl('',)
+    title: new FormControl('')
   })
 
   saveCategory() {
@@ -43,7 +37,7 @@ export class CategoryPage implements OnInit {
         error => {
           console.error(error);
         });
-        this.reloadService.reload();
+    this.reloadService.reload();
     this.modalController.dismiss();
   }
 

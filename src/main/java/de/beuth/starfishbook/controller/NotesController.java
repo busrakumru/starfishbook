@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-//import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,15 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import de.beuth.starfishbook.exception.NoteNotFoundException;
-import de.beuth.starfishbook.model.Categories;
 import de.beuth.starfishbook.model.Notes;
-import de.beuth.starfishbook.repository.FileDBRepository;
+import de.beuth.starfishbook.repository.CategoriesRepository;
 import de.beuth.starfishbook.repository.NotesRepository;
-import de.beuth.starfishbook.service.FileStorageService;
 import de.beuth.starfishbook.service.NotesService;
 
 @CrossOrigin(origins = "https://localhost:8100")
@@ -36,30 +31,21 @@ import de.beuth.starfishbook.service.NotesService;
 
 public class NotesController {
 
+  @Autowired
   private NotesRepository notesRepository;
+
+  private CategoriesRepository ca;
 
   @Autowired
   private NotesService notesService;
 
-  /* 
-  @Autowired
-  FileController fileController;
-*/
-  /*@Autowired
-  private FileStorageService storageService;
-
-  @Autowired
-  private FileDBRepository fileDBRepository;*/
-
-  @Autowired
   public NotesController(NotesRepository notesRepository) {
     this.notesRepository = notesRepository;
   }
 
-
   @GetMapping("notes")
   public List<Notes> getNotes() {
-  return this.notesService.getAll();
+    return this.notesService.getAll();
   }
 
   @GetMapping("notes/{id}")
@@ -68,38 +54,42 @@ public class NotesController {
         .orElseThrow(() -> new NoteNotFoundException(noteId));
   }
 
-  @PostMapping("notes")
-  public ResponseEntity<Notes> createNote( @RequestBody Notes notes)
-      throws IOException {
-    Notes savedNotes = notesRepository.save(notes);
-    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-        .buildAndExpand(savedNotes.getId()).toUri();
+ /*  @PostMapping("/categories/{categorieId}/notes")
+  public ResponseEntity<Notes> createComment(@PathVariable(value = "categorieId") Long categorieId,
+      @RequestBody Notes notes) throws NoteNotFoundException {
+        Notes note = ca.findById(categorieId).map(tutorial -> {
+      notes.setCategories(tutorial);
+      return notesRepository.save(notes);
+    }).orElseThrow(() -> new NoteNotFoundException(categorieId));
 
-    return ResponseEntity.created(location).body(savedNotes);
-  }
-
-  /*@PostMapping("notes")
-  public Notes addNotes(@RequestBody Notes notes) {
-      return this.notesService.addNotes(notes);
+    return new ResponseEntity<>(note, HttpStatus.CREATED);
   }*/
 
-  @PutMapping("notes/{id}")
-  public Notes updateNote(@PathVariable(value = "id") Long noteId, @RequestBody Notes noteDetails)
-      throws NoteNotFoundException {
-    Notes updatedNotes = this.notesService.update(noteId, noteDetails);
-    return updatedNotes;
+
+  @PostMapping("notes")
+  public Notes addNotes(@RequestBody Notes notes) {
+    return this.notesService.addNotes(notes);
   }
 
+  /*
+   * @PutMapping("notes/{id}")
+   * public Notes updateNote(@PathVariable(value = "id") Long noteId, @RequestBody
+   * Notes noteDetails)
+   * throws NoteNotFoundException {
+   * Notes updatedNotes = this.notesService.update(noteId, noteDetails);
+   * return updatedNotes;
+   * }
+   */
+
   @DeleteMapping("/notes/{id}")
-    public Boolean delete(@PathVariable Long id) {
-      return this.notesService.delete(id);
+  public Boolean delete(@PathVariable Long id) {
+    return this.notesService.delete(id);
   }
 
   @PatchMapping("notes/{id}")
-  public Notes updateTodoWithMap(@PathVariable(value="id") Long id, @RequestBody
-  Map<Object,Object> objectMap ){    
- return notesService.updateWithMap(id, objectMap); 
-  
+  public Notes updateTodoWithMap(@PathVariable(value = "id") Long id, @RequestBody Map<Object, Object> objectMap) {
+    return notesService.updateWithMap(id, objectMap);
+
   }
 
 }

@@ -1,11 +1,12 @@
 <ion-content>
   <form [formGroup]="newNote" (ngSubmit)="saveNote(newNote)" class="form" [style.background]="selectedColor">
+
     <div class="toolbar">
       <div>
         <ion-button size="small" fill="clear" type="submit">
           <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
         </ion-button>
-        <ion-button size="small" fill="clear" (click)="abbrechen()">
+        <ion-button size="sm ll" fill="clear" (click)="abbrechen()">
           <ion-icon slot="icon-only" name="close-outline"></ion-icon>
         </ion-button>
       </div>
@@ -14,58 +15,12 @@
     <input type="text" formControlName="title" class="title" ngModel="{{title}}" />
     <textarea type="text" formControlName="text" class="text" ngModel="{{text}}"></textarea>
 
-    <!--div>
-        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-          Upload
-        </button>
-      </div-->
-
-    <!--AUSGEWÄHLTE DATEI/IMG LÖSCHEN-->
-    <!--div>
-      <ul *ngFor="let f of file">
-        <li>
-          <a href="{{ f.url }}">{{ f.name }}</a>
-          <ion-icon name="trash-outline" (click)="deleteFile(file)"></ion-icon>
-        </li>
-      </ul>
-    </div-->
-
-    <!--p>{{imgName}}</p>
-    <p>{{fileName}}</p-->
-
-    <ion-input formControlName="color"></ion-input>
-
     <div class="footer">
 
       <ion-button (click)="showC()" fill="clear">
         <ion-icon name="albums"></ion-icon>
       </ion-button>
 
-      <!--ng-container formArrayName="files">
-        <div *ngFor="let file of files.controls;index as i">
-          <div [formGroupName]="i">
-
-            <input onchange="console.log(event.target.files)" formControlName="name" type="file"
-              (change)="selectImg($event)" #imageUpload accept="image/*" class="file-input" />
-            <div class="imageUpload">
-
-              <ion-button fill="clear" (click)="imageUpload.click()">
-                <ion-icon name="image"></ion-icon>
-              </ion-button>
-            </div>
-
-            <input formControlName="name" type="file" (change)="selectFile($event)" #fileUpload accept=".pdf, .txt"
-              class="file-input" />
-            <div class="imageUpload">
-
-              <ion-button fill="clear" (click)="fileUpload.click()">
-                <ion-icon name="document"></ion-icon>
-              </ion-button>
-            </div>
-
-          </div>
-        </div>
-      </ng-container-->
 
       <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
         <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
