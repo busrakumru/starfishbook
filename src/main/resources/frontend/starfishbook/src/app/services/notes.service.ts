@@ -32,14 +32,14 @@ export class NotesService {
       return this.http.delete(`${this.baseUrl}/${id}`);
     }
 
-    updateNote(id: any, note: Notes): Observable<Notes[]> {
-    return this.http.put<Notes>(`${this.baseUrl}/${id}`, note);
-    }
+     updateNotes(id: any, notesData: Notes): Observable<Notes[]> {
+    return this.http.patch<Notes[]>(this.baseUrl + '/auth/users/notes/' + id, notesData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+*/
 
-    /*patchNote(id: any, note: Notes): Observable<any>{
-      return this.http.patch<Notes[]>(`${this.baseUrl}/${id}`, note);
-    }
-}*/
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -64,8 +64,8 @@ export class NotesService {
       );
   }
 
-  createNotes(notesData: Notes): Observable<Notes> {
-    return this.http.post<Notes>(this.baseUrl + '/auth/users/notes/', notesData)
+  createNotes(notesData: Notes): Observable<Notes[]> {
+    return this.http.post<Notes[]>(this.baseUrl + '/auth/users/notes/', notesData)
       .pipe(
         catchError(this.handleError)
       );

@@ -11,12 +11,15 @@ import { NotePageRoutingModule } from './note-routing.module';
 import { NotePage } from './note.page';
 import { NgxColorsModule } from 'ngx-colors';
 import { IonicModule } from '@ionic/angular';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MatIconModule,
+    MatInputModule,
     NotePageRoutingModule,
     ReactiveFormsModule,
     NgxColorsModule,

@@ -1,33 +1,33 @@
-<ion-content>
-  <form [formGroup]="newNote" (ngSubmit)="saveNote(newNote)" class="form" [style.background]="selectedColor">
+<form [formGroup]="newNote" (ngSubmit)="saveNote(newNote)" class="form" [style.background]="selectedColor">
 
-    <div class="toolbar">
-      <div>
-        <ion-button size="small" fill="clear" type="submit">
-          <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
-        </ion-button>
-        <ion-button size="sm ll" fill="clear" (click)="abbrechen()">
-          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </ion-button>
-      </div>
-    </div>
-
-    <input type="text" formControlName="title" class="title" ngModel="{{title}}" />
-    <textarea type="text" formControlName="text" class="text" ngModel="{{text}}"></textarea>
-
-    <div class="footer">
-
-      <ion-button (click)="showC()" fill="clear">
-        <ion-icon name="albums"></ion-icon>
+  <ion-header >
+  
+      <ion-button size="small" fill="clear" type="submit">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
+      <ion-button size="sm ll" fill="clear" (click)="abbrechen()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
       </ion-button>
 
+  </ion-header>
 
-      <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
-        <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
-          [hideColorPicker]="true" [hideTextInput]="true">
-        </ngx-colors>
+
+    <input type="text" formControlName="title" class="title" ngModel="{{title}}" placeholder="Titel" />
+    <textarea type="text" formControlName="text" class="text" ngModel="{{text}}" placeholder="Text"></textarea>
+  
+
+  <ion-footer>
+      <div class="footer">
+        <ion-button (click)="showC()" fill="clear">
+          <ion-icon name="albums"></ion-icon>
+        </ion-button>
+
+        <div style="display:flex; align-items: center; margin: 0px 20px 0px 9px;">
+          <ngx-colors formControlName="color" ngx-colors-trigger [palette]="colorPalette" [(ngModel)]="selectedColor"
+            [hideColorPicker]="true" [hideTextInput]="true">
+          </ngx-colors>
+        </div>
       </div>
-    </div>
-  </form>
+  </ion-footer>
 
-</ion-content>
+</form>

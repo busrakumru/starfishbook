@@ -21,7 +21,6 @@ public class CategoriesService {
         Categories category = new Categories();
         category.setTitle(request.getTitle());
         category.setNotes(request.getNotes());
-
         return categoriesRepository.save(category);
     }
 

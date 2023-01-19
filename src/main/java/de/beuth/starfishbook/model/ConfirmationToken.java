@@ -2,7 +2,6 @@ package de.beuth.starfishbook.model;
 
 import java.util.Date;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,34 +15,35 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="confirmationToken")
+@Table(name = "confirmationToken")
 public class ConfirmationToken {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="token_id")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "token_id")
 	public Long tokenid;
 
-    @Column(name="confirmation_token")
-    private String confirmationToken;
+	@Column(name = "confirmation_token")
+	private String confirmationToken;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	@JoinColumn(nullable = false, name = "user_id")
+	private User user;
 
-    public ConfirmationToken(){}
+	public ConfirmationToken() {
+	}
 
-    public ConfirmationToken(User user){
+	public ConfirmationToken(User user) {
 
-        this.user = user;
-        createdDate = new Date();
-        confirmationToken = UUID.randomUUID().toString();
-    }
+		this.user = user;
+		createdDate = new Date();
+		confirmationToken = UUID.randomUUID().toString();
+	}
 
-    public Long getTokenid() {
+	public Long getTokenid() {
 		return tokenid;
 	}
 
@@ -75,7 +75,4 @@ public class ConfirmationToken {
 		this.user = user;
 	}
 
-
-    
-    
 }

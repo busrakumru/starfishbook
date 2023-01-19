@@ -37,7 +37,7 @@ public class TodosService {
     public Todos addTodo(Todos request) {
         Todos todo = new Todos();
         todo.setTitle(request.getTitle());
-        //todo.setCreatedAt(request.getCreatedAt());
+        todo.setCreatedAt(request.getCreatedAt());
         todo.setTodolist(request.getTodolist());
         todo.setAppointmentTime(request.getAppointmentTime());
         return this.todoRepository.save(todo);
@@ -50,7 +50,7 @@ public class TodosService {
     public Todos updateTodo(Long id, Todos request) {
         Todos forUpdate = this.todoRepository.findTodoById(id);
         forUpdate.setTitle(request.getTitle());
-        //forUpdate.setCreatedAt(request.getCreatedAt());
+        forUpdate.setCreatedAt(request.getCreatedAt());
         forUpdate.setTodolist(request.getTodolist());
         forUpdate.setAppointmentTime(request.getAppointmentTime());
         return this.todoRepository.save(forUpdate);

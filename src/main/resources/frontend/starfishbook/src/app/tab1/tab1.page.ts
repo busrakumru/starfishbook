@@ -104,7 +104,8 @@ export class Tab1Page {
         'id': note.id,
         'title': note.title,
         'text': note.text,
-        'color': note.color
+        'color': note.color,
+        'categories': note.categories,
       }
     });
     return await modal.present();
@@ -129,25 +130,12 @@ export class Tab1Page {
   clearSearch() {
     this.searchTerm = '';
   }
-
+  
   async addCategory() {
     const modal = await this.modalController.create({
       component: CategoryPage,
     });
     return await modal.present();
   }
-
-  /*async openCategory(category) {
-
-    const modal = await this.modalController.create({
-      component: CategoryPage,
-      componentProps: {
-        'id': category.id,
-        'title': category.title,
-      }
-    });
-    return await modal.present();
-
-  }*/
 
 }

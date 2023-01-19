@@ -1,12 +1,15 @@
 package de.beuth.starfishbook.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,10 +54,10 @@ public class TodolistController {
         return this.todoListService.addTodolist(todoslist);
     }
 
-    @PutMapping("todolist/{id}")
-    public Todolist updateTodolistbyTodosId(@PathVariable(value = "id") Long todolistId,
-            @RequestBody Todolist todoslist) {
-        return this.todoListService.updateTodo(todolistId, todoslist);
+    @PatchMapping("todolist/{id}")
+    public Todolist updateTodolistbyTodosId(@PathVariable(value = "id") Long id,
+    @RequestBody Map<Object, Object> objectMap) {
+        return this.todoListService.updateWithMap(id, objectMap);
     }
 
     @DeleteMapping("todolist/{id}")

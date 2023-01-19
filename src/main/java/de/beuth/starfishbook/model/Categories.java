@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "categories")
@@ -25,7 +25,6 @@ public class Categories {
     private String title;
 
     @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Notes> notes = new HashSet<>();
 
     public Categories() {

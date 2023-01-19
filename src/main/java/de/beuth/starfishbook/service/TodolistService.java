@@ -1,7 +1,9 @@
 package de.beuth.starfishbook.service;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 import de.beuth.starfishbook.model.Todolist;
 import de.beuth.starfishbook.repository.TodolistRepository;
@@ -49,13 +51,26 @@ public class TodolistService {
         return this.todoListRepository.save(request);
     }
 
-    public Todolist updateTodo(Long id, Todolist request) {
+    /*public Todolist updateTodo(Long id, Todolist request) {
         Todolist update = todoListRepository.findTodolistById(id);
         update.setText(request.getText());
         update.setFinished(request.isFinished());
         update.setTodos(request.getTodos());
         return this.todoListRepository.save(update);
+    }*/
+    public Todolist updateWithMap(Long id, Map<Object, Object> objectMap) {
+
+        Optional<Todolist> todolist = todoListRepository.findById(id);
+
+        objectMap.forEach((key, value) -> {
+            Field field = ReflectionUtils.findRequiredField(Todolist.class, (String) key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, todolist.get(), value);
+        });
+
+        return todoListRepository.save(todolist.get());
     }
+
 
     public Boolean delete(Long id) {
         this.todoListRepository.deleteById(id);

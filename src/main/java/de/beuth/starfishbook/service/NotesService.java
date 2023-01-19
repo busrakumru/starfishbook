@@ -63,7 +63,6 @@ public class NotesService {
     public Notes updateWithMap(Long id, Map<Object, Object> objectMap) {
 
         Optional<Notes> notes = notesRepository.findById(id);
-
         objectMap.forEach((key, value) -> {
             Field field = ReflectionUtils.findRequiredField(Notes.class, (String) key);
             field.setAccessible(true);

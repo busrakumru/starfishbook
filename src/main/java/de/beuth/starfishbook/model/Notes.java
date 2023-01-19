@@ -1,11 +1,6 @@
 package de.beuth.starfishbook.model;
 
 import javax.persistence.*;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -23,14 +18,13 @@ public class Notes {
     @Column(name = "text")
     private String text;
 
+
     @Column(name = "color")
     private String color;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categories_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    //@JsonIgnore
     private Categories categories;
 
     public Notes() {

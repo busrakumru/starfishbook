@@ -35,15 +35,15 @@ export class TodolistService {
       );
   }
   
-  createTodolist(todolistData: Todolist): Observable<Todolist> {
-    return this.http.post<Todolist>(this.baseUrl + '/auth/users/todolist', todolistData)
+  createTodolist(todolistData: Todolist): Observable<Todolist[]> {
+    return this.http.post<Todolist[]>(this.baseUrl + '/auth/users/todolist', todolistData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  updateTodolist(todolistData: Todolist): Observable<Todolist> {
-    return this.http.put<Todolist>(this.baseUrl + '/auth/users/todolist/' + todolistData.id, todolistData)
+  updateTodolist(todolistData: Todolist): Observable<Todolist[]> {
+    return this.http.patch<Todolist[]>(this.baseUrl + '/auth/users/todolist/' + todolistData.id, todolistData)
       .pipe(
         catchError(this.handleError)
       );

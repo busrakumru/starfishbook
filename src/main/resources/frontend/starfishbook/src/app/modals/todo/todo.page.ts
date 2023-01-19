@@ -19,9 +19,7 @@ export class TodoPage implements OnInit {
   @Input() id: any;
   @Input() title: string;
   @Input() appointmentTime: Date;
-  @Input() oldTodolist: Todolist[];
-
-
+  //@Input() oldTodolist: Todolist[];
 
   minDate = new Date().toISOString();
   maxDate: any = (new Date()).getFullYear() + 10;
@@ -40,11 +38,11 @@ export class TodoPage implements OnInit {
 
     this.newTodo = this.fb.group({
       title: [''],
-      appointmentTime: new Date(),
+      appointmentTime: Date(),
       todolist: this.fb.array([])
     })
 
-    this.addProduct();
+    //this.addProduct();
   }
 
   get todolist() {

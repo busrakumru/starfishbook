@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Kategorien</ion-title>
-  </ion-toolbar>
 
-  <ion-button class="setting_icon" fill="none" size="large" (click)="closeModal()">
-    <ion-icon name="close-outline"></ion-icon>
-  </ion-button>
+
+    <ion-title>Kategorien</ion-title>
+    <ion-button class="setting_icon" fill="none" size="large" (click)="closeModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+
 </ion-header>
 
 <ion-content>
   <div *ngFor="let c of categories">
     <ion-item (click)="passId(c)">
-      Id:{{c.id}}, Titel:{{ c.title }}
+      {{ c.title }}
     </ion-item>
   </div>
 </ion-content>

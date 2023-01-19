@@ -6,12 +6,11 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "todos")
-//@JsonIgnoreProperties(value = { "createdAt" }, allowGetters = true)
+// @JsonIgnoreProperties(value = { "createdAt" }, allowGetters = true)
 
 public class Todos {
 
@@ -25,16 +24,17 @@ public class Todos {
     @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
     private Set<Todolist> todolists = new HashSet<>();
 
-    //@Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date appointmentTime;
 
-    /*@Column(name = "createdAt")
-    private Date createdAt = new Date();*/
+    
+      @Column(name = "createdAt")
+      private Date createdAt = new Date();
 
-    public Todos(String title, Set<Todolist> todolists, Date appointmentTime) {
+    public Todos(String title, Set<Todolist> todolists, Date appointmentTime, Date createdAt) {
         this.title = title;
-        //this.createdAt = createdAt;
+        this.createdAt = createdAt;
         this.todolists = todolists;
         this.appointmentTime = appointmentTime;
     }
@@ -57,15 +57,16 @@ public class Todos {
     public void setTitle(String title) {
         this.title = title;
     }
-/* 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+
+    public Date getCreatedAt() {
+    return createdAt;
     }
-*/
+    
+    public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+    }
+    
     public Set<Todolist> getTodolist() {
         return todolists;
     }
