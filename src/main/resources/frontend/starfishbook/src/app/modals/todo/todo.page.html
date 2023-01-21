@@ -63,33 +63,63 @@
         </ion-card-header>
 
         <ion-card-content>
-          <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
+          <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls'] ; let i = index;">
             <div [formGroupName]="i" class="todo-list">
-              <div>
-                <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+              <div class="item">
+                <div>
+                  <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+                </div>
+                <div class="todo-text">
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input matInput id="text" placeholder="Todoitem" type="text" class="form-control" formControlName="text">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <ion-button (click)="delete(id)" fill="clear">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
-              <div class="todo-text">
-                <mat-form-field [hideRequiredMarker]="true">
-                  <input matInput id="text" placeholder="Todoitem" type="text" class="form-control" formControlName="text">
-                </mat-form-field>
+             
+              <div *ngFor="let tl of todolist2" class="item">
+                  <div>
+                    <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+                  </div>
+                  <div class="todo-text">
+                    <mat-form-field [hideRequiredMarker]="true">
+                      <input matInput id="text" placeholder="{{tl.text}}" type="text" class="form-control" formControlName="text">
+                    </mat-form-field>
+                  </div>
+                <div>
+                  <ion-button (click)="delete(id)" fill="clear">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
-              <div>
-                <ion-button (click)="delete(id)" fill="clear">
-                  <ion-icon name="close-outline"></ion-icon>
-                </ion-button>
-              </div>
-
+              
                 
-              <span>{{t.text}}
-
-              </span>
+              <!--span>{{t.text}}</span-->
             </div>
           
-            <span>{{t.text}}
-
-            </span>
+            <!--span>{{t.text}}</span-->
               
           </div>
+
+          <!--div *ngFor="let t of todolist2" class="todo-list">
+            <div>
+              <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+            </div>
+            <div class="todo-text">
+              <mat-form-field [hideRequiredMarker]="true">
+                <input matInput id="text" placeholder="{{t.text}}" type="text" class="form-control" formControlName="text">
+              </mat-form-field>
+            </div>
+            <div>
+              <ion-button (click)="delete(id)" fill="clear">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div-->
         </ion-card-content>
 
       </ion-card>

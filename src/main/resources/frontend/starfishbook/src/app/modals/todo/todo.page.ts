@@ -19,6 +19,7 @@ export class TodoPage implements OnInit {
   @Input() id: any;
   @Input() title: string;
   @Input() appointmentTime: Date;
+  @Input() todolist2: any;
 
 
   minDate = new Date().toISOString();

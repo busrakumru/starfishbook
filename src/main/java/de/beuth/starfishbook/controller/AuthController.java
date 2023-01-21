@@ -5,7 +5,6 @@ import de.beuth.starfishbook.model.ERoles;
 import de.beuth.starfishbook.model.Role;
 import de.beuth.starfishbook.model.User;
 import de.beuth.starfishbook.repository.ConfirmationTokenRepository;
-import de.beuth.starfishbook.repository.RoleRepository;
 import de.beuth.starfishbook.request.UserRequest;
 import de.beuth.starfishbook.repository.AuthCRepository;
 import de.beuth.starfishbook.response.JwtResponse;
@@ -53,9 +52,6 @@ public class AuthController {
 
     @Autowired
     private ConfirmationTokenService confirmationService;
-
-    @Autowired
-    RoleRepository roleRepository;
 
     @Autowired
     private EmailService emailService;
