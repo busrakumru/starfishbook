@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 import de.beuth.starfishbook.model.Notes;
 
 @Repository
-public interface  NotesRepository extends JpaRepository<Notes, Long> {
+public interface NotesRepository extends JpaRepository<Notes, Long> {
 
    Notes findNotesById(Long id);
-   
-}
 
+}

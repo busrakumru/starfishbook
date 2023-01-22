@@ -16,7 +16,6 @@ public class NotesService {
     @Autowired
     private final NotesRepository notesRepository;
 
-
     public NotesService(NotesRepository notesRepository) {
         this.notesRepository = notesRepository;
     }

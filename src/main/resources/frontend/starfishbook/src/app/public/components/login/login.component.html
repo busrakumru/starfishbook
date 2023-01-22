@@ -1,15 +1,18 @@
 <div class="container">
 
   <div>
+
     <div class="register">
       <a [routerLink]="['../register']">Registrieren</a>
       <p>Du hast noch kein Konto? Dann registriere dich in nur ein Paar Schritten!</p>
     </div>
 
     <div>
-      <mat-card>
-        <mat-card-title>Login</mat-card-title>
-        <mat-card-content>
+      <ion-card>
+        <ion-card-title>Login</ion-card-title>
+
+        <ion-card-content>
+
           <form [formGroup]="form" (ngSubmit)="login()" *ngIf="!isLoggedIn">
 
             <mat-form-field>
@@ -30,11 +33,15 @@
             </div>
 
           </form>
-          <div class="alert alert-success" *ngIf="isLoggedIn">
-            Logged in as {{ roles }}.
-          </div>
-        </mat-card-content>
-      </mat-card>
+        </ion-card-content>
+      </ion-card>
+      <div class="register">
+        
+        <p>Bist du Admin?</p>
+        <a [routerLink]="['../login']">ADMIN</a>
+        
+      </div>
+  
     </div>
   </div>
 </div>

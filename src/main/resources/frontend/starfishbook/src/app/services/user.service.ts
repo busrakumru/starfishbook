@@ -24,8 +24,11 @@ export class UserService {
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.baseUrl}`);
   }
+  getAdminBoard(): Observable<any> {
+    return this.http.get(`${this.baseUrl}` + 'admin', { responseType: 'text' });
+  }
 
-  getPublicContent(): Observable<any> {
+ /* getPublicContent(): Observable<any> {
     return this.http.get(`${this.baseUrl}` + 'all', { responseType: 'text' });
   }
 
@@ -34,7 +37,5 @@ export class UserService {
   }
 
 
-  getAdminBoard(): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + 'admin', { responseType: 'text' });
-  }
+  */
 }

@@ -10,7 +10,7 @@ public class ResponseFile {
     private String type;
     private long size;
 
-    //private Notes notes;
+    // private Notes notes;
 
     public ResponseFile(String id, String name, String url, String type, long size) {
         this.id = id;
@@ -18,7 +18,7 @@ public class ResponseFile {
         this.url = url;
         this.type = type;
         this.size = size;
-        //this.notes = notes;
+        // this.notes = notes;
     }
 
     public String getId() {
@@ -60,13 +60,13 @@ public class ResponseFile {
     public void setSize(long size) {
         this.size = size;
     }
-/* 
-    public Notes getNotes() {
-        return notes;
-    }
-
-    public void setNotes(Notes notes) {
-        this.notes = notes;
-    }
-*/
+    /*
+     * public Notes getNotes() {
+     * return notes;
+     * }
+     * 
+     * public void setNotes(Notes notes) {
+     * this.notes = notes;
+     * }
+     */
 }

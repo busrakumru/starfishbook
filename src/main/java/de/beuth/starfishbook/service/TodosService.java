@@ -5,12 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import de.beuth.starfishbook.model.Todos;
 import de.beuth.starfishbook.repository.TodosRepository;
 
@@ -19,7 +16,6 @@ public class TodosService {
 
     private final TodosRepository todoRepository;
 
-    @Autowired
     public TodosService(TodosRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
@@ -45,15 +41,6 @@ public class TodosService {
 
     public Todos save(Todos request) {
         return this.todoRepository.save(request);
-    }
-
-    public Todos updateTodo(Long id, Todos request) {
-        Todos forUpdate = this.todoRepository.findTodoById(id);
-        forUpdate.setTitle(request.getTitle());
-        forUpdate.setCreatedAt(request.getCreatedAt());
-        forUpdate.setTodolist(request.getTodolist());
-        forUpdate.setAppointmentTime(request.getAppointmentTime());
-        return this.todoRepository.save(forUpdate);
     }
 
     public Boolean delete(Long id) {

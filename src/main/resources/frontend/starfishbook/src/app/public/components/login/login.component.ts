@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  //roles: string[]= [];
+  roles: string[];
+  showAdminBoard = false;
 
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -31,8 +32,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenservice.getToken()) {
       this.isLoggedIn = true;
-      //this.roles = this.tokenservice.getUser();
-      this.tokenservice.getUser();
     }
   }
 
@@ -42,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.authService.login({
         email: this.email.value,
         password: this.password.value,
+
       }).pipe(
         tap(data => {
           
@@ -49,10 +49,13 @@ export class LoginComponent implements OnInit {
           this.token.saveUser(data);
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-          const role= this.tokenservice.getUser();
-          console.log(role)
+          const user = this.tokenservice.getUser();
+          this.roles = user.role;
 
-          //this.roles = this.tokenservice.getUser().roles;
+          console.log(user.email);
+          console.log(user.role);
+          console.log(this.roles)
+          
           this.router.navigate(['../../tabs/tab1'])
 
         },

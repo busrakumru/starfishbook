@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-board-admin',
-  templateUrl: './board-admin.component.html',
-  styleUrls: ['./board-admin.component.scss'],
+  selector: 'app-admin-board',
+  templateUrl: './admin-board.component.html',
+  styleUrls: ['./admin-board.component.scss'],
 })
-export class BoardAdminComponent implements OnInit {
+export class AdminBoardComponent implements OnInit {
 
   content = 'HALLOADMIN';
 
@@ -22,5 +22,4 @@ export class BoardAdminComponent implements OnInit {
       }
     );
   }
-
 }

@@ -8,5 +8,5 @@ import de.beuth.starfishbook.model.ConfirmationToken;
 public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken, Long> {
 
     ConfirmationToken findByConfirmationToken(String confirmationToken);
-    
+
 }

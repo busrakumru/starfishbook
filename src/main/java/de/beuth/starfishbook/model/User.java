@@ -1,6 +1,5 @@
 package de.beuth.starfishbook.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -23,18 +22,22 @@ public class User {
   @Column(name = "enabled")
   private boolean enabled;
 
-  public User(Long userid, String email, String password,ERoles roles ) {
-    this.userid = userid;
+  public User(String email, String password, ERoles roles) {
     this.email = email;
     this.password = password;
     this.enabled = false;
-    this.roles =roles;
+    this.roles = roles;
+  }
 
+  public User(String email, String password, Boolean enabled, ERoles roles) {
+    this.email = email;
+    this.password = password;
+    this.enabled = enabled;
+    this.roles = roles;
   }
 
   public User() {
   }
-	
 
   public boolean isEnabled() {
     return enabled;
@@ -79,5 +82,5 @@ public class User {
   public void setRoles(ERoles roles) {
     this.roles = roles;
   }
- 
+
 }

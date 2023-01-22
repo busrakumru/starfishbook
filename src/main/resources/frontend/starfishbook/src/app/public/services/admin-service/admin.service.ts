@@ -1,5 +1,6 @@
+
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
@@ -14,30 +15,21 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AdminService {
 
-  constructor(private http: HttpClient, private tokenStorageService: TokenService, private router: Router ) { }
+  constructor(private http: HttpClient) { }
 
-  private baseUrl = 'https://localhost:8443/auth';
+  private baseUrl = 'https://localhost:8443/auth/admin';
 
-  login(user: User): Observable<any> {
-    return this.http.post<User>(`${this.baseUrl}/login`, user, httpOptions);
+  getuser(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/user`, httpOptions);
   }
 
-  register(user: User): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, user, httpOptions).pipe(catchError(this.handleError));
+  updateuser(id:any, user: Map<Object, Object> ): Observable<User[]> {
+    return this.http.patch<User[]>(`${this.baseUrl}/user/${id}`, user, httpOptions).pipe(catchError(this.handleError));
   }
 
-  findByEmail(email: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/find-by-email?email=${email}`);
-  }
-
-  logout(): void {
-    this.tokenStorageService.signOut();
-    this.router.navigate(['../../login']);
-  }
-
-  delete(id: any): Observable<any> {
+  deleteuser(id: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/users/${id}`);
   }
   

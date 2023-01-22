@@ -7,5 +7,5 @@ import de.beuth.starfishbook.model.Todos;
 @Repository
 public interface TodosRepository extends JpaRepository<Todos, Long> {
 
-    Todos findTodoById(Long id);    
+    Todos findTodoById(Long id);
 }

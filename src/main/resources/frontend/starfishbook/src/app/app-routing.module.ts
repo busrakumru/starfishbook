@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
 
 const routes: Routes = [
   {

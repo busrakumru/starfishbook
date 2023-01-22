@@ -56,7 +56,7 @@ public class TodolistController {
 
     @PatchMapping("todolist/{id}")
     public Todolist updateTodolistbyTodosId(@PathVariable(value = "id") Long id,
-    @RequestBody Map<Object, Object> objectMap) {
+            @RequestBody Map<Object, Object> objectMap) {
         return this.todoListService.updateWithMap(id, objectMap);
     }
 

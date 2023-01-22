@@ -51,13 +51,15 @@ public class TodolistService {
         return this.todoListRepository.save(request);
     }
 
-    /*public Todolist updateTodo(Long id, Todolist request) {
-        Todolist update = todoListRepository.findTodolistById(id);
-        update.setText(request.getText());
-        update.setFinished(request.isFinished());
-        update.setTodos(request.getTodos());
-        return this.todoListRepository.save(update);
-    }*/
+    /*
+     * public Todolist updateTodo(Long id, Todolist request) {
+     * Todolist update = todoListRepository.findTodolistById(id);
+     * update.setText(request.getText());
+     * update.setFinished(request.isFinished());
+     * update.setTodos(request.getTodos());
+     * return this.todoListRepository.save(update);
+     * }
+     */
     public Todolist updateWithMap(Long id, Map<Object, Object> objectMap) {
 
         Optional<Todolist> todolist = todoListRepository.findById(id);
@@ -70,7 +72,6 @@ public class TodolistService {
 
         return todoListRepository.save(todolist.get());
     }
-
 
     public Boolean delete(Long id) {
         this.todoListRepository.deleteById(id);

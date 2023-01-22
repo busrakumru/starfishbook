@@ -18,15 +18,19 @@ public class FileStorageService {
     @Autowired
     private FileDBRepository fileDBRepository;
 
-   /*  public List<FileDB> findByNotesId(Long notesId) {
-        return fileDBRepository.findByNotesId(notesId);
-    }
-*/
-    /*public FileDB store(MultipartFile file, Notes notes) throws IOException {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
-        return fileDBRepository.save(FileDB);
-    }*/
+    /*
+     * public List<FileDB> findByNotesId(Long notesId) {
+     * return fileDBRepository.findByNotesId(notesId);
+     * }
+     */
+    /*
+     * public FileDB store(MultipartFile file, Notes notes) throws IOException {
+     * String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+     * FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),
+     * notes);
+     * return fileDBRepository.save(FileDB);
+     * }
+     */
 
     public FileDB store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -34,15 +38,17 @@ public class FileStorageService {
         return fileDBRepository.save(FileDB);
     }
 
-    /*public FileDB store2(MultipartFile file) throws IOException {
-
-        Notes notes = new Notes();
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(), notes);
-        return fileDBRepository.save(FileDB);
-    }*/
-
+    /*
+     * public FileDB store2(MultipartFile file) throws IOException {
+     * 
+     * Notes notes = new Notes();
+     * 
+     * String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+     * FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes(),
+     * notes);
+     * return fileDBRepository.save(FileDB);
+     * }
+     */
 
     public FileDB save(FileDB request) {
         return this.fileDBRepository.save(request);
@@ -52,20 +58,22 @@ public class FileStorageService {
         return fileDBRepository.findAll().stream();
     }
 
-    public FileDB getFile(String id){
+    public FileDB getFile(String id) {
         return fileDBRepository.findById(id).get();
     }
 
-    /*public void deleteFile(String id){
-        Optional<FileDB> file = fileDBRepository.findById(id);
-        file.ifPresent(fileDBRepository::delete);
+    /*
+     * public void deleteFile(String id){
+     * Optional<FileDB> file = fileDBRepository.findById(id);
+     * file.ifPresent(fileDBRepository::delete);
+     * 
+     * 
+     * //return fileDBRepository.findById(id).isPresent(fileDBRepository::delete);
+     * }
+     */
 
-
-        //return fileDBRepository.findById(id).isPresent(fileDBRepository::delete);
-    }*/
-
-    public Boolean deleteFile(String id){
-        if(!this.fileDBRepository.existsById(id)){
+    public Boolean deleteFile(String id) {
+        if (!this.fileDBRepository.existsById(id)) {
 
         }
         this.fileDBRepository.deleteById(id);

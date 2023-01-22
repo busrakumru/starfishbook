@@ -9,8 +9,11 @@ import de.beuth.starfishbook.model.Todolist;
 public interface TodolistRepository extends JpaRepository<Todolist, Long> {
 
     Todolist findTodolistById(Long id);
+
     Todolist findByIdAndTodosId(Long id, Long todoId);
+
     List<Todolist> findByFinished(boolean finished);
+
     List<Todolist> findByTodosId(Long todoId);
 
 }

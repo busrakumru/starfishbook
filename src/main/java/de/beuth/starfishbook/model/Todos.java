@@ -28,9 +28,8 @@ public class Todos {
     @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date appointmentTime;
 
-    
-      @Column(name = "createdAt")
-      private Date createdAt = new Date();
+    @Column(name = "createdAt")
+    private Date createdAt = new Date();
 
     public Todos(String title, Set<Todolist> todolists, Date appointmentTime, Date createdAt) {
         this.title = title;
@@ -58,15 +57,14 @@ public class Todos {
         this.title = title;
     }
 
-
     public Date getCreatedAt() {
-    return createdAt;
+        return createdAt;
     }
-    
+
     public void setCreatedAt(Date createdAt) {
-    this.createdAt = createdAt;
+        this.createdAt = createdAt;
     }
-    
+
     public Set<Todolist> getTodolist() {
         return todolists;
     }

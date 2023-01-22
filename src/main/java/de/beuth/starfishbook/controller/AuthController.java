@@ -135,6 +135,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody UserRequest user) {
 
         User existingUser = authRepository.findUserByEmail(user.getEmail());
+
         if (existingUser.isEnabled() == true) {
 
             Authentication authentication = authenticationManager.authenticate(

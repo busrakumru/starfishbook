@@ -29,47 +29,59 @@ import de.beuth.starfishbook.service.FileStorageService;
 @RequestMapping("auth/users/")
 public class FileController {
 
-    /*private FileDBRepository filesRepository;
-    private NotesRepository notesRepository;
-
-  @Autowired
-  public FileController(FileDBRepository filesRepository, NotesRepository notesRepository) {
-    this.filesRepository = filesRepository;
-    this.notesRepository = notesRepository;
-  }*/
+    /*
+     * private FileDBRepository filesRepository;
+     * private NotesRepository notesRepository;
+     * 
+     * @Autowired
+     * public FileController(FileDBRepository filesRepository, NotesRepository
+     * notesRepository) {
+     * this.filesRepository = filesRepository;
+     * this.notesRepository = notesRepository;
+     * }
+     */
 
     @Autowired
     private FileStorageService storageService;
 
-   /*  @GetMapping("notes/{notesId}/files")
-    public ResponseEntity<List<FileDB>> getFilesByNotesId(@PathVariable(value = "notesId") Long notesId) {
-        List<FileDB> files = storageService.findByNotesId(notesId);
-        return new ResponseEntity<>(files, HttpStatus.OK);
-    }*/
-  
-    /*@PostMapping("notes/{notesId}/files")
-    public ResponseEntity<ResponseMessage> createFileByNotesId(@PathVariable(value = "notesId") Long notesId,
-            @RequestParam("file") MultipartFile file) {
-        String message = "";
-        try {
-            Notes notes = this.notesService.findNotesById(notesId);
-            // request.setNotes(notes);
-            // this.storageService.save(request);
+    /*
+     * @GetMapping("notes/{notesId}/files")
+     * public ResponseEntity<List<FileDB>> getFilesByNotesId(@PathVariable(value =
+     * "notesId") Long notesId) {
+     * List<FileDB> files = storageService.findByNotesId(notesId);
+     * return new ResponseEntity<>(files, HttpStatus.OK);
+     * }
+     */
 
-            storageService.store(file, notes);
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-        } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-        }
-    }*/
+    /*
+     * @PostMapping("notes/{notesId}/files")
+     * public ResponseEntity<ResponseMessage>
+     * createFileByNotesId(@PathVariable(value = "notesId") Long notesId,
+     * 
+     * @RequestParam("file") MultipartFile file) {
+     * String message = "";
+     * try {
+     * Notes notes = this.notesService.findNotesById(notesId);
+     * // request.setNotes(notes);
+     * // this.storageService.save(request);
+     * 
+     * storageService.store(file, notes);
+     * message = "Uploaded the file successfully: " + file.getOriginalFilename();
+     * return ResponseEntity.status(HttpStatus.OK).body(new
+     * ResponseMessage(message));
+     * } catch (Exception e) {
+     * message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+     * return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new
+     * ResponseMessage(message));
+     * }
+     * }
+     */
 
     @PostMapping("files")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         try {
-            
+
             storageService.store(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -79,36 +91,41 @@ public class FileController {
         }
     }
 
-    /*@PostMapping("files")
-    public ResponseEntity<FileDB> uploadFile(@RequestBody @Valid FileDB files) {
-        Optional<Notes> optionalNotes = notesRepository.findById(files.getNotes().getId());
-        if (!optionalNotes.isPresent()) {
-            return ResponseEntity.unprocessableEntity().build();
-        }
-
-        files.setNotes(optionalNotes.get());
-
-        FileDB savedfile = filesRepository.save(files);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-            .buildAndExpand(savedfile.getId()).toUri();
-
-        return ResponseEntity.created(location).body(savedfile);
-    }
-    @PostMapping("files")
-    public ResponseEntity<FileDB> create(@RequestBody @Valid FileDB files) {
-        Optional<Notes> optionalNotes = notesRepository.findById(files.getNotes().getId());
-        if (!optionalNotes.isPresent()) {
-            return ResponseEntity.unprocessableEntity().build();
-        }
-
-        files.setNotes(optionalNotes.get());
-
-        FileDB savedFiles = filesRepository.save(files);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-            .buildAndExpand(savedFiles.getId()).toUri();
-
-        return ResponseEntity.created(location).body(savedFiles);
-    }*/
+    /*
+     * @PostMapping("files")
+     * public ResponseEntity<FileDB> uploadFile(@RequestBody @Valid FileDB files) {
+     * Optional<Notes> optionalNotes =
+     * notesRepository.findById(files.getNotes().getId());
+     * if (!optionalNotes.isPresent()) {
+     * return ResponseEntity.unprocessableEntity().build();
+     * }
+     * 
+     * files.setNotes(optionalNotes.get());
+     * 
+     * FileDB savedfile = filesRepository.save(files);
+     * URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+     * .buildAndExpand(savedfile.getId()).toUri();
+     * 
+     * return ResponseEntity.created(location).body(savedfile);
+     * }
+     * 
+     * @PostMapping("files")
+     * public ResponseEntity<FileDB> create(@RequestBody @Valid FileDB files) {
+     * Optional<Notes> optionalNotes =
+     * notesRepository.findById(files.getNotes().getId());
+     * if (!optionalNotes.isPresent()) {
+     * return ResponseEntity.unprocessableEntity().build();
+     * }
+     * 
+     * files.setNotes(optionalNotes.get());
+     * 
+     * FileDB savedFiles = filesRepository.save(files);
+     * URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+     * .buildAndExpand(savedFiles.getId()).toUri();
+     * 
+     * return ResponseEntity.created(location).body(savedFiles);
+     * }
+     */
     /*
      * public FileDB createFileByNotesId(@PathVariable(value = "notesId") Long
      * notesId, @RequestBody FileDB request, @RequestParam("file") MultipartFile
@@ -122,11 +139,12 @@ public class FileController {
      * }
      */
 
-    /*@GetMapping("files")
-    public ResponseEntity<List<FileDB>> getAll() {
-        return ResponseEntity.ok(filesRepository.findAll());
-    }*/
-
+    /*
+     * @GetMapping("files")
+     * public ResponseEntity<List<FileDB>> getAll() {
+     * return ResponseEntity.ok(filesRepository.findAll());
+     * }
+     */
 
     @GetMapping("files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
@@ -142,24 +160,29 @@ public class FileController {
                     fileDownloadUri,
                     dbFile.getType(),
                     dbFile.getData().length
-                   // dbFile.getNotes()
-                   );
+            // dbFile.getNotes()
+            );
         }).collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    /*@PostMapping("files")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-        String message = "";
-        try {
-            storageService.store2(file);
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-        } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-        }
-    }*/
+    /*
+     * @PostMapping("files")
+     * public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file")
+     * MultipartFile file) {
+     * String message = "";
+     * try {
+     * storageService.store2(file);
+     * message = "Uploaded the file successfully: " + file.getOriginalFilename();
+     * return ResponseEntity.status(HttpStatus.OK).body(new
+     * ResponseMessage(message));
+     * } catch (Exception e) {
+     * message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+     * return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new
+     * ResponseMessage(message));
+     * }
+     * }
+     */
 
     @GetMapping("files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
