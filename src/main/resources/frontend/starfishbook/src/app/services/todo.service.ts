@@ -11,35 +11,33 @@ import { Todo } from '../models/todo.model';
 
 export class TodoService {
 
-  //private baseUrl = 'https://localhost:8443';
-
-  private baseUrl = 'https://localhost:8443/auth/users';
+  private baseUrl = 'https://localhost:8443';
 
   constructor(private http: HttpClient) { }
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.baseUrl}/todo`)
+    return this.http.get<Todo[]>(this.baseUrl +'/auth/users/todo')
       .pipe(
         catchError(this.handleError)
       );
   }
 
   createTodo(todoData: Todo): Observable<Todo[]> {
-    return this.http.post<Todo[]>(`${this.baseUrl}/todo`, todoData)
+    return this.http.post<Todo[]>(this.baseUrl +'/auth/users/todo/', todoData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  updateTodo(id: any, todoData: Map<Object, Object> ): Observable<Todo[]> {
-    return this.http.patch<Todo[]>(`${this.baseUrl}/todo/${id}`, todoData)
+  updateTodo(id: any, todoData: Todo): Observable<Todo[]> {
+    return this.http.patch<Todo[]>(this.baseUrl +'/auth/users/todo/'+id, todoData)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteTodo(id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/todo/${id}`)
+    return this.http.delete(this.baseUrl +'/auth/users/todo/'+id)
       .pipe(
         catchError(this.handleError)
       );

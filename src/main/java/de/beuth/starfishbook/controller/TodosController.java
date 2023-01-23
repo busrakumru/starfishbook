@@ -50,7 +50,7 @@ public class TodosController {
 
     @PatchMapping("todo/{id}")
     public Todos updateTodoWithMap(@PathVariable(value = "id") Long id, @RequestBody Map<Object, Object> objectMap) {
-        return todoService.updateTodoWithMap(id, objectMap);
+        return todoService.updateWithMap(id, objectMap);
 
     }
 

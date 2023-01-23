@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Roles } from 'src/app/models/roles.model';
 import { User } from 'src/app/models/user.model';
 import { TokenService } from '../token/token.service';
 
@@ -40,6 +41,17 @@ export class AuthService {
   delete(id: any): Observable<any> {
     return this.http.delete(`${this.baseUrl}/users/${id}`);
   }
+  
+  private user: User;
+
+  isAuthorized() {
+      return !!this.user;
+  }
+
+  hasRole(role: Roles) {
+      return this.isAuthorized() && this.user.roles === role;
+  }
+
   
   handleError(error: HttpErrorResponse) {
     let msg = '';

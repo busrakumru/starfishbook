@@ -16,7 +16,6 @@ import { TodolistService } from '../services/todolist.service';
 export class Tab2Page implements OnInit {
 
   todos: Todo[] = [];
- 
 
   newTodo: FormGroup = new FormGroup({
     title: new FormControl(''),
@@ -31,18 +30,12 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenService.getToken();
     this.getTodo();
-    
   }
-
-  /* logout() {
-     this.authService.logout();
-   }*/
 
   getTodo(): void {
     this.todoService.getTodos()
       .subscribe((data: Todo[]) => {
         this.todos = data
- console.log(data);
       });
      
   }
@@ -89,7 +82,7 @@ export class Tab2Page implements OnInit {
         'id': todo.id,
         'title': todo.title,
         'appointmentTime': todo.appointmentTime,
-        'oldTodolist': todo.todolist
+        'todolist2': todo.todolist
       }
     });
     return await modal.present();

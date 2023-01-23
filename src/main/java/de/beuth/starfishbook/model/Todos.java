@@ -24,14 +24,14 @@ public class Todos {
     @OneToMany(mappedBy = "todos", cascade = CascadeType.ALL)
     private Set<Todolist> todolists = new HashSet<>();
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date appointmentTime;
+    //@Temporal(TemporalType.DATE)
+    //@DateTimeFormat(pattern = "dd.MM.yyyy") 
+    private String appointmentTime;
 
     @Column(name = "createdAt")
     private Date createdAt = new Date();
 
-    public Todos(String title, Set<Todolist> todolists, Date appointmentTime, Date createdAt) {
+    public Todos(String title, Set<Todolist> todolists,String appointmentTime, Date createdAt) {
         this.title = title;
         this.createdAt = createdAt;
         this.todolists = todolists;
@@ -77,12 +77,12 @@ public class Todos {
         }
 
     }
-
-    public Date getAppointmentTime() {
+ 
+    public String getAppointmentTime() {
         return appointmentTime;
     }
 
-    public void setAppointmentTime(Date appointmentTime) {
+    public void setAppointmentTime(String appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
 }

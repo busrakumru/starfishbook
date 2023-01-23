@@ -22,13 +22,13 @@ public class DatabaseLoader {
 
     }
 
-    // @Bean
-    public CommandLineRunner initializeDatabase(User user) {
+    //@Bean
+    public CommandLineRunner initializeDatabase() {
 
-        User existingUser = userRepo.findUserByEmail(user.getEmail());
-
-        if (existingUser.getRoles() != ERoles.ADMIN) {
-
+       /*  User existingUser = userRepo.findUserByEmail(user.getEmail());
+        if (existingUser.getRoles() != ERoles.ADMIN) {*/
+       /* }
+        return null;*/
             return args -> {
                 User user1 = new User("admin@gmail.com", passwordencoder.encode("1234"), true, ERoles.ADMIN);
                 // User user2 = new User("goncagueld2@gmail.com",passwordencoder.encode("1234"),
@@ -36,7 +36,5 @@ public class DatabaseLoader {
                 userRepo.save(user1);
                 System.out.println("Database initialized");
             };
-        }
-        return null;
     }
 }

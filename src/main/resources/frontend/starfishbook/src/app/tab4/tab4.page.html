@@ -1,13 +1,17 @@
 <ion-app>
   <ion-header [translucent]="true" class="ion-no-border">
-    <img class="logo" src="assets/img/logo.png">
+    <img src="assets/img/starfish_happy.png">
     <ion-title>Profil</ion-title>
-    <ion-button class="setting_icon" fill="none" size="large" (click)="openModal()">
-      <ion-icon name="settings-outline"> </ion-icon>
-    </ion-button>
+    <div>
+      <ion-button class="setting_icon" fill="none" size="large" (click)="openModal()">
+        <ion-icon name="settings-outline"> </ion-icon>
+      </ion-button>
+    </div>
   </ion-header>
+
+
   <ion-content>
-    <div class="container" *ngIf="currentUser; else loggedOut">
+    <!--div class="container" *ngIf="currentUser; else loggedOut">
       <p>
         <strong>Token:</strong>
         {{ currentUser.accessToken.substring(0, 20) }} ...
@@ -23,8 +27,8 @@
       {{ role }}
     </li>
   </ul>
-    </div>
-    
+    </div-->
+
     <app-profilmood></app-profilmood>
   </ion-content>
 </ion-app>

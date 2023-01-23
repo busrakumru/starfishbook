@@ -49,7 +49,7 @@ export class NotePage implements OnInit {
   }
  
   newCategorie: FormGroup= new FormGroup({
-    id: new FormControl(this.ca),
+    id: new FormControl(''),
     //title: new FormControl(''),
   });
 
@@ -90,7 +90,7 @@ export class NotePage implements OnInit {
     } else {
       this.createNewNote();
     }
-    //this.reloadService.reload();
+    this.reloadService.reload();
     this.modalController.dismiss();
   }
 

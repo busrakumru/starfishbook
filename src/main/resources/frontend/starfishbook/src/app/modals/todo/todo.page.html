@@ -42,7 +42,7 @@
       </section>
 
 
-      <ion-card>
+      <!--ion-card>
 
         <ion-card-header>
           <ion-text>
@@ -55,9 +55,10 @@
 
         <ion-card-content >
           <div formArrayName="todolist" *ngFor="let t of newTodo.get('todolist')['controls']; let i = index;">
-            <div [formGroupName]="i" class="todo-list"  >
+            <div [formGroupName]="i" class="todo-list">
+              
                 <div>
-                  <ion-checkbox type="checkbox" id="finished" formControlName="finished"></ion-checkbox>
+                  <ion-checkbox type="checkbox"  formControlName="finished"></ion-checkbox>
                 </div>
                 <div class="todo-text" >
                   <mat-form-field [hideRequiredMarker]="true">
@@ -71,9 +72,28 @@
                 </div>
             </div>
           </div>
+
+          <div *ngFor="let tl of todolist2" class="item">
+            <div>
+              <ion-checkbox type="checkbox" formControlName="finished"></ion-checkbox>
+            </div>
+            <div class="todo-text">
+              <mat-form-field [hideRequiredMarker]="true">
+                <input matInput id="text" placeholder="{{tl.text}}" type="text" class="form-control" formControlName="text">
+              </mat-form-field>
+            </div>
+          <div>
+            <ion-button (click)="delete(id)" fill="clear">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+
+
+
         </ion-card-content>
 
-      </ion-card>  
+      </ion-card-->  
     </form>
   </div>
 </ion-content>

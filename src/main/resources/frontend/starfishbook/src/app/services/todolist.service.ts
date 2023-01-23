@@ -42,8 +42,8 @@ export class TodolistService {
       );
   }
 
-  updateTodolist(todolistData: Todolist): Observable<Todolist[]> {
-    return this.http.patch<Todolist[]>(this.baseUrl + '/auth/users/todolist/' + todolistData.id, todolistData)
+  updateTodolist( id:any, todolistData: Todolist): Observable<Todolist[]> {
+    return this.http.patch<Todolist[]>(this.baseUrl + '/auth/users/todolist/' + id, todolistData)
       .pipe(
         catchError(this.handleError)
       );

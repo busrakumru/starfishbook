@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 import de.beuth.starfishbook.model.Todos;
@@ -48,17 +47,17 @@ public class TodosService {
         return this.todoRepository.existsById(id);
     }
 
-    public Todos updateTodoWithMap(Long id, Map<Object, Object> objectMap) {
+    public Todos updateWithMap(Long id, Map<Object, Object> objectMap) {
 
-        Optional<Todos> todos = todoRepository.findById(id);
-
+        Optional<Todos> todo = todoRepository.findById(id);
         objectMap.forEach((key, value) -> {
             Field field = ReflectionUtils.findField(Todos.class, (String) key);
             field.setAccessible(true);
-            ReflectionUtils.setField(field, todos.get(), value);
+            ReflectionUtils.setField(field, todo.get(), value);
         });
 
-        return todoRepository.save(todos.get());// todoService.updateTodo(todos);
+        return todoRepository.save(todo.get());
     }
+
 
 }
